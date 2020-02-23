@@ -1,0 +1,39 @@
+
+@media screen and  (max-width : 540px) {
+    
+	/**************  HEADER  ********************/
+	header{
+	    
+        height: 60px;
+	}
+ 
+	header a{
+	 
+	   margin-top:0;
+	}	
+	
+	
+	footer {
+	    height: 64px;
+	}
+	
+	footer .comments {
+	    
+	       display:none;
+	}
+	
+	
+
+	
+	.form-horizontal .form-group {
+         margin-right: 0px; 
+         margin-left: 0px; 
+    }
+    
+    .panel-default {
+        margin-top: 20px;
+    }
+	
+}
+
+

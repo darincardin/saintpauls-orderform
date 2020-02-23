@@ -1,0 +1,284 @@
+
+	
+	html, body, #app, #app>div {
+		height: 100%;
+		background: #FFFFFF;
+		color: #626262;
+		font-size: 15px;
+		font-family: Arial, Tahoma, Verdana;
+	}
+
+	
+
+	h2, label, p {
+		white-space: nowrap;
+		xxoverflow: hidden;
+	}
+	
+	.control-label.required:after {
+        content: "*";
+        display: inline;
+        color: red;
+        position: absolute;
+        margin-left: 5px;
+    }
+	
+	.panel{
+		background: rgba(255,255,255, .4);
+		margin-bottom: 0;
+	}
+
+	
+	
+	.ng-cloak {
+		display: none !important;
+	}
+
+	
+	main {
+		background: url('../images/lobster1.jpg');
+		background-repeat: no-repeat;
+		background-position: center top; 		
+		min-height: calc(100% - 130px);		
+	    overflow:hidden;
+	}
+	
+	
+	.page1, .page2, .page3{
+		vertical-align: top;
+		position: relative;
+		opacity: 1;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 700px;				
+		display: block;		
+	}	
+	
+
+	
+
+
+	
+	/**************  HEADER  ********************/
+	header{
+		background: url('../images/bg.jpg');
+		height: 80px;
+	
+	    transition: all .1s;
+	    overflow:hidden;
+	}
+ 
+	header a{
+		background: url('../images/header-small.jpg') no-repeat;
+		max-width: 300px;
+		height: 55px;
+        margin-top: 10px;
+	}	
+	
+
+
+
+
+	/**************  FOOTER  ********************/
+	footer{
+		width: 100%;
+        padding: 5px 15px 30px 15px;
+        height: 50px;
+		background: black;		
+		font-size: 13px;
+		line-height: 21px;
+		color: #626262; 		
+		font-size: 12px;	
+		overflow: hidden;	
+		
+	}
+
+	footer .copyright{
+		color: #BBBBBB;		
+	}	
+
+	
+	
+	
+
+	
+	textarea{
+		text-overflow: ellipsis;
+		resize: none;
+	}	
+	
+    hr{
+        border-color: black;
+    }
+	
+	.popover{
+		font-weight: 700;
+		white-space:nowrap;
+	}
+		
+		
+	.page1 .control-label{
+	    margin-bottom: 10px!important;
+	}
+		
+		
+	.page2 .control-label, .page3 .control-label{		
+		padding-top: 0!important;
+		padding-right: 40px;
+	}
+	
+
+    .page2 table, .page3 table{
+        width:auto;
+        margin-left: 50px;
+
+    }
+
+
+    .page2 table td, .page3 table td{
+        padding-bottom: 10px;
+    }
+			
+		
+	/********* Progress ******************/
+
+	.order-progress {
+		display: block;
+		background: rgba(0,0,0, .6);
+		position: fixed;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		z-index: 10000;
+	}	
+	
+	
+	.order-progress>div{
+		width: 40%;
+		min-width: 230px;
+		height: 32px;
+		border: solid #999999 1px;
+		background: rgba(255,255,255, .8);				
+		position: absolute;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 5px;
+		margin: auto;	
+		border-radius: 10px;			
+	}
+	
+	.progress-bar{
+		width: 100%;
+	}
+	/*
+		dialog{
+		position: relative;
+		display: block;
+		width: 100%;
+	    border: solid #DDDDDD 1px;
+		background: rgba(255,255,255, .4);
+		padding: 20px;
+		border-radius: 10px;	
+		overflow: hidden;
+		xxtransition: padding .1s;		
+	}	
+	
+	
+	*/
+	
+	
+	
+	[name=my-fName]{
+	    width:100%;
+		max-width: 300px;
+	}
+	
+	[name=my-lName]{
+	    width:100%;
+		max-width: 300px;
+	}
+	
+	[name=my-quantity]{
+	    width:100%;
+		max-width: 200px;
+	}
+	
+	[name=my-phone]{
+	    width:100%;
+		max-width: 200px;
+	}
+	
+	
+	[name=my-address]{
+	    width:100%;
+		max-width: 500px;
+	}
+	
+	
+	.control-label {
+	    text-align: right;
+        width: 100%;
+        padding-top: 0px!important;
+
+        padding-right: 15px;
+	}
+	
+	
+	.glyphicon-ok, .glyphicon-remove{
+		display:none;
+	}
+
+	.has-success .glyphicon-ok{
+		display:block;
+	}
+	
+	 .has-error .glyphicon-remove{
+		display:block
+	}
+	
+	.xxxhas-error .form-control {
+        border: 1px solid #ccc;
+		box-shadow:0;
+	}
+	
+	.xxxxxhas-error:hover .form-control {
+        border: 1px solid #ccc!important;
+		box-shadow:0!important;
+	}
+	
+	.xxxxxsubmitted .has-error .form-control {
+		border-color: #a94442;
+		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	}
+		
+	
+	
+	
+	
+	td {word-wrap: break-word; word-break: break-all;}
+	
+	table{
+	    padding-left: 1px;
+	    padding-right: 1px;
+        width: calc(100% - 2px);
+	    
+	}
+	
+	
+	
+	.select-menu{
+	    
+	    display:none!important;
+	}
+	
+    @media only screen and (max-width: 767px) {
+        .select-menu {
+            display:none!important;
+      
+        }
+    }
+    

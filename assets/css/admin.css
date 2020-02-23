@@ -1,0 +1,136 @@
+
+
+        	html, body{height: 100%;}
+        	
+        	body{
+        		background: url('/images/lobster1.jpg');
+        		background-repeat: no-repeat;
+        		background-position: cover; 
+        		xxopacity: 0;
+        	}
+        	
+        	body .order-window{
+        	
+        		margin-left: auto;
+        		margin-right: auto;
+        		position: relative;
+        		width:  calc(100% - 20px);
+                height: calc(100% - 55px);
+        		xxoverflow-y: scroll;
+        		background-repeat: no-repeat;
+        		background-position: cover; 
+        	}
+        	
+        	tbody{
+        		overflow-y: scroll;
+        		overflow-x: hidden;
+        	}
+        	
+        	body .order-window>div{
+        	    border: solid #DDDDDD 1px;
+        		background: rgba(255,255,255, .7);
+        		padding: 20px;
+        		border-radius: 10px;
+        	}	
+        	
+        	
+        	.mainGrid thead{
+        		font-weight: bold;
+        	}
+        
+        	.mainGrid td{
+        		padding: 10px;
+        		border-bottom: solid #080808 1px;
+        		white-space: nowrap;
+        	}
+        	    
+        	#quantity{
+        		width: 100px;
+        	}	
+        	
+        	textarea {
+        		resize: none;
+        		height: 70px!important;
+        	}	
+        	
+        	
+        	.highlight{
+        		
+        		background: rgba(255,0,0, .4);
+        		
+        	}
+        	
+        	.logout{
+                position: absolute;
+                top: 10;
+                right: 100px;
+                font-size: 18px;
+        	}
+        	
+        	.modal-body td {
+        		padding: 2px;
+        	}
+        	
+        	
+    	
+            @media screen and  (max-width : 540px) {
+                
+            	/**************  HEADER  ********************/
+            	.mainGrid td:nth-child(3),
+            	.mainGrid td:nth-child(4),
+            	.mainGrid td:nth-child(5){
+            	    display:none;
+            	}
+            }        	
+            	
+        	#fName{
+        	    width:100%;
+        		max-width: 300px;
+        	}
+        	
+        	#lName{
+        	    width:100%;
+        		max-width: 300px;
+        	}
+        	
+            #quantity{
+        	    width:100%;
+        		max-width: 100px;
+        	}
+        	
+        	#phone{
+        	    width:100%;
+        		max-width: 200px;
+        	}
+        	
+        	
+        	#address{
+        	    width:100%;
+        		max-width: 400px;
+        	}    
+
+   
+            .loading{
+                background: rgba(0, 0, 0, 0.7);
+                position:fixed;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                z-index: 100000;
+                display:none;
+            }
+
+            .loading.show{
+                display:block;
+            }
+            .loading div{
+                margin-top: 200px;
+                width: 60px;
+                margin-left: auto;
+                height: 50px;
+                color: white;
+                margin-right: auto;
+                font-size: 25px;
+            }
+     
