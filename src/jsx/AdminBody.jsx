@@ -35,9 +35,12 @@ class AdminBody extends MyBody{
 		
 	getOrders(){
 	
-	    fetch("data/list.json").then(res => res.json()).then(
-		result => {
-			var r = JSON.parse(result);
+	    fetch("data/list.json").then(res => {
+			debugger;
+			res.json()}).then(
+		(result)=> {
+			debugger;
+			var r =  result ? JSON.parse(result) : [];
 			this.setState({array: r });
 		},
 		error => {alert(error)})

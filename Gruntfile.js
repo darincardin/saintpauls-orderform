@@ -4,27 +4,29 @@ module.exports = function(grunt) {
 
 	grunt.config.init({
 		clean: {dist:'dist', tmp:'.tmp'},
-		useminPrepare: {  html: 'src/index.html',options: { dest: 'dist' }},
-		usemin:{html:['dist/index.html']  },
+		useminPrepare: {  html: 'src/index.html', admin: 'src/admin.html', options: { dest: 'dist' }},
+		usemin:{html:['dist/index.html'], admin:['dist/admin.html']   },
 		copy:{ 
-		
-		
-			html: {src: './src/index.html', dest: 'dist/index.html' },
-			images: {cwd: './src/assets/images', src: '*', dest: 'dist/assets/images',  expand: true },
-			fonts: {cwd: './src/assets/fonts', src: '*', dest: 'dist/assets/fonts',  expand: true  }
+			html: {cwd: './src/', src: '*.html', dest: 'dist/' ,  expand: true  },
+			assets: {cwd: './src/assets/', src: '**', dest: 'dist/assets/',  expand: true  },
+			data: {cwd: './data', src: '*', dest: 'dist/data',  expand: true  },
+			favicon: {src: './src/favicon.ico', dest: 'dist/favicon.ico' }
 		}
 	});
 
 	grunt.registerTask('default',[
 		'clean:dist',
 		'copy:html',
+
 		'useminPrepare',
 		'concat',
 		'uglify',
 		'cssmin',
 		'usemin',
-		'copy:images',
-		'copy:fonts',
+		'copy:assets',
+		'copy:data',
+		'copy:favicon',
+		
 		'clean:tmp'
     ]);
 }
