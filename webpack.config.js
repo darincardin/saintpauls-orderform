@@ -1,9 +1,11 @@
 const path = require('path');
 
+var readFile = function(file){
+	return JSON.parse( require('fs').readFileSync(file, 'utf8') );
+}
+
 
 var config = {
-
- // entry: './src/index.js',
 
   entry: {
 	index: './src/index.js',
@@ -18,9 +20,30 @@ var config = {
   devServer: {
 	contentBase: './src',
 	publicPath: '/',
-	historyApiFallback: true,
+	historyApiFallback: true   ,   
     inline: true,
-    port: 7777
+    port: 7777   ,
+	
+	
+	
+	before: function(app, server, compiler) {
+		
+      app.post('/php/orders/create.php', function(req, res) {	  
+		  res.json(readFile('data/create.json'));
+      });
+	  
+	  app.get('/php/orders/list.php', function(req, res) {
+		  res.json(readFile('data/list.json'));
+      }); 
+
+	  app.post('/php/orders/update.php', function(req, res) {
+		  res.json(readFile('data/update.json'));
+      }); 	  
+	  
+	  app.get('/php/orders/delete.php*', function(req, res) {
+		  res.json(readFile('data/delete.json'));
+      }); 
+    }
   },
 
 
@@ -39,3 +62,4 @@ var config = {
 }
 
 module.exports = config;
+

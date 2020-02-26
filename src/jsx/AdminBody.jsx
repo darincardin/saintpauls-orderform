@@ -27,23 +27,14 @@ class AdminBody extends MyBody{
 		this.state.selected = form(new Order());
 		this.state.array = []
 		
-		this.getOrders();
-		
-	
-			
+		this.getOrders();	
 	}
 		
 	getOrders(){
 	
-	    fetch("data/list.json").then(res => {
-			debugger;
-			res.json()}).then(
-		(result)=> {
-			debugger;
-			var r =  result ? JSON.parse(result) : [];
-			this.setState({array: r });
-		},
-		error => {alert(error)})
+	    fetch("/php/orders/list.php").then(res =>res.json()).then(
+		success => { this.setState({array: success }); },
+		error => {alert(error) })
 	}
 	
 	openEdit(order){
@@ -54,9 +45,9 @@ class AdminBody extends MyBody{
 	edit(order) {
 		this.showOverlay();
 
-	    fetch("data/edit.json", order).then(
+	    fetch("/php/orders/update.php", { method: 'post', body: JSON.stringify(order)} ).then(
 		result => { 
-		
+
 			var i = this.state.array.findIndex( i => i.id == order.id );
 		    this.state.array.splice(i, 1, order);
 		
@@ -67,17 +58,19 @@ class AdminBody extends MyBody{
 	}
 
 	delete(id){
-		var result = confirm("Press a button!"); 
 		
-		if(result) {
+		if(confirm(`Delete order ${id}?`) ) {
 			this.showOverlay();
-			fetch("data/delete.json?" + id).then(res => res.json()).then(
-			result =>{ 	
+			fetch(`/php/orders/delete.php?id=${id}`).then(res => res.json()).then(
+			success =>{ 	
 				var i = this.state.array.findIndex(i => i.id == id );
 				this.state.array.splice(i, 1);
 				this.hideOverlay(); 
 			},
-			error => alert("An error occurred. Please try again later."))				
+			error => {
+				this.hideOverlay(); 
+				alert("An error occurred. Please try again later.")
+			})
 		}
 	}
 	
@@ -87,6 +80,7 @@ class AdminBody extends MyBody{
 		<div>
 			<Header />
 			<main >	
+				<br />
 				<div className="order-window">
 					<div>
 						<table className="mainGrid">

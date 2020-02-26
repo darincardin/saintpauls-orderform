@@ -17,8 +17,6 @@ class Page1 extends React.Component {
 	}
 
 	onNext(event) {		
-	
-		;
 		var form = this.state.form;
 		form.submitted = true;
 		this.setState({form: form})

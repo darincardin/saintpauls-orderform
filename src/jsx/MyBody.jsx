@@ -29,20 +29,22 @@ class MyBody extends React.Component{
 
 		this.showOverlay();
 
-	    fetch("php/orders/create.php").then(res => res.json())
-		.then(result =>{ 
+		fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) })
+		.then(res => res.json()).then(
+		success => { 
 			this.hideOverlay(); 
+			this.state.form.id = success;
 			onSuccess();
 		},
 		error => {
 			alert("An error occurred. Please try again later.")
 			this.hideOverlay(); 
-		})
+		});
 	}
 	
-	showOverlay(){this.setState({showProgress:true})}
+	showOverlay(){ this.setState({showProgress:true})}
 	
-	hideOverlay(){	this.setState({showProgress:false})}
+	hideOverlay(){ this.setState({showProgress:false})}
 	
     render() {return (
 		<div>

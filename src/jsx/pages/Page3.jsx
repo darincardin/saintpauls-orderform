@@ -41,7 +41,7 @@ class Page3 extends React.Component {
 							<tbody>
 								<tr>
 									<td><label className="control-label">Order ID</label> </td>
-									<td>xxxxx</td>
+									<td>{this.state.form.id}</td>
 								</tr>
 								<tr>
 									<td><label className="control-label">Name</label> </td>
