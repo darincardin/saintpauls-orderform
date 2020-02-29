@@ -9,13 +9,12 @@ class Number extends Input {
 		super(props);
 	}
 	
-	validate(){
-		
+	validate = () =>{
 		var result = true;
 		
-		if(this.props.required)  result = this.state.form.$required(this.props.name);
+		if(this.props.required)  result = this.context.state.form.$required(this.props.name);
 		
-		if(!result)  this.state.form.$phone(this.props.name);
+		if(!result)  this.context.state.form.$phone(this.props.name);
 	}
 }
 

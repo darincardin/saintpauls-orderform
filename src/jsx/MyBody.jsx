@@ -12,59 +12,84 @@ import ProgressBar from './common/ProgressBar.jsx';
 import form from '../js/form.js';
 import Order from '../js/order.js';
 
+import Context from '../js/context.js';
 
 class MyBody extends React.Component{
 	
     constructor(){
 		super();
 		
-		this.state = { showProgress:false,  form: form(new Order())}
+		this.state = { 
+			showProgress:false,  
+			form: form(new Order()),
+			clear: ()=>{
+				this.setState({form:  form(new Order())  } );
+			},
+			change: (arg1, arg2)=>{
+
+				var name, val;
+
+				if(arg1 instanceof Event) {
+					name = arg1.target.name;
+					val = arg1.target.value.trim();
+				}
+				else{
+					name = arg1;
+					val = arg2;
+				}
+
+				this.state.form[name] =  val;
+				this.setState({form : this.state.form});
+			},
+	
+			submit: onSuccess =>{
+				this.showOverlay();
+
+				fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) })
+				.then(res => res.json()).then(
+				success => { 
+					this.hideOverlay(); 
+					this.state.form.id = success;
+					onSuccess();
+				},
+				error => {
+					alert("An error occurred. Please try again later.")
+					this.hideOverlay(); 
+				});	
+				
+			}
 		
-	    this.showOverlay = this.showOverlay.bind(this);
-	    this.hideOverlay = this.hideOverlay.bind(this);
-	    this.onSubmit = this.onSubmit.bind(this);
+			
+		}
 	}
 	
-	onSubmit(onSuccess) {
+	showOverlay = () =>{ this.setState({showProgress:true})}
+	
+	hideOverlay = () =>{ this.setState({showProgress:false})}
 
-		this.showOverlay();
-
-		fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) })
-		.then(res => res.json()).then(
-		success => { 
-			this.hideOverlay(); 
-			this.state.form.id = success;
-			onSuccess();
-		},
-		error => {
-			alert("An error occurred. Please try again later.")
-			this.hideOverlay(); 
-		});
-	}
-	
-	showOverlay(){ this.setState({showProgress:true})}
-	
-	hideOverlay(){ this.setState({showProgress:false})}
-	
-    render() {return (
-		<div>
+    render() {
+		return (
+		<div> 
 			<Header />
+
 			<main>	
-				<Router>
-				  <div>
-					<Switch>
-					  <Route path="/page2">
-						<Page2 form={this.state.form}  onSubmit={this.onSubmit}/>
-					  </Route>
-					  <Route path="/page3">
-						<Page3 form={this.state.form}/>
-					  </Route>
-					  <Route path="/">
-						<Page1 form={this.state.form} />
-					  </Route>
-					</Switch>
-				  </div>
-				</Router>
+				<Context.Provider value={{state: this.state}}> 
+					<Router>
+					  <div>
+						<Switch>
+						  <Route path="/page2">
+							<Page2 />
+						  </Route>
+						  <Route path="/page3">
+							<Page3 />
+						  </Route>
+						  <Route path="/">
+							<Page1 />
+						  </Route>
+						</Switch>
+					  </div>
+					</Router>
+				</Context.Provider> 
 			</main>	
 			
 			<Footer />
