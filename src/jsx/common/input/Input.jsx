@@ -9,11 +9,11 @@ class Input extends React.Component {
     static contextType = Context;
 
 	onWatch = () =>{
-		if(this.context.state.form.submitted) {
+		if(this.context.state.form.$submitted) {
 		
-			if(this.context.state.form.errors[this.props.name]){
-				if(this.context.state.form.errors[this.props.name] == "required") this.ttip.show("Required");
-				if(this.context.state.form.errors[this.props.name] == "phone") this.ttip.show("Format is xxx-xxx-xxxx");		
+			if(this.context.state.form.$errors[this.props.name]){
+				if(this.context.state.form.$errors[this.props.name] == "required") this.ttip.show("Required");
+				if(this.context.state.form.$errors[this.props.name] == "phone") this.ttip.show("Format is xxx-xxx-xxxx");		
 			}
 			else this.ttip.hide();
 		}

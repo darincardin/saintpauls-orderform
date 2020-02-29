@@ -26,17 +26,9 @@ class MyBody extends React.Component{
 				this.setState({form:  form(new Order())  } );
 			},
 			change: (arg1, arg2)=>{
-
-				var name, val;
-
-				if(arg1 instanceof Event) {
-					name = arg1.target.name;
-					val = arg1.target.value.trim();
-				}
-				else{
-					name = arg1;
-					val = arg2;
-				}
+				
+				var name = (arg1 instanceof Event) ? arg1.target.name  : arg1;
+				var val =  (arg1 instanceof Event) ? arg1.target.value : arg2;
 
 				this.state.form[name] =  val;
 				this.setState({form : this.state.form});
