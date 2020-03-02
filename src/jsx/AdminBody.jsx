@@ -1,55 +1,74 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, withRouter, Route,Link} from "react-router-dom";
 
-import Page1 from './pages/Page1.jsx';
-import Page2 from './pages/Page2.jsx';
-import Page3 from './pages/Page3.jsx';
 
 import MyBody from './MyBody.jsx';
-import Header from './common/Header.jsx';
-import Footer from './common/Footer.jsx';
-import ProgressBar from './common/ProgressBar.jsx';
-import Modal from './common/Modal.jsx';
-
+import * as Layout from './common/layout/';
+import * as Admin from './pages/';
+import ProgressBar from './common/widget/ProgressBar.jsx';
 
 import form from '../js/form.js';
 import Order from '../js/order.js';
+import Context from '../js/context.js';
+
+
 
 class AdminBody extends MyBody{
 	
 	constructor(props){
 		super(props);
-		this.openEdit = this.openEdit.bind(this);
+		
+		this.state = { 
+			array: [],
+			form: form(new Order()),
+			clear: () =>{ this.setState( {form:  form(new Order())  } ) },
+			change: (arg1, arg2)=>{
+				
+				var name = (arg1 instanceof Event) ? arg1.target.name  : arg1;
+				var val =  (arg1 instanceof Event) ? arg1.target.value : arg2;
 
-		this.edit = this.edit.bind(this);
-		this.getOrders = this.getOrders.bind(this);
-		
-		this.state.selected = form(new Order());
-		this.state.array = []
-		
-		this.getOrders();	
+				this.state.form[name] =  val;
+				this.setState({form : this.state.form});
+			},
+	
+			submit: onSuccess =>{
+				this.showOverlay();
+
+				fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) })
+				.then(res => res.json()).then(
+				success => { 
+					this.hideOverlay(); 
+					this.state.form.id = success;
+					onSuccess();
+				},
+				error => {
+					alert("An error occurred. Please try again later.")
+					this.hideOverlay(); 
+				});	
+			},
+			openEdit: this.openEdit,
+			edit: this.edit,
+			delete: this.delete	
+		}
 	}
 		
-	getOrders(){
-	
+	componentDidMount = () =>{
 	    fetch("/php/orders/list.php").then(res =>res.json()).then(
 		success => { this.setState({array: success }); },
 		error => {alert(error) })
 	}
 	
-	openEdit(order){
-		this.setState({selected: form(order)});
+	openEdit = (row) => {
+		this.setState({form:  form(row)});
 		$('#basicModal').modal('toggle');		
 	}
 
-	edit(order) {
+	edit = () => {
 		this.showOverlay();
 
-	    fetch("/php/orders/update.php", { method: 'post', body: JSON.stringify(order)} ).then(
+	    fetch("/php/orders/update.php", { method: 'post', body: JSON.stringify(this.state.form)} ).then(
 		result => { 
-
-			var i = this.state.array.findIndex( i => i.id == order.id );
-		    this.state.array.splice(i, 1, order);
+			var i = this.state.array.findIndex( i => i.id == this.state.form.id );
+		    this.state.array.splice(i, 1, this.state.form);
 		
 			this.hideOverlay(); 
 			$('#basicModal').modal('toggle');
@@ -57,7 +76,7 @@ class AdminBody extends MyBody{
 		error => alert("An error occurred. Please try again later."))
 	}
 
-	delete(id){
+	delete = (id) =>{
 		
 		if(confirm(`Delete order ${id}?`) ) {
 			this.showOverlay();
@@ -77,44 +96,21 @@ class AdminBody extends MyBody{
     render() {
 	
 		return (
+		<Context.Provider value={{state: this.state}}> 
 		<div>
-			<Header />
-			<main >	
+			<Layout.Header />
+			<main>	
 				<br />
-				<div className="order-window">
-					<div>
-						<table className="mainGrid">
-							<thead>
-								<tr><td>First Name</td>
-								<td>Last Name</td>
-								<td>Quantity</td>
-								<td>Phone</td>
-								<td>Address</td>
-								<td>Actions</td></tr>
-							</thead>
-							<tbody>
-								{this.state.array.map( r =>  
-									<tr key={r.id}>
-									   <td>{r.fName}</td>
-									   <td>{r.lName}</td>
-									   <td>{r.quantity}</td>
-									   <td>{r.phone}</td>
-									   <td>{r.address}</td>
-									   <td>
-										   <a onClick={() => this.openEdit(r)}> Edit </a> | 
-										   <a onClick={() =>  this.delete(r.id)}> Delete </a> 
-									   </td>
-									</tr>  
-								)}
-							</tbody>
-						</table>
-					</div>	
-				</div>
+				<Admin.AdminList />
 			</main>	
-			<Footer />
-			<Modal order={this.state.selected} onSubmit={this.edit} />
+			<Layout.Footer />
+			
+			<Admin.AdminUpdate />
+			
 			<ProgressBar show={this.state.showProgress} />
+			
 		</div>
+		</Context.Provider> 
 	  );
 	}
 
@@ -122,3 +118,8 @@ class AdminBody extends MyBody{
 }
 
 export default (AdminBody);
+
+
+/*
+
+*/

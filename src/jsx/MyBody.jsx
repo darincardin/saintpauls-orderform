@@ -5,9 +5,9 @@ import Page1 from './pages/Page1.jsx';
 import Page2 from './pages/Page2.jsx';
 import Page3 from './pages/Page3.jsx';
 
-import Header from './common/Header.jsx';
-import Footer from './common/Footer.jsx';
-import ProgressBar from './common/ProgressBar.jsx';
+import Header from './common/layout/Header.jsx';
+import Footer from './common/layout/Footer.jsx';
+import ProgressBar from './common/widget/ProgressBar.jsx';
 
 import form from '../js/form.js';
 import Order from '../js/order.js';

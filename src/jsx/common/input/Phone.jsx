@@ -1,9 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch,  Route,Link} from "react-router-dom";
+import Text from './Text.jsx';
 
-import Input from './Input.jsx';
-
-class Number extends Input {
+class Number extends Text {
 	
 	constructor(props){
 		super(props);

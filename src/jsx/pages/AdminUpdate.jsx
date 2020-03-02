@@ -1,39 +1,28 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-import Page2 from './Page2.jsx';
-import * as Input from '../common/input';
-import form from '../../js/form.js';
 
+import * as Input from '../common/input';
+import Modal from '../common/widget/Modal.jsx';
 import Context from '../../js/context.js';
 
-class Page1 extends React.Component {
+class AdminUpdate extends React.Component {
 	static contextType = Context;
 
-	onNext = () => {		
-		this.context.state.change('$submitted', true)
-		if(this.context.state.form.$isValid()) this.props.history.push('/page2');
-	}
-	
 	render(){
-		return (
+	  return (
 		<Context.Consumer>
-		{ context => (	
-			<div className="page1">
-				<div>
-				<h2> Order Form </h2>
-				<form>
-					<div className="panel panel-default">
-						<div className="panel-body">
-							<table>
-								<tbody>
+		{ context => (
+				<Modal>
+					<div>
+						<table>
+							<tbody>
 								<tr>
 									<td><label className="control-label required">First Name</label></td>
 									<td><Input.Text name="fName" required /></td>
-								</tr>
+								</tr>	
 								<tr>
 									<td><label className="control-label required">Last Name</label></td>
 									<td><Input.Text name="lName" required /></td>
-								</tr>
+								</tr>	
 								<tr>
 									<td><label className="control-label required">Quantity</label></td>
 									<td><Input.Number name="quantity" required /></td>
@@ -46,18 +35,19 @@ class Page1 extends React.Component {
 									<td><label className="control-label">Address</label></td>
 									<td><Input.Text name="address" /></td>
 								</tr>
-								</tbody>
-							</table>
-							<button type="button" className="btn btn-primary" onClick={ this.onNext} >Submit</button> 	
-						</div>
+							</tbody>
+						</table>	
 					</div>
-				</form>
-				</div>
-			</div>
+					<div>
+					    <button type="button" className="btn btn-primary" onClick={ this.context.state.edit } >Save Changes</button>
+						<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</Modal>
+			
 		)}	
 		</Context.Consumer>	
-		)	
+	  )
 	}
 }
 
-export default withRouter(Page1) ;
+export default AdminUpdate;

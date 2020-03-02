@@ -9,12 +9,13 @@
     "start": "clear && webpack-dev-server --hot"
   },
   "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "wildcard"
+    ],
     "presets": [
       "@babel/react",
       "@babel/env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
     ]
   },
   "author": "",
@@ -48,5 +49,8 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-log": "^2.0.0",
     "webpack-merge-and-include-globally": "^2.1.24"
+  },
+  "devDependencies": {
+    "babel-plugin-wildcard": "^6.0.0"
   }
 }
