@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, withRouter, Route,Link} from "react-router-dom";
 
 import Page1 from './pages/Page1.jsx';
@@ -11,8 +12,9 @@ import ProgressBar from './common/widget/ProgressBar.jsx';
 
 import form from '../js/form.js';
 import Order from '../js/order.js';
-
 import Context from '../js/context.js';
+
+
 
 class MyBody extends React.Component{
 	
@@ -48,10 +50,7 @@ class MyBody extends React.Component{
 					alert("An error occurred. Please try again later.")
 					this.hideOverlay(); 
 				});	
-				
-			}
-		
-			
+			}	
 		}
 	}
 	
@@ -84,13 +83,10 @@ class MyBody extends React.Component{
 			</main>	
 			
 			<Footer />
-		
-			<ProgressBar show={this.state.showProgress} />
+		    {ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
 		</div>
 	  );
 	}
-
-
 }
 
 export default MyBody;

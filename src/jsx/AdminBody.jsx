@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
 
 import MyBody from './MyBody.jsx';
@@ -128,8 +129,8 @@ class AdminBody extends MyBody{
 					</main>	
 				<Footer />
 				<Admin.AdminUpdate />
-				<ProgressBar show={this.state.showProgress} />
 			</div>
+			{ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
 		</Context.Provider> 
 	  );
 	}

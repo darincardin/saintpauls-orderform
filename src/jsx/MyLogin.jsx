@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from 'react-dom';
+
 import {BrowserRouter as Router, Redirect ,Switch, withRouter, Route,Link} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
@@ -74,8 +76,7 @@ class MyLogin extends React.Component{
 			</main>
 					
 			<Footer />
-		
-			<ProgressBar show={this.state.showProgress} />
+		    {ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
 		</div>
 	  );
 	}
