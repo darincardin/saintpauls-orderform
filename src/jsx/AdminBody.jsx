@@ -2,7 +2,8 @@ import React from "react";
 
 
 import MyBody from './MyBody.jsx';
-import * as Layout from './common/layout/';
+import Header from './common/layout/Header.jsx';
+import Footer from './common/layout/Footer.jsx';
 import * as Admin from './pages/';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
@@ -76,6 +77,19 @@ class AdminBody extends MyBody{
 		error => alert("An error occurred. Please try again later."))
 	}
 
+	logout = () =>{
+		this.showOverlay(); 
+		fetch(`/php/logout.php`).then(res => res.json()).then(
+		result =>{ 	
+			window.location.href = '/login.html';
+		},
+		error => {
+			this.hideOverlay(); 
+			alert("An error occurred. Please try again later.")
+		})
+	}
+
+
 	delete = (id) =>{
 		
 		if(confirm(`Delete order ${id}?`) ) {
@@ -98,12 +112,14 @@ class AdminBody extends MyBody{
 		return (
 		<Context.Provider value={{state: this.state}}> 
 		<div>
-			<Layout.Header />
+			<Header />
+			<div className="bg"> <img src="/assets/images/lobster1.jpg" /></div>
+			<a href="#" onClick={this.logout} className="logout">Logout</a>  
 			<main>	
 				<br />
 				<Admin.AdminList />
 			</main>	
-			<Layout.Footer />
+			<Footer />
 			
 			<Admin.AdminUpdate />
 			

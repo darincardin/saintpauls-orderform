@@ -39,7 +39,7 @@ class Text extends React.Component {
 	}
 
 	render(){
-		debugger;
+
 		var name = this.props.name;
 		var submitted = this.context.state.form.$submitted;
 		var errors = this.context.state.form.$errors[name];

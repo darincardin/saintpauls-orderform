@@ -4,8 +4,8 @@ module.exports = function(grunt) {
 
 	grunt.config.init({
 		clean: {dist:'dist', tmp:'.tmp'},
-		useminPrepare: {  html: 'src/index.html', admin: 'src/admin.html', options: { dest: 'dist' }},
-		usemin:{html:['dist/index.html'], admin:['dist/admin.html']   },
+		useminPrepare: {  html: 'src/index.html', admin: 'src/admin.html', login: 'src/login.html',options: { dest: 'dist' }},
+		usemin:{ html:['dist/index.html'], admin:['dist/admin.html'], login:['dist/login.html'] },
 		copy:{ 
 			html: {cwd: './src/', src: '*.html', dest: 'dist/' ,  expand: true  },
 			images: {cwd: './src/assets/images', src: '**', dest: 'dist/assets/images',  expand: true  },

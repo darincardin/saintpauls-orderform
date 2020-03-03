@@ -24,7 +24,7 @@
     }
 	
 	.panel{
-		background: rgba(255,255,255, .4);
+		background: rgba(255,255,255, .2);
 		margin-bottom: 0;
 	}
 
@@ -33,17 +33,35 @@
 	.ng-cloak {
 		display: none !important;
 	}
+	
+	.bg{
+
+		background-size: cover;
+		position:fixed;
+		background: #c7c9cb;
+		background-repeat: no-repeat;
+		background-position: center top; 
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+	}
+			
+	.bg img{
+		width: 100%;
+	}
 
 	main {
-		background: url('../images/lobster1.jpg');
-		background-repeat: no-repeat;
-		background-position: center top; 		
+		
 		min-height: calc(100% - 130px);		
 	    overflow:hidden;
+		position: relative;
+		z-index:2;
 	}
 	
 	
-	.page1, .page2, .page3{
+	.page1, .page2, .page3, .login{
 		vertical-align: top;
 		position: relative;
 		opacity: 1;
@@ -53,16 +71,19 @@
 		display: block;		
 	}	
 	
-
+	.login{
+		max-width: 400px;		
+	}	
 	
 
-
+	
 	
 	/**************  HEADER  ********************/
 	header{
 		background: url('../images/bg.jpg');
 		height: 80px;
-	
+		z-index:2;
+		position: relative;
 	    transition: all .1s;
 	    overflow:hidden;
 	}
@@ -89,6 +110,8 @@
 		color: #626262; 		
 		font-size: 12px;	
 		overflow: hidden;	
+				z-index:2;
+				position: relative;
 		
 	}
 
@@ -203,7 +226,7 @@
 	
 	[name=my-quantity]{
 	    width:100%;
-		max-width: 200px;
+		max-width: 100px;
 	}
 	
 	[name=my-phone]{
@@ -266,6 +289,8 @@
         width: calc(100% - 2px);
 	    
 	}
+	
+	
 	
 	
 	

@@ -63,7 +63,7 @@ class MyBody extends React.Component{
 		return (
 		<div> 
 			<Header />
-
+			<div className="bg"> <img src="/assets/images/lobster1.jpg" /></div>
 			<main>	
 				<Context.Provider value={{state: this.state}}> 
 					<Router>

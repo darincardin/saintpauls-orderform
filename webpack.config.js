@@ -10,6 +10,7 @@ var config = {
   entry: {
 	index: './src/index.js',
 	admin: './src/admin.js',
+	login: './src/login.js',
   },
 
   output: {
@@ -28,21 +29,17 @@ var config = {
 	
 	before: function(app, server, compiler) {
 		
-      app.post('/php/orders/create.php', function(req, res) {	  
-		  res.json(readFile('data/create.json'));
-      });
-	  
-	  app.get('/php/orders/list.php', function(req, res) {
-		  res.json(readFile('data/list.json'));
-      }); 
-
-	  app.post('/php/orders/update.php', function(req, res) {
-		  res.json(readFile('data/update.json'));
-      }); 	  
-	  
-	  app.get('/php/orders/delete.php*', function(req, res) {
-		  res.json(readFile('data/delete.json'));
-      }); 
+		var reader = function(res, path){
+			var data = JSON.parse( require('fs').readFileSync(`data/${path}`, 'utf8') );
+			res.json(data);
+		}
+		  
+		app.post('/php/orders/create.php',  (req, res)=>reader(res, 'create.json')); 
+		app.post('/php/orders/update.php',  (req, res)=>reader(res, 'success.json')); 
+		app.get('/php/orders/list.php',    (req, res)=>reader(res, 'list.json')); 
+		app.get('/php/orders/delete.php*', (req, res)=>reader(res, 'success.json')); 
+		app.post('/php/login.php*',  (req, res)=>reader(res, 'success.json')); 
+		app.get('/php/logout.php',  (req, res)=>reader(res, 'success.json')); 
     }
   },
 
