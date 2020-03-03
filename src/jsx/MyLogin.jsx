@@ -49,7 +49,6 @@ class MyLogin extends React.Component{
 		return (
 		<div> 
 			<Header />
-			<div className="bg"> <img src="/assets/images/lobster1.jpg" /></div>
 			<main >
 			<div className="login">
 				<h2>Login Demo</h2>

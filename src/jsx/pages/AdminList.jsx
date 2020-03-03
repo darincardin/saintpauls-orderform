@@ -7,8 +7,8 @@ import form from '../../js/form.js';
 class AdminList extends React.Component {
 	static contextType = Context;
 
-
 	render(){
+
 	  return (
 		<Context.Consumer>
 		{ context => (

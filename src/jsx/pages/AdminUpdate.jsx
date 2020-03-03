@@ -8,9 +8,11 @@ class AdminUpdate extends React.Component {
 	static contextType = Context;
 
 	render(){
+		
 	  return (
 		<Context.Consumer>
 		{ context => (
+			
 				<Modal>
 					<div>
 						<table>

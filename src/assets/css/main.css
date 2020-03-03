@@ -2,13 +2,17 @@
 	
 	html, body, #app, #app>div {
 		height: 100%;
-		background: #FFFFFF;
 		color: #626262;
 		font-size: 15px;
 		font-family: Arial, Tahoma, Verdana;
 	}
 
-	
+    body{
+		background: url('../images/lobster1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover; 
+        background-repeat: repeat;
+   }	
 
 	h2, label, p {
 		white-space: nowrap;

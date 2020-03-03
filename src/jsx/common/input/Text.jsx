@@ -22,6 +22,7 @@ class Text extends React.Component {
 		super(props);
 		this.props = props;
 	    this.elem = React.createRef();
+
 	}
 	
 	onChange = (e)=>{

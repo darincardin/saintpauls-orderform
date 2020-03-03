@@ -1,5 +1,5 @@
 import React from "react";
-
+import ErrorBoundary from 'react-error-boundary';
 
 import MyBody from './MyBody.jsx';
 import Header from './common/layout/Header.jsx';
@@ -10,6 +10,9 @@ import ProgressBar from './common/widget/ProgressBar.jsx';
 import form from '../js/form.js';
 import Order from '../js/order.js';
 import Context from '../js/context.js';
+
+
+
 
 
 
@@ -51,6 +54,9 @@ class AdminBody extends MyBody{
 			delete: this.delete	
 		}
 	}
+		
+		
+	errorMsg = function(){  return <h2 className="text-center" >An error occurred. </h2> }	
 		
 	componentDidMount = () =>{
 	    fetch("/php/orders/list.php").then(res =>res.json()).then(
@@ -107,25 +113,23 @@ class AdminBody extends MyBody{
 		}
 	}
 	
+
     render() {
-	
+		
 		return (
-		<Context.Provider value={{state: this.state}}> 
-		<div>
-			<Header />
-			<div className="bg"> <img src="/assets/images/lobster1.jpg" /></div>
-			<a href="#" onClick={this.logout} className="logout">Logout</a>  
-			<main>	
-				<br />
-				<Admin.AdminList />
-			</main>	
-			<Footer />
-			
-			<Admin.AdminUpdate />
-			
-			<ProgressBar show={this.state.showProgress} />
-			
-		</div>
+		<Context.Provider value={{state: this.state}} > 
+			<div>
+				<Header />
+					<a href="#" onClick={this.logout} className="logout">Logout</a>  
+					<main>	
+						<ErrorBoundary  FallbackComponent={this.errorMsg}  >
+							<Admin.AdminList />
+						</ErrorBoundary>
+					</main>	
+				<Footer />
+				<Admin.AdminUpdate />
+				<ProgressBar show={this.state.showProgress} />
+			</div>
 		</Context.Provider> 
 	  );
 	}
@@ -135,7 +139,3 @@ class AdminBody extends MyBody{
 
 export default (AdminBody);
 
-
-/*
-
-*/
