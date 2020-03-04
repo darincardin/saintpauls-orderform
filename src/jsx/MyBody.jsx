@@ -20,7 +20,7 @@ class MyBody extends React.Component{
 	
     constructor(){
 		super();
-				debugger;
+
 		this.state = { 
 			showProgress:false,  
 			form: form(new Order()),
