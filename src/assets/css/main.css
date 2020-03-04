@@ -253,6 +253,9 @@
         padding-right: 15px;
 	}
 	
+	.has-feedback .form-control {
+		padding-right: 24px;
+	}
 	
 	.glyphicon-ok, .glyphicon-remove{
 		display:none;

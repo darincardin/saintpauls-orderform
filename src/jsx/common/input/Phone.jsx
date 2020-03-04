@@ -8,11 +8,11 @@ class Number extends Text {
 	}
 	
 	validate = () =>{
-		var result = true;
-		
-		if(this.props.required)  result = this.context.state.form.$required(this.props.name);
-		
-		if(!result)  this.context.state.form.$phone(this.props.name);
+		return this.context.state.form.$phone(this.props.name);
+	}
+	
+	render(){ 
+		return ( <Text type="text" name={this.props.name} required validate={this.validate} /> );
 	}
 }
 

@@ -23,6 +23,7 @@ class Text extends React.Component {
 		this.props = props;
 	    this.elem = React.createRef();
 
+		this.type = props.type || "text";
 	}
 	
 	onChange = (e)=>{
@@ -36,7 +37,12 @@ class Text extends React.Component {
 	}
 		
 	validate = (val) => {
-		if(this.props.required)  this.context.state.form.$required(this.props.name, val);
+		
+		var result = false;
+
+		if(this.props.validate) result = this.props.validate(val);
+
+		if(!result && this.props.required)  this.context.state.form.$required(this.props.name, val);
 	}
 
 	render(){
@@ -45,6 +51,9 @@ class Text extends React.Component {
 		var submitted = this.context.state.form.$submitted;
 		var errors = this.context.state.form.$errors[name];
 		var value = this.context.state.form[name];
+		
+		var onWatch = this.onWatch;
+		var onChange = this.onChange;
 
 		return (
 		<Context.Consumer>
@@ -53,7 +62,7 @@ class Text extends React.Component {
 			<div ref={this.elem} 
 				 className={`form-group has-feedback ${ submitted && (!errors ? "has-success" : "has-error") } `} name={`my-${name}`} >
 				
-				<input type="text" className="form-control" name={name} value={value} onFocus={this.onWatch} onKeyUp={this.onWatch} onChange={this.onChange} />
+				<input type={this.type} className="form-control" name={name} value={value} onFocus={onWatch} onKeyUp={onWatch} onChange={onChange} />
 				
 				<span className="glyphicon glyphicon-ok form-control-feedback" ></span>
 				<span className="glyphicon glyphicon-remove form-control-feedback" ></span>
