@@ -37,6 +37,7 @@ class AdminList extends React.Component {
 									   <td>
 										   <a onClick={() => {this.context.state.openEdit(r)}} > Edit </a> | 
 										   <a onClick={() => this.context.state.delete(r.id)} > Delete </a> 
+										   <a onClick={this.context.state.delete.bind(this, r.id)} > Delete </a> 
 									   </td>
 									</tr>  
 								)}
