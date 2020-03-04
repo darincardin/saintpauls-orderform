@@ -8,7 +8,6 @@ class AdminList extends React.Component {
 	static contextType = Context;
 
 	render(){
-
 	  return (
 		<Context.Consumer>
 		{ context => (
@@ -35,9 +34,9 @@ class AdminList extends React.Component {
 									   <td>{r.phone}</td>
 									   <td>{r.address}</td>
 									   <td>
-										   <a onClick={() => {this.context.state.openEdit(r)}} > Edit </a> | 
+										   <a onClick={() => this.context.state.openEdit(r) } > Edit </a> | 
 										   <a onClick={() => this.context.state.delete(r.id)} > Delete </a> 
-										   <a onClick={this.context.state.delete.bind(this, r.id)} > Delete </a> 
+										   
 									   </td>
 									</tr>  
 								)}

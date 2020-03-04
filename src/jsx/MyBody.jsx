@@ -20,7 +20,7 @@ class MyBody extends React.Component{
 	
     constructor(){
 		super();
-		
+				debugger;
 		this.state = { 
 			showProgress:false,  
 			form: form(new Order()),
@@ -28,12 +28,10 @@ class MyBody extends React.Component{
 				this.setState({form:  form(new Order())  } );
 			},
 			change: (arg1, arg2)=>{
-				
 				var name = (arg1 instanceof Event) ? arg1.target.name  : arg1;
 				var val =  (arg1 instanceof Event) ? arg1.target.value : arg2;
 
-				this.state.form[name] =  val;
-				this.setState({form : this.state.form});
+				this.setState(state => state.form[name] = val)
 			},
 	
 			submit: onSuccess =>{

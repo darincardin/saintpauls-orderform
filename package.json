@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "clear && grunt default && webpack  --mode production",
-    "start": "clear && webpack-dev-server --hot"
+    "build": "clear && grunt default && webpack --env.production=true --mode production",
+    "start": "clear && webpack-dev-server --hot --env.production=false"
   },
   "babel": {
     "plugins": [

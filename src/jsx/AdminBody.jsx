@@ -22,17 +22,17 @@ class AdminBody extends MyBody{
 	constructor(props){
 		super(props);
 		
+		
+
+		
 		this.state = { 
 			array: [],
 			form: form(new Order()),
 			clear: () =>{ this.setState( {form:  form(new Order())  } ) },
-			change: (arg1, arg2)=>{
-				
-				var name = (arg1 instanceof Event) ? arg1.target.name  : arg1;
-				var val =  (arg1 instanceof Event) ? arg1.target.value : arg2;
-
-				this.state.form[name] =  val;
-				this.setState({form : this.state.form});
+			change: e=>{
+				var name = e.target.name;
+				var val =  e.target.value;
+				this.setState(state => state.form[name] = val)
 			},
 	
 			submit: onSuccess =>{
@@ -56,13 +56,10 @@ class AdminBody extends MyBody{
 		}
 	}
 		
-		
-	errorMsg = function(){  return <h2 className="text-center" >An error occurred. </h2> }	
-		
 	componentDidMount = () =>{
 	    fetch("/php/orders/list.php").then(res =>res.json()).then(
 		success => { this.setState({array: success }); },
-		error => {alert(error) })
+		error => { alert(error) })
 	}
 	
 	openEdit = (row) => {
@@ -87,15 +84,12 @@ class AdminBody extends MyBody{
 	logout = () =>{
 		this.showOverlay(); 
 		fetch(`/php/logout.php`).then(res => res.json()).then(
-		result =>{ 	
-			window.location.href = '/login.html';
-		},
+		result =>{ window.location.href = '/login.html' },
 		error => {
 			this.hideOverlay(); 
 			alert("An error occurred. Please try again later.")
 		})
 	}
-
 
 	delete = (id) =>{
 		
@@ -113,7 +107,6 @@ class AdminBody extends MyBody{
 			})
 		}
 	}
-	
 
     render() {
 		
@@ -123,7 +116,7 @@ class AdminBody extends MyBody{
 				<Header />
 					<a href="#" onClick={this.logout} className="logout">Logout</a>  
 					<main>	
-						<ErrorBoundary  FallbackComponent={this.errorMsg}  >
+						<ErrorBoundary  FallbackComponent={()=>"Error"}  >
 							<Admin.AdminList />
 						</ErrorBoundary>
 					</main>	

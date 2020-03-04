@@ -1,12 +1,11 @@
 import React from 'react';
 import Text from './Text.jsx';
+import Context from '../../../js/context.js';
 
-class Number extends Text {
+class Number extends React.Component {
+	static contextType = Context;
 	
-	constructor(props){
-		super(props);
-	}
-	
+
 	validate = () =>{
 		return this.context.state.form.$phone(this.props.name);
 	}

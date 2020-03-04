@@ -7,23 +7,27 @@ import Context from '../../../js/context.js';
 class Text extends React.Component {
     static contextType = Context;
 
-	onWatch = () =>{
-		if(this.context.state.form.$submitted) {
-		
-			if(this.context.state.form.$errors[this.props.name]){
-				if(this.context.state.form.$errors[this.props.name] == "required") this.ttip.show("Required");
-				if(this.context.state.form.$errors[this.props.name] == "phone") this.ttip.show("Format is xxx-xxx-xxxx");		
-			}
-			else this.ttip.hide();
-		}
-	}
-
 	constructor(props){
 		super(props);
 		this.props = props;
 	    this.elem = React.createRef();
 
 		this.type = props.type || "text";
+	}
+	
+	onWatch = () =>{
+		
+		var form = this.context.state.form;
+		
+		if(form.$submitted) {
+		
+			if(form.$errors[this.props.name]){
+				
+				if(form.$errors[this.props.name] == "required") this.ttip.show("Required");
+				if(form.$errors[this.props.name] == "phone") this.ttip.show("Format is xxx-xxx-xxxx");		
+			}
+			else this.ttip.hide();
+		}
 	}
 	
 	onChange = (e)=>{
