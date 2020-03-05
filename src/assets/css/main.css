@@ -90,6 +90,7 @@
 		position: relative;
 	    transition: all .1s;
 	    overflow:hidden;
+		color:white;
 	}
  
 	header a{

@@ -10,18 +10,16 @@ module.exports = function(data)  {
 		return Object.keys(this.$errors).length == 0;
 	},
 		
-	$required: function(name, value){
-			
-		var val =  value==undefined ? this[name] : value;
+	$required: function(name, val){
+		
 		if(!val) this.$errors[name] = "required";
 		else delete this.$errors[name];	
 		
 		return !val;
 	},
 
-	$phone: function(name){
-		var val = this[name];
-			
+	$phone: function(name, val){
+		
 		var pattern = /^\d{3}-\d{3}-\d{4}$/;
 		
 		if(!pattern.test(val)) this.$errors[name] = "phone";

@@ -7,7 +7,7 @@ class Header extends React.Component{
     render() {return (
 		<header>
     		<div>
-    		    <a className="center-block" href="http://stpaulsumcnb.org/"></a>
+				<h1 class="text-center">Placeholder</h1>
     		</div>	
 		</header>
 	  );

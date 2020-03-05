@@ -12,54 +12,35 @@ import form from '../js/form.js';
 import Order from '../js/order.js';
 import Context from '../js/context.js';
 
-
-
-
-
+var _ = require('lodash');
 
 class AdminBody extends MyBody{
 	
 	constructor(props){
 		super(props);
 		
-		
-
-		
 		this.state = { 
 			array: [],
 			form: form(new Order()),
 			clear: () =>{ this.setState( {form:  form(new Order())  } ) },
 			change: e=>{
-				var name = e.target.name;
-				var val =  e.target.value;
-				this.setState(state => state.form[name] = val)
-			},
-	
-			submit: onSuccess =>{
-				this.showOverlay();
-
-				fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) })
-				.then(res => res.json()).then(
-				success => { 
-					this.hideOverlay(); 
-					this.state.form.id = success;
-					onSuccess();
-				},
-				error => {
-					alert("An error occurred. Please try again later.")
-					this.hideOverlay(); 
-				});	
+				this.setState(state => state.form[ e.target.name] = e.target.value)
 			},
 			openEdit: this.openEdit,
 			edit: this.edit,
 			delete: this.delete	
 		}
-	}
+	}	
 		
 	componentDidMount = () =>{
+		this.showOverlay();
+		
 	    fetch("/php/orders/list.php").then(res =>res.json()).then(
-		success => { this.setState({array: success }); },
-		error => { alert(error) })
+		res => { 
+			this.hideOverlay(); 
+			this.setState({array: res }); 
+		})
+		.catch(this.errorHandler)
 	}
 	
 	openEdit = (row) => {
@@ -69,42 +50,34 @@ class AdminBody extends MyBody{
 
 	edit = () => {
 		this.showOverlay();
+		var obj = this.state.form;
 
-	    fetch("/php/orders/update.php", { method: 'post', body: JSON.stringify(this.state.form)} ).then(
-		result => { 
-			var i = this.state.array.findIndex( i => i.id == this.state.form.id );
-		    this.state.array.splice(i, 1, this.state.form);
-		
+	    fetch("/php/orders/update.php", { method:'post', body:JSON.stringify(obj)} ).then(res =>res.json()).then(
+		resp => { 
+			this.state.array = this.state.array.map(i=>i.id==obj.id ? obj:i);
 			this.hideOverlay(); 
 			$('#basicModal').modal('toggle');
-		},
-		error => alert("An error occurred. Please try again later."))
+		})
+		.catch(this.errorHandler)
 	}
 
 	logout = () =>{
 		this.showOverlay(); 
-		fetch(`/php/logout.php`).then(res => res.json()).then(
-		result =>{ window.location.href = '/login.html' },
-		error => {
-			this.hideOverlay(); 
-			alert("An error occurred. Please try again later.")
-		})
+		fetch(`/php/logout.php`).then(res => res.json())
+		.then(res =>window.location.href = '/login.html' )
+		.catch(this.errorHandler)
 	}
 
-	delete = (id) =>{
+	delete = id=>{
 		
 		if(confirm(`Delete order ${id}?`) ) {
 			this.showOverlay();
-			fetch(`/php/orders/delete.php?id=${id}`).then(res => res.json()).then(
-			success =>{ 	
-				var i = this.state.array.findIndex(i => i.id == id );
-				this.state.array.splice(i, 1);
+			fetch(`/php/orders/delete.php?id=${id}`).then(res => res.json())
+			.then(res =>{ 
+			    _.remove(this.state.array, {id: id})
 				this.hideOverlay(); 
-			},
-			error => {
-				this.hideOverlay(); 
-				alert("An error occurred. Please try again later.")
 			})
+			.catch(this.errorHandler)
 		}
 	}
 
@@ -125,11 +98,8 @@ class AdminBody extends MyBody{
 			</div>
 			{ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
 		</Context.Provider> 
-	  );
+	    );
 	}
-
-
 }
-
 export default (AdminBody);
 

@@ -31,17 +31,18 @@ class Text extends React.Component {
 	}
 	
 	onChange = (e)=>{
-		this.context.state.change(event)
+		this.context.state.change(event);
+		
 		this.validate( event.target.value.trim());	
 	}
 	
 	componentDidMount() {
-	   this.validate();
+	   this.validate(this.context.state.form[this.props.name]);
 	   this.ttip = tooltip(this.elem.current);
 	}
 		
-	validate = (val) => {
-		
+	validate = val => {
+
 		var result = false;
 
 		if(this.props.validate) result = this.props.validate(val);
@@ -67,7 +68,6 @@ class Text extends React.Component {
 				 className={`form-group has-feedback ${ submitted && (!errors ? "has-success" : "has-error") } `} name={`my-${name}`} >
 				
 				<input type={this.type} className="form-control" name={name} value={value} onFocus={onWatch} onKeyUp={onWatch} onChange={onChange} />
-				
 				<span className="glyphicon glyphicon-ok form-control-feedback" ></span>
 				<span className="glyphicon glyphicon-remove form-control-feedback" ></span>
 				<span id="inputSuccess4Status" className="sr-only">(success)</span>

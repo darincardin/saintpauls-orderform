@@ -33,21 +33,16 @@ class MyBody extends React.Component{
 
 				this.setState(state => state.form[name] = val)
 			},
-	
 			submit: onSuccess =>{
 				this.showOverlay();
 
-				fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) })
-				.then(res => res.json()).then(
-				success => { 
+				fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) }).then(res => res.json())
+				.then(res => { 
 					this.hideOverlay(); 
-					this.state.form.id = success;
+					this.state.form.id = res;
 					onSuccess();
-				},
-				error => {
-					alert("An error occurred. Please try again later.")
-					this.hideOverlay(); 
-				});	
+				})
+				.catch(this.errorHandler)
 			}	
 		}
 	}
@@ -55,7 +50,12 @@ class MyBody extends React.Component{
 	showOverlay = () =>{ this.setState({showProgress:true})}
 	
 	hideOverlay = () =>{ this.setState({showProgress:false})}
-
+			
+	errorHandler = () => {
+		this.hideOverlay(); 
+		alert("An error occurred. Please try again later.");
+	}	
+	
     render() {
 		return (
 		<div> 

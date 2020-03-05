@@ -2,12 +2,12 @@ import React from 'react';
 import Text from './Text.jsx';
 import Context from '../../../js/context.js';
 
-class Number extends React.Component {
+class Phone extends React.Component {
 	static contextType = Context;
 	
 
-	validate = () =>{
-		return this.context.state.form.$phone(this.props.name);
+	validate = val =>{
+		return this.context.state.form.$phone(this.props.name, val);
 	}
 	
 	render(){ 
@@ -15,4 +15,4 @@ class Number extends React.Component {
 	}
 }
 
-export default Number;
+export default Phone;
