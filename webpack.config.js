@@ -5,6 +5,7 @@ var webpack = require('webpack');
 module.exports = (env) => {
 
 
+	var dir = env.mode || 'src';
 	var plugins = env.production ? [ new webpack.DefinePlugin({'process.env': { 'NODE_ENV': JSON.stringify('production')} }) ] : [] 
 
 	return  {
@@ -22,7 +23,7 @@ module.exports = (env) => {
 	  
 	  plugins:plugins,
 	  devServer: {
-		contentBase: './src',
+		contentBase: path.join(__dirname, dir),
 		publicPath: '/',
 		historyApiFallback: true,   
 		inline: true,

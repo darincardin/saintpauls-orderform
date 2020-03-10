@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "clear && grunt default && webpack --env.production=true --mode production",
-    "start": "clear && webpack-dev-server --hot --env.production=false"
+    "start": "clear && webpack-dev-server --hot --env.production=false",
+	"dist": "clear && npm run build && webpack-dev-server --hot --env.production=true --env.mode=dist --display-error-details"
   },
   "babel": {
     "plugins": [

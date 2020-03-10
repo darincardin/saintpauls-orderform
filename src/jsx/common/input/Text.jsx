@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import tooltip from '../../../js/tooltip.js';
@@ -11,8 +12,6 @@ class Text extends React.Component {
 		super(props);
 		this.props = props;
 	    this.elem = React.createRef();
-
-		this.type = props.type || "text";
 	}
 	
 	onWatch = () =>{
@@ -50,24 +49,26 @@ class Text extends React.Component {
 		if(!result && this.props.required)  this.context.state.form.$required(this.props.name, val);
 	}
 
-	render(){
-
-		var name = this.props.name;
+	render(){ 
 		var submitted = this.context.state.form.$submitted;
-		var errors = this.context.state.form.$errors[name];
-		var value = this.context.state.form[name];
+		var errors = this.context.state.form.$errors[this.props.name];
 		
-		var onWatch = this.onWatch;
-		var onChange = this.onChange;
+		var attribs = {
+			type: this.props.type || "text",
+			name: this.props.name,
+			value: this.context.state.form[this.props.name],
+			onFocus:this.onWatch,
+			onKeyUp:this.onWatch,
+			onChange:this.onChange,
+		}
 
 		return (
 		<Context.Consumer>
 		{ context => (
 			
-			<div ref={this.elem} 
-				 className={`form-group has-feedback ${ submitted && (!errors ? "has-success" : "has-error") } `} name={`my-${name}`} >
+			<div ref={this.elem} className={`form-group has-feedback ${ submitted && (!errors ? "has-success" : "has-error") } `} name={`my-${this.props.name}`} >
 				
-				<input type={this.type} className="form-control" name={name} value={value} onFocus={onWatch} onKeyUp={onWatch} onChange={onChange} />
+				<input className="form-control" {...attribs} />
 				<span className="glyphicon glyphicon-ok form-control-feedback" ></span>
 				<span className="glyphicon glyphicon-remove form-control-feedback" ></span>
 				<span id="inputSuccess4Status" className="sr-only">(success)</span>
@@ -78,3 +79,4 @@ class Text extends React.Component {
 	}
 }			
 export default Text;
+

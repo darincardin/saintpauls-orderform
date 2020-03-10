@@ -1,4 +1,6 @@
 
+import form from './form.js';
+
 export default class Order {
 	
 	constructor(obj = {}){
@@ -8,5 +10,7 @@ export default class Order {
 		this.quantity = obj.quantity || "";
 		this.phone = obj.phone || "";
 		this.address = obj.address || "";
+		
+		return form(this);
 	}
 }

@@ -23,9 +23,9 @@ class MyBody extends React.Component{
 
 		this.state = { 
 			showProgress:false,  
-			form: form(new Order()),
+			form: new Order(),
 			clear: ()=>{
-				this.setState({form:  form(new Order())  } );
+				this.setState({form: new Order() } );
 			},
 			change: (arg1, arg2)=>{
 				var name = (arg1 instanceof Event) ? arg1.target.name  : arg1;

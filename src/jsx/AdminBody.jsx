@@ -8,7 +8,7 @@ import Footer from './common/layout/Footer.jsx';
 import * as Admin from './pages/';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
-import form from '../js/form.js';
+
 import Order from '../js/order.js';
 import Context from '../js/context.js';
 
@@ -21,8 +21,8 @@ class AdminBody extends MyBody{
 		
 		this.state = { 
 			array: [],
-			form: form(new Order()),
-			clear: () =>{ this.setState( {form:  form(new Order())  } ) },
+			form: new Order(),
+			clear: () =>{ this.setState( {form: new Order()  } ) },
 			change: e=>{
 				this.setState(state => state.form[ e.target.name] = e.target.value)
 			},
@@ -44,7 +44,8 @@ class AdminBody extends MyBody{
 	}
 	
 	openEdit = (row) => {
-		this.setState({form:  form(row)});
+		debugger;
+		this.setState({form:  new Order(row) });
 		$('#basicModal').modal('toggle');		
 	}
 
