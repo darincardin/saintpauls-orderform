@@ -44,7 +44,6 @@ class AdminBody extends MyBody{
 	}
 	
 	openEdit = (row) => {
-		debugger;
 		this.setState({form:  new Order(row) });
 		$('#basicModal').modal('toggle');		
 	}
