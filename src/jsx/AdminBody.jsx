@@ -26,21 +26,35 @@ class AdminBody extends MyBody{
 			change: e=>{
 				this.setState(state => state.form[ e.target.name] = e.target.value)
 			},
+			getOrders: this.getOrders,
 			openEdit: this.openEdit,
 			edit: this.edit,
-			delete: this.delete	
+			delete: this.delete,
+			total:0
+			
 		}
 	}	
 		
 	componentDidMount = () =>{
-		this.showOverlay();
+		this.getOrders(0);
+	}
+	
+	
+	
+	
+	getOrders = page => {
+		//this.showOverlay();
 		
-	    fetch("/php/orders/list.php").then(res =>res.json()).then(
+
+		var offset =  Math.floor((window.innerHeight - 215) / 43);
+		
+	    fetch(`/php/orders/list.php?offset=${offset}&page=${page}`).then(res =>res.json()).then(
 		res => { 
-			this.hideOverlay(); 
-			this.setState({array: res }); 
+		//this.hideOverlay(); 
+			this.setState({total: res.total})
+			this.setState({array: res.data1 }); 
 		})
-		.catch(this.errorHandler)
+		.catch(this.errorHandler)	
 	}
 	
 	openEdit = (row) => {
@@ -89,7 +103,7 @@ class AdminBody extends MyBody{
 				<Header />
 					<a href="#" onClick={this.logout} className="logout">Logout</a>  
 					<main>	
-						<ErrorBoundary  FallbackComponent={()=>"Error"}  >
+						<ErrorBoundary  FallbackComponent={()=><h1>An Error Occurred</h1>}  >
 							<Admin.AdminList />
 						</ErrorBoundary>
 					</main>	

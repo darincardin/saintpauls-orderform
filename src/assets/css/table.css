@@ -1,0 +1,43 @@
+	
+	
+	.mainGrid{
+		white-space: nowrap;
+		table-layout:fixed;
+	}
+	
+	.mainGrid thead{
+        font-weight: bold;
+    }
+
+	.mainGrid tbody{
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }	
+
+    .mainGrid td{
+        padding: 10px;
+        border-bottom: solid #080808 1px;
+        white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;	
+	}
+	
+	.mainGrid   td:nth-child(1){
+		width: 40px;
+	}
+
+	.mainGrid   td:nth-child(3){
+		max-width: 140px;
+	}
+		
+	
+
+	 /**************  HEADER     ********************/  
+    @media screen and  (max-width : 540px) {
+            .mainGrid td:nth-child(5),
+            .mainGrid td:nth-child(6){
+            	 display:none;
+        }
+   }    
+
+ 	   

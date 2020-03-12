@@ -4,8 +4,38 @@ import Context from '../../js/context.js';
 import form from '../../js/form.js';
 
 
+
+var TableLink = props =>{
+	if( props.page > props.min || props.page < (props.max-1) )	return <a onClick={props.onClick}> {props.children} </a>
+	return <span class="disabled">{props.children}</span> ;
+}
+
+
 class AdminList extends React.Component {
 	static contextType = Context;
+	cancel = null;
+	
+	constructor(props){
+		super(props)
+		
+		window.addEventListener('resize', this.handleResize)
+	}
+	
+	handleResize = () => {
+
+		if(this.cancel) clearTimeout(this.cancel);
+		
+		this.cancel = setTimeout(()=>{
+			this.context.state.getOrders(this.page);
+		}, 300);
+	}
+	
+	
+	page = 0;
+	
+	next = ()=>{this.context.state.getOrders(++this.page);}
+
+	prev = ()=>{this.context.state.getOrders(--this.page);}
 
 	render(){
 	  return (
@@ -36,12 +66,24 @@ class AdminList extends React.Component {
 									   <td>
 										   <a onClick={() => this.context.state.openEdit(r) } > Edit </a> | 
 										   <a onClick={() => this.context.state.delete(r.id)} > Delete </a> 
-										   
 									   </td>
 									</tr>  
 								)}
 							</tbody>
 						</table>
+						
+						<div className="foot text-center">
+							<TableLink onClick={this.prev} page={this.page} min={0}> &lt; Prev </TableLink>
+
+							&nbsp;&nbsp;&nbsp;
+							
+							<TableLink onClick={this.next} page={this.page} max={this.context.state.total}> Next  &gt; </TableLink>
+							
+							
+			
+						</div>
+			
+						
 					</div>	
 				</div>
 		)}	
@@ -49,5 +91,8 @@ class AdminList extends React.Component {
 	  )
 	}
 }
-
+//   {this.page < this.context.state.total ? : <span /> }     <Prev page={this.page}/>
+					
 export default AdminList;
+
+

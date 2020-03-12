@@ -299,7 +299,11 @@
 	}
 	
 	
-	
+	.disabled {
+		cursor:not-allowed;
+		color:#777777;
+	}
+		
 	
 	
 	.select-menu{

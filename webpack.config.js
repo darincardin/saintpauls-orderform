@@ -13,7 +13,7 @@ module.exports = (env) => {
 	  entry: {
 		index: './src/index.js',
 		admin: './src/admin.js',
-		login: './src/login.js',
+		login: './src/login.js'
 	  },
 
 	  output: {
@@ -25,19 +25,38 @@ module.exports = (env) => {
 	  devServer: {
 		contentBase: path.join(__dirname, dir),
 		publicPath: '/',
+		
+		
 		historyApiFallback: true,   
 		inline: true,
 		port: 7777   ,
 		before: function(app, server, compiler) {
 			
-			var reader = function(res, path){   res.json( JSON.parse( require('fs').readFileSync(`data/${path}`, 'utf8'))) }
+			var reader = function(res, path){   return JSON.parse( require('fs').readFileSync(`data/${path}`, 'utf8')) }
 			  
-			app.post('/php/orders/create.php',  (req, res)=>reader(res, 'create.json')); 
-			app.post('/php/orders/update.php',  (req, res)=>reader(res, 'success.json')); 
-			app.get('/php/orders/list.php',    (req, res)=>reader(res, 'list.json')); 
-			app.get('/php/orders/delete.php*', (req, res)=>reader(res, 'success.json')); 
-			app.post('/php/login.php*',  (req, res)=>reader(res, 'success.json')); 
-			app.get('/php/logout.php',  (req, res)=>reader(res, 'success.json')); 
+			app.post('/php/orders/create.php',  (req, res)=>res.json(reader(res, 'create.json'))); 
+			app.post('/php/orders/update.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
+			app.get('/php/orders/list.php*',    (req, res)=>{
+				
+				var offset = req.query.offset;
+				var list = 	reader(res, 'list.json'); 
+
+
+
+				var resp =  {
+					
+					total: Math.ceil(list.length/offset),
+					data1: list.splice(offset*req.query.page, offset)
+					
+				}
+
+				res.json(resp);
+			})
+			
+			
+			app.get('/php/orders/delete.php*', (req, res)=>res.json(reader(res, 'success.json'))); 
+			app.post('/php/login.php*',  (req, res)=>res.json(reader(res, 'success.json'))); 
+			app.get('/php/logout.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
 		}
 	  },
 
