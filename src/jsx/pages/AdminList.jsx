@@ -1,9 +1,5 @@
 import React from 'react';
-
 import Context from '../../js/context.js';
-import form from '../../js/form.js';
-
-
 
 var TableLink = props =>{
 	if( props.page > props.min || props.page < (props.max-1) )	return <a onClick={props.onClick}> {props.children} </a>
@@ -14,35 +10,38 @@ var TableLink = props =>{
 class AdminList extends React.Component {
 	static contextType = Context;
 	cancel = null;
-	
-	constructor(props){
-		super(props)
-		
-		window.addEventListener('resize', this.handleResize)
-	}
-	
-	handleResize = () => {
+	state = { array:[], totalPages:0, page:0 }
 
+	componentDidMount = () =>{
+		window.addEventListener('resize', this.handleResize)
+		this.getOrders(0);
+	}
+
+	getOrders = page => {
+		
+		var amount =  Math.floor((window.innerHeight - 215) / 43);
+		
+	    fetch(`/php/orders/list.php?amount=${amount}&page=${page}`).then(res =>res.json()).then(
+		res => { 
+			if(page > res.totalPages  ) page = res.totalPages;
+			
+			this.setState({page: page, totalPages: res.totalPages, array: res.data })
+		})
+		.catch(this.errorHandler)	
+		
+	}
+
+	handleResize = () => {
 		if(this.cancel) clearTimeout(this.cancel);
 		
-		this.cancel = setTimeout(()=>{
-			this.context.state.getOrders(this.page);
-		}, 300);
+		this.cancel = setTimeout(()=>{ this.getOrders(this.state.page) }, 300);
 	}
 	
-	
-	page = 0;
-	
-	next = ()=>{this.context.state.getOrders(++this.page);}
-
-	prev = ()=>{this.context.state.getOrders(--this.page);}
-
 	render(){
 	  return (
 		<Context.Consumer>
 		{ context => (
 				<div className="order-window">
-				
 					<div>
 						<table className="mainGrid">
 							<thead>
@@ -55,7 +54,7 @@ class AdminList extends React.Component {
 								<td>Actions</td></tr>
 							</thead>
 							<tbody>
-								{this.context.state.array.map( r =>  
+								{this.state.array.map( r =>  
 									<tr key={r.id}>
 									   <td>{r.id}</td>
 									   <td>{r.fName}</td>
@@ -73,26 +72,15 @@ class AdminList extends React.Component {
 						</table>
 						
 						<div className="foot text-center">
-							<TableLink onClick={this.prev} page={this.page} min={0}> &lt; Prev </TableLink>
-
+							<TableLink onClick={()=>{this.getOrders(this.state.page-1)}} page={this.state.page} min={0}>&lt; Prev</TableLink>
 							&nbsp;&nbsp;&nbsp;
-							
-							<TableLink onClick={this.next} page={this.page} max={this.context.state.total}> Next  &gt; </TableLink>
-							
-							
-			
+							<TableLink onClick={()=>{this.getOrders(this.state.page+1)}} page={this.state.page} max={this.state.totalPages}>Next  &gt;</TableLink>
 						</div>
-			
-						
 					</div>	
 				</div>
 		)}	
 		</Context.Consumer>	
 	  )
 	}
-}
-//   {this.page < this.context.state.total ? : <span /> }     <Prev page={this.page}/>
-					
+}			
 export default AdminList;
-
-

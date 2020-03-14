@@ -26,36 +26,16 @@ class AdminBody extends MyBody{
 			change: e=>{
 				this.setState(state => state.form[ e.target.name] = e.target.value)
 			},
-			getOrders: this.getOrders,
 			openEdit: this.openEdit,
 			edit: this.edit,
-			delete: this.delete,
-			total:0
-			
+			delete: this.delete,	
 		}
 	}	
 		
-	componentDidMount = () =>{
-		this.getOrders(0);
-	}
-	
-	
-	
-	
-	getOrders = page => {
-		//this.showOverlay();
-		
 
-		var offset =  Math.floor((window.innerHeight - 215) / 43);
-		
-	    fetch(`/php/orders/list.php?offset=${offset}&page=${page}`).then(res =>res.json()).then(
-		res => { 
-		//this.hideOverlay(); 
-			this.setState({total: res.total})
-			this.setState({array: res.data1 }); 
-		})
-		.catch(this.errorHandler)	
-	}
+	
+	
+
 	
 	openEdit = (row) => {
 		this.setState({form:  new Order(row) });

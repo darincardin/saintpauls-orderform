@@ -38,22 +38,15 @@ module.exports = (env) => {
 			app.post('/php/orders/update.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
 			app.get('/php/orders/list.php*',    (req, res)=>{
 				
-				var offset = req.query.offset;
+				var {page, amount} = req.query;
 				var list = 	reader(res, 'list.json'); 
 
-
-
-				var resp =  {
-					
-					total: Math.ceil(list.length/offset),
-					data1: list.splice(offset*req.query.page, offset)
-					
-				}
-
-				res.json(resp);
+				res.json({
+					totalPages: Math.ceil(list.length/amount),
+					data: list.splice(amount*page, amount)	
+				});
 			})
-			
-			
+
 			app.get('/php/orders/delete.php*', (req, res)=>res.json(reader(res, 'success.json'))); 
 			app.post('/php/login.php*',  (req, res)=>res.json(reader(res, 'success.json'))); 
 			app.get('/php/logout.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
