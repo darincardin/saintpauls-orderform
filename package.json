@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "clear && grunt default && webpack --env.production=true --mode production",
     "start": "clear && webpack-dev-server --hot --env.production=false",
-	"dist": "clear && npm run build && webpack-dev-server --hot --env.production=true --env.mode=dist --display-error-details"
+    "dist": "clear && npm run build && webpack-dev-server --hot --env.production=true --env.mode=dist --display-error-details"
   },
   "babel": {
     "plugins": [
@@ -22,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "file": "../React_Modal",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "latest",

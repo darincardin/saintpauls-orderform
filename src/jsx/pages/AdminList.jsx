@@ -1,5 +1,6 @@
 import React from 'react';
 import Context from '../../js/context.js';
+import OrderAPI from '../../js/orderAPI.js';
 
 var TableLink = props =>{
 	if( props.page > props.min || props.page < (props.max-1) )	return <a onClick={props.onClick}> {props.children} </a>
@@ -10,7 +11,7 @@ var TableLink = props =>{
 class AdminList extends React.Component {
 	static contextType = Context;
 	cancel = null;
-	state = { array:[], totalPages:0, page:0 }
+	state = { totalPages:0, page:0 }
 
 	componentDidMount = () =>{
 		window.addEventListener('resize', this.handleResize)
@@ -21,11 +22,13 @@ class AdminList extends React.Component {
 		
 		var amount =  Math.floor((window.innerHeight - 215) / 43);
 		
-	    fetch(`/php/orders/list.php?amount=${amount}&page=${page}`).then(res =>res.json()).then(
-		res => { 
-			if(page > res.totalPages  ) page = res.totalPages;
-			
-			this.setState({page: page, totalPages: res.totalPages, array: res.data })
+	    OrderAPI.list(amount, page).then(res => { 
+			var {totalPages, data} = res;
+
+			if(page > totalPages  ) page = totalPages;
+		
+			this.context.state.changeState("array", data);
+			this.setState({ page, totalPages})
 		})
 		.catch(this.errorHandler)	
 		
@@ -33,7 +36,6 @@ class AdminList extends React.Component {
 
 	handleResize = () => {
 		if(this.cancel) clearTimeout(this.cancel);
-		
 		this.cancel = setTimeout(()=>{ this.getOrders(this.state.page) }, 300);
 	}
 	
@@ -54,7 +56,7 @@ class AdminList extends React.Component {
 								<td>Actions</td></tr>
 							</thead>
 							<tbody>
-								{this.state.array.map( r =>  
+								{this.context.state.array.map( r =>  
 									<tr key={r.id}>
 									   <td>{r.id}</td>
 									   <td>{r.fName}</td>
@@ -74,7 +76,7 @@ class AdminList extends React.Component {
 						<div className="foot text-center">
 							<TableLink onClick={()=>{this.getOrders(this.state.page-1)}} page={this.state.page} min={0}>&lt; Prev</TableLink>
 							&nbsp;&nbsp;&nbsp;
-							<TableLink onClick={()=>{this.getOrders(this.state.page+1)}} page={this.state.page} max={this.state.totalPages}>Next  &gt;</TableLink>
+							<TableLink onClick={()=>{this.getOrders(this.state.page+1)}} page={this.state.page} max={this.state.totalPages}>Next &gt;</TableLink>
 						</div>
 					</div>	
 				</div>

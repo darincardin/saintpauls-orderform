@@ -9,6 +9,7 @@ import Header from './common/layout/Header.jsx';
 import Footer from './common/layout/Footer.jsx';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
+import OrderAPI from '../js/orderAPI.js';
 import form from '../js/form.js';
 import Order from '../js/order.js';
 
@@ -24,10 +25,8 @@ class MyLogin extends React.Component{
 	
 	submit =()=>{
 		this.showOverlay(); 
-		var obj = {username:this.state.username, password: this.state.password}
-		
-		fetch(`/php/login.php`, {method:'post',  body: JSON.stringify(obj)} ).then(res => res.json()).then(
-		result =>{ 	
+
+		OrderAPI.login(this.state.username, this.state.password).then(result =>{ 	
 			if(result.success) window.location.href = '/admin.html';
 			else {
 				this.hideOverlay(); 

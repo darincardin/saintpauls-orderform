@@ -6,14 +6,18 @@ import Context from '../../js/context.js';
 
 class AdminUpdate extends React.Component {
 	static contextType = Context;
+	
+	
+
+
 
 	render(){
 		
 	  return (
 		<Context.Consumer>
 		{ context => (
-			
-				<Modal>
+
+				<Modal   open={this.context.state.showModal}  onSubmit={this.context.state.edit}>
 					<div>
 						<table>
 							<tbody>
@@ -40,12 +44,9 @@ class AdminUpdate extends React.Component {
 							</tbody>
 						</table>	
 					</div>
-					<div>
-					    <button type="button" className="btn btn-primary" onClick={ this.context.state.edit } >Save Changes</button>
-						<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
 				</Modal>
 			
+		
 		)}	
 		</Context.Consumer>	
 	  )

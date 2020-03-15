@@ -8,7 +8,7 @@ import Footer from './common/layout/Footer.jsx';
 import * as Admin from './pages/';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
-
+import OrderAPI from '../js/orderAPI.js';
 import Order from '../js/order.js';
 import Context from '../js/context.js';
 
@@ -23,42 +23,36 @@ class AdminBody extends MyBody{
 			array: [],
 			form: new Order(),
 			clear: () =>{ this.setState( {form: new Order()  } ) },
-			change: e=>{
-				this.setState(state => state.form[ e.target.name] = e.target.value)
-			},
+			change: e=>{this.setState(state => state.form[ e.target.name] = e.target.value)},
+
+			changeState: (name, value)=>{this.setState({[name]:value})},
 			openEdit: this.openEdit,
 			edit: this.edit,
-			delete: this.delete,	
+			delete: this.delete,
+			showModal: false
 		}
 	}	
-		
-
-	
-	
-
 	
 	openEdit = (row) => {
 		this.setState({form:  new Order(row) });
-		$('#basicModal').modal('toggle');		
+		this.setState({showModal:true});
 	}
 
 	edit = () => {
 		this.showOverlay();
 		var obj = this.state.form;
 
-	    fetch("/php/orders/update.php", { method:'post', body:JSON.stringify(obj)} ).then(res =>res.json()).then(
-		resp => { 
+	    OrderAPI.update(obj).then(resp => { 
 			this.state.array = this.state.array.map(i=>i.id==obj.id ? obj:i);
 			this.hideOverlay(); 
-			$('#basicModal').modal('toggle');
+			this.setState({showModal:false});
 		})
 		.catch(this.errorHandler)
 	}
 
 	logout = () =>{
 		this.showOverlay(); 
-		fetch(`/php/logout.php`).then(res => res.json())
-		.then(res =>window.location.href = '/login.html' )
+		OrderAPI.logout().then(res =>window.location.href = '/login.html' )
 		.catch(this.errorHandler)
 	}
 
@@ -66,8 +60,8 @@ class AdminBody extends MyBody{
 		
 		if(confirm(`Delete order ${id}?`) ) {
 			this.showOverlay();
-			fetch(`/php/orders/delete.php?id=${id}`).then(res => res.json())
-			.then(res =>{ 
+			
+			OrderAPI.delete(id).then(res =>{ 
 			    _.remove(this.state.array, {id: id})
 				this.hideOverlay(); 
 			})
@@ -83,6 +77,7 @@ class AdminBody extends MyBody{
 				<Header />
 					<a href="#" onClick={this.logout} className="logout">Logout</a>  
 					<main>	
+
 						<ErrorBoundary  FallbackComponent={()=><h1>An Error Occurred</h1>}  >
 							<Admin.AdminList />
 						</ErrorBoundary>

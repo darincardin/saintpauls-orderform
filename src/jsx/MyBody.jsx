@@ -10,6 +10,7 @@ import Header from './common/layout/Header.jsx';
 import Footer from './common/layout/Footer.jsx';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
+import OrderAPI from '../js/orderAPI.js';
 import form from '../js/form.js';
 import Order from '../js/order.js';
 import Context from '../js/context.js';
@@ -36,8 +37,7 @@ class MyBody extends React.Component{
 			submit: onSuccess =>{
 				this.showOverlay();
 
-				fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(this.state.form) }).then(res => res.json())
-				.then(res => { 
+				OrderAPI.create(this.state.form).then(res => { 
 					this.hideOverlay(); 
 					this.state.form.id = res;
 					onSuccess();
