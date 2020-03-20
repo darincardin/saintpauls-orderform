@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-
 import MyLogin from './jsx/MyLogin.jsx';
 
-var html = <MyLogin></MyLogin>;
+import '/assets/css/bootstrap.min.css';
+import '/assets/css/responsive.css';
+import '/assets/css/main.css';
 
-ReactDOM.render(html,    document.getElementById('app'));
+ReactDOM.render(<MyLogin></MyLogin>,    document.getElementById('app'));
 
 
 

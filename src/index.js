@@ -1,12 +1,11 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-
 import MyBody from './jsx/MyBody.jsx';
 
-var html = <MyBody></MyBody>;
+import '/assets/css/bootstrap.min.css';
+import '/assets/css/responsive.css';
+import '/assets/css/main.css';
 
-ReactDOM.render(html,    document.getElementById('app'));
+ReactDOM.render(<MyBody></MyBody>,    document.getElementById('app'));
 
 

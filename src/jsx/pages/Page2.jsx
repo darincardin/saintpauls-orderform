@@ -1,65 +1,61 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
 import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-router-dom";
-import form from '../../js/form.js';
+import OrderAPI from '../../js/orderAPI.js';
+import ProgressBar from '../common/widget/ProgressBar.jsx';
 
-import Context from '../../js/context.js';
+import Context from '/js/context.js';
 
-class Page2 extends React.Component {
-	static contextType = Context;
+var Page2 = props => {
 
-	onSuccess = () => {
-		this.props.history.push('/page3')
+	const context = useContext(Context);
+	
+	const submitHandler = (e) => {
+		context.showOverlay()
+
+		OrderAPI.create(props.object).then(res => { 
+			context.hideOverlay()
+			props.object.id = res;
+			props.history.push('/page3')
+		}).catch(context.errorHandler)
+		
 	}
 
-	render(){
-		return (
-			<Context.Consumer>
-			{ context => (
-				<div className="page2" >
-					<h2>Confirm Order </h2>
-					<div className="panel panel-default form-horizontal">
+	var data = [
+		{label: "First Name", value: props.object.fName },
+		{label: "Last Name", value: props.object.lName },
+		{label: "Quantity", value: props.object.quantity },
+		{label: "Phone", value: props.object.phone },
+		{label: "Address", value: props.object.address }
+	]
 	
-						<div className="panel-body">
-
-							<table >  
-								<tbody>
-									 <tr> 
-										<td><label className='control-label' htmlFor='inputSuccess4'>First Name</label></td>
-										<td>{context.state.form.fName}</td>
-									 </tr>
-									 <tr> 
-										<td><label className='control-label' htmlFor='inputSuccess4'>Last Name</label></td>
-										<td>{context.state.form.lName}</td>
-									 </tr>
-									 <tr> 
-										<td><label className='control-label' htmlFor='inputSuccess4'>Quantity</label></td>
-										<td>{context.state.form.quantity}</td>
-									 </tr>
-									 <tr> 
-										<td><label className='control-label' htmlFor='inputSuccess4'>Phone</label></td>
-										<td>{context.state.form.phone}</td>
-									 </tr>
-									 <tr> 
-										<td><label className='control-label' htmlFor='inputSuccess4'>Address</label></td>
-										<td>{context.state.form.address}</td>
-									 </tr>
-								 </tbody>
-							</table>
-
-							<hr/>
-
-							<Link to='/'>
-								<button  className="btn btn-default">Back</button>
-							</Link>
+	return (
+		<>
+			<div className="page2" >
+				<h2>Confirm Order </h2>
+				<div className="panel panel-default form-horizontal">
+					<div className="panel-body">
+						<table >  
+							<tbody>
+							{data.map(i=>(
+								<tr> 
+								    <td><label className='control-label' htmlFor='inputSuccess4'>{i.label}</label></td>
+									<td>{i.value}</td>
+								</tr>
+							))}
+							</tbody>
+						</table>
+						<hr/>
+						<div className="text-right">
+							<Link to='/'><button  className="btn btn-default">Back</button></Link>
 							&nbsp;
-							
-							<button className="btn btn-primary" type='button' onClick={ ()=>{ context.state.submit(this.onSuccess)}} >Confirm</button> 	  
+							<button className="btn btn-primary" type='button' onClick={submitHandler} >Confirm</button> 	  
 						</div>
 					</div>
 				</div>
-			)}	
-			</Context.Consumer>	
-		)
-	}
+			</div>		
+		</>
+	)
 }
 export default withRouter(Page2);
+								//		

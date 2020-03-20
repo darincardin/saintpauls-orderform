@@ -7,7 +7,7 @@ export default class OrderAPI {
 	}
 	
 	static create(data){
-		return  fetch('/php/orders/create.php', { method: 'post', body: JSON.stringify(data) }).then(res => res.json())
+		return  fetch(`/php/orders/create.php`, { method: 'post', body: JSON.stringify(data) }).then(res => res.json())
 	}	
 	
 	static update(obj){

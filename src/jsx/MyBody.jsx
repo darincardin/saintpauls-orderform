@@ -1,91 +1,71 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch, withRouter, Route,Link} from "react-router-dom";
+import ErrorBoundary from 'react-error-boundary';
+import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 
-import Page1 from './pages/Page1.jsx';
-import Page2 from './pages/Page2.jsx';
-import Page3 from './pages/Page3.jsx';
+import Header from '/jsx/common/layout/Header.jsx';
+import Footer from '/jsx/common/layout/Footer.jsx';
 
-import Header from './common/layout/Header.jsx';
-import Footer from './common/layout/Footer.jsx';
+import Page1 from '/jsx/pages/Page1.jsx';
+import Page2 from '/jsx/pages/Page2.jsx';
+import Page3 from '/jsx/pages/Page3.jsx';
+
+
+import Error from '/jsx/common/widget/Error.jsx';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
-import OrderAPI from '../js/orderAPI.js';
-import form from '../js/form.js';
-import Order from '../js/order.js';
-import Context from '../js/context.js';
+import {MyProvider} from '/js/context.js';
 
 
+const newOrder = {fName:"", lName:"", quantity:"", phone:"", address:""}
 
 class MyBody extends React.Component{
+		
+	state = { object: {...newOrder}, showProgress:false }
 	
-    constructor(){
-		super();
-
-		this.state = { 
-			showProgress:false,  
-			form: new Order(),
-			clear: ()=>{
-				this.setState({form: new Order() } );
-			},
-			change: (arg1, arg2)=>{
-				var name = (arg1 instanceof Event) ? arg1.target.name  : arg1;
-				var val =  (arg1 instanceof Event) ? arg1.target.value : arg2;
-
-				this.setState(state => state.form[name] = val)
-			},
-			submit: onSuccess =>{
-				this.showOverlay();
-
-				OrderAPI.create(this.state.form).then(res => { 
-					this.hideOverlay(); 
-					this.state.form.id = res;
-					onSuccess();
-				})
-				.catch(this.errorHandler)
-			}	
-		}
+	storeObject = (o = {...newOrder} )=>{
+		this.setState({object: o})
 	}
 	
-	showOverlay = () =>{ this.setState({showProgress:true})}
-	
-	hideOverlay = () =>{ this.setState({showProgress:false})}
-			
-	errorHandler = () => {
-		this.hideOverlay(); 
-		alert("An error occurred. Please try again later.");
-	}	
-	
+	shared = {
+		showOverlay : () => { this.setState({showProgress:true})},
+		
+		hideOverlay : () => { this.setState({showProgress:false})},
+		
+		errorHandler : () => {
+			this.shared.hideOverlay(); 
+			alert("An error occurred. Please try again later.")
+		}			
+	}
+		
     render() {
 		return (
-		<div> 
+		<MyProvider value={{...this.shared}} > 
 			<Header />
-			<main>	
-				<Context.Provider value={{state: this.state}}> 
+			<main>			
+				<ErrorBoundary  FallbackComponent={<Error />}  >
 					<Router>
 					  <div>
 						<Switch>
-						  <Route path="/page2">
-							<Page2 />
+						  <Route path="/page2" >
+							<Page2 object={this.state.object}/>
 						  </Route>
-						  <Route path="/page3">
-							<Page3 />
+						  <Route path="/page3" >
+							<Page3 object={this.state.object}  storeObject={this.storeObject} />
 						  </Route>
 						  <Route path="/">
-							<Page1 />
+							<Page1  object={this.state.object} storeObject={this.storeObject} />
 						  </Route>
 						</Switch>
 					  </div>
 					</Router>
-				</Context.Provider> 
+				</ErrorBoundary >
 			</main>	
-			
 			<Footer />
-		    {ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
-		</div>
+			{ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
+		</MyProvider> 
 	  );
 	}
 }
 
 export default MyBody;
-

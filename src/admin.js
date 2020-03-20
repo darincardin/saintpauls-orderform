@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 
-import AdminBody from './jsx/AdminBody.jsx';
+import Admin from './jsx/pages/Admin/Admin.jsx';
 
-var html = <AdminBody></AdminBody>;
 
-ReactDOM.render(html,    document.getElementById('app'));
+
+import '/assets/css/bootstrap.min.css';
+import '/assets/css/responsive.css';
+import '/assets/css/main.css';
+import '/assets/css/admin.css';
+import '/assets/css/table.css';
+
+ReactDOM.render(<Admin></Admin>,    document.getElementById('app'));
 
 
 

@@ -1,42 +1,31 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 
-import {BrowserRouter as Router, Redirect ,Switch, withRouter, Route,Link} from "react-router-dom";
-import { useHistory } from "react-router-dom";
-
-
 import Header from './common/layout/Header.jsx';
 import Footer from './common/layout/Footer.jsx';
 import ProgressBar from './common/widget/ProgressBar.jsx';
 
-import OrderAPI from '../js/orderAPI.js';
-import form from '../js/form.js';
-import Order from '../js/order.js';
+import OrderAPI from '/js/orderAPI.js';
 
-import Context from '../js/context.js';
 
 class MyLogin extends React.Component{
 	
-    constructor(props){
-		super(props);
-		this.props = props;
-		this.state = {showProgress:false, username:"", password:""}
-	}
+	state = {showProgress:false, username:"", password:""}
 	
-	submit =()=>{
+	submit = () =>{
 		this.showOverlay(); 
 
-		OrderAPI.login(this.state.username, this.state.password).then(result =>{ 	
-			if(result.success) window.location.href = '/admin.html';
+		OrderAPI.login(this.state.username, this.state.password).then(res =>{ 	
+			if(res.success) window.location.href = '/admin.html';
 			else {
 				this.hideOverlay(); 
 				alert("Login was unsuccessful.");
 			}
-		},
-		error => {
+		})
+		.catch(()=>{
 			this.hideOverlay(); 
 			alert("An error occurred. Please try again later.")
-		})
+		});
 	}
 	
 	change = e=>{this.setState({[e.target.name] :  e.target.value});}

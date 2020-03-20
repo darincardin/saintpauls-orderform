@@ -1,63 +1,29 @@
 import React from 'react';
+//import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-import Page2 from './Page2.jsx';
-import * as Input from '../common/input';
-import form from '../../js/form.js';
+import Form from '../common/input/Form.jsx';
 
-import Context from '../../js/context.js';
 
-class Page1 extends React.Component {
-	static contextType = Context;
-
-	onNext = () => {		
-		this.context.state.change('$submitted', true)
-		if(this.context.state.form.$isValid()) this.props.history.push('/page2');
-	}
+var Page1 = props =>{
 	
-	render(){
-		return (
-		<Context.Consumer>
-		{ context => (	
-			<div className="page1">
-				<div>
+	var onSuccess = (object)=>{
+		props.storeObject(object) ;
+		props.history.push('/page2')
+	}
+
+	return (
+		<div className="page1">
+			<div>
 				<h2> Order Form </h2>
-				<form>
-					<div className="panel panel-default">
-						<div className="panel-body">
-							<table>
-								<tbody>
-								<tr>
-									<td><label className="control-label required">First Name</label></td>
-									<td><Input.Text name="fName" required /></td>
-								</tr>
-								<tr>
-									<td><label className="control-label required">Last Name</label></td>
-									<td><Input.Text name="lName" required /></td>
-								</tr>
-								<tr>
-									<td><label className="control-label required">Quantity</label></td>
-									<td><Input.Number name="quantity" required /></td>
-								</tr>
-								<tr>
-									<td><label className="control-label required">Phone</label></td>
-									<td><Input.Phone name="phone" required /></td>
-								</tr>				
-								<tr>
-									<td><label className="control-label">Address</label></td>
-									<td><Input.Text name="address" /></td>
-								</tr>
-								</tbody>
-							</table>
-							<button type="button" className="btn btn-primary" onClick={ this.onNext} >Submit</button> 	
-						</div>
+				<div className="panel panel-default">
+					<div className="panel-body">
+						<Form object={props.object} onSuccess={onSuccess}>
+							<button type="submit" className="btn btn-primary">Submit</button> 	
+						</Form>
 					</div>
-				</form>
 				</div>
 			</div>
-		)}	
-		</Context.Consumer>	
-		)	
-	}
+		</div>	
+	)
 }
-
-export default withRouter(Page1) ;
+export default withRouter(Page1);

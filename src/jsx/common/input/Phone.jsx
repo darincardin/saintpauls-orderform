@@ -1,18 +1,20 @@
 import React from 'react';
 import Text from './Text.jsx';
-import Context from '../../../js/context.js';
 
-class Phone extends React.Component {
-	static contextType = Context;
+
+var pattern = /^\d{3}-\d{3}-\d{4}$/;
+
+var Phone = props=>{
 	
-
-	validate = val =>{
-		return this.context.state.form.$phone(this.props.name, val);
+	var validate = value=>{
+		
+		if(pattern.test(value)) return true;
+		
+		props.state.errors[props.name] = "phone";
+		return false;	
 	}
 	
-	render(){ 
-		return ( <Text type="text" name={this.props.name} required validate={this.validate} /> );
-	}
+	return ( <Text type="text" {...props} validation={validate} required /> ) 	
 }
-
 export default Phone;
+

@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 		'useminPrepare',
 		'concat',
 		'uglify',
-		'cssmin',
+		//'cssmin',
 		'usemin',
 		'copy:images',
 		'copy:fonts',
