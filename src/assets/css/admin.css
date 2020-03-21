@@ -62,18 +62,7 @@
         	}
         	
         	
-			.order-window .foot{
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				border-top: solid #d4d4d4 1px;
-				    background: #e6e6e6e6;;
-				user-select: none;
-					padding:10px;
-					height: 40px
-			}
-			
+
     	
 
         	#fName{
@@ -117,6 +106,8 @@
             .loading.show{
                 display:block;
             }
+			
+			
             .loading div{
                 margin-top: 200px;
                 width: 60px;
@@ -127,3 +118,31 @@
                 font-size: 25px;
             }
      
+
+
+
+.fa-spin-custom, .glyphicon-spin {
+    -xxwebkit-animation: spin 1000ms infinite linear;
+    animation: spin 2s infinite linear;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+			

@@ -6,9 +6,9 @@ import Modal from '/jsx/common/widget/Modal.jsx';
 var Update = props => {
 	
 	var html = (
-		<Modal open={props.showView} onClose={props.callback} >
+		<Modal open={props.show} onClose={props.callback} >
 			<div style={{height: '340px'}}>
-			{props.showView && 
+			{props.show && 
 				<Form object={props.object} onSuccess={props.callback}    >
 					<button type="button" onClick={props.callback} className="btn btn-default">Cancel</button> &nbsp;
 					<button type="submit" className="btn btn-primary">Update</button> 

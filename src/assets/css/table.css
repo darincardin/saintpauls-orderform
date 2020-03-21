@@ -31,6 +31,47 @@
 	}
 		
 	
+	.order-window .foot{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-top: solid #d4d4d4 1px;
+		background: #e6e6e6ed;
+		user-select: none;
+		padding:10px;
+		height: 40px
+	}
+			
+	
+	.order-window{
+		position:relative;   
+	}
+		 
+		 
+	.table-loader {
+		position: absolute;
+		top:41px; left:0;right:0;bottom:0;
+		background: rgba(227, 227, 227, 0.4);
+		z-index: 10;
+	}	
+
+	.glyphicon-spin {
+		color: #828282;
+		margin: 10px auto;
+		display: block;
+		width: 30px;
+		height: 30px;
+		font-size: 30px;
+	}	
+			
+			
+	
+	
+	
+	
+	
+	
 
 	 /**************  HEADER     ********************/  
     @media screen and  (max-width : 540px) {
