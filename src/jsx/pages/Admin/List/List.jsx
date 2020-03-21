@@ -23,9 +23,8 @@ class List extends React.Component {
 		var amount =  Math.floor((window.innerHeight - 215) / 43);
 		this.setState({loading:true})
 	    OrderAPI.list(amount, page).then(res => { 
-			var {total, data} = res;
-			if(page > total  ) page = total;
-			this.setState({ page, total, data, loading:false})
+			if(page > res.total  ) page = total;
+			this.setState({ page, ...res, loading:false})
 			if(onSuccess) onSuccess();
 		})
 		.catch(this.context.errorHandler)
@@ -101,7 +100,6 @@ class List extends React.Component {
 
 					<Footer update={this.getOrders} page={this.state.page} max={this.state.total} />
 
-						
 					<Update show={this.state.showEdit} object={this.state.selected} callback={this.orderClose} />						
 				
 				</div>

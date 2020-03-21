@@ -6,10 +6,8 @@ import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-ro
 import Header from '/jsx/common/layout/Header.jsx';
 import Footer from '/jsx/common/layout/Footer.jsx';
 
-import Page1 from '/jsx/pages/Page1.jsx';
-import Page2 from '/jsx/pages/Page2.jsx';
-import Page3 from '/jsx/pages/Page3.jsx';
 
+import {Page1, Page2, Page3} from '/jsx/pages/';
 
 import Error from '/jsx/common/widget/Error.jsx';
 import ProgressBar from './common/widget/ProgressBar.jsx';

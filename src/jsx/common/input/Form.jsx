@@ -28,10 +28,9 @@ class Form extends React.Component {
 	}
 
 
-	change = (e)=>{
-		var newObject = {...this.state.object }
-		newObject[e.target.name] = e.target.value;
-		this.setState({object: newObject});	
+	change = e=>{
+		var {name, value} = e.target;
+		this.setState(state=>state.object[name] = value )
 	}
 	
 	render() {

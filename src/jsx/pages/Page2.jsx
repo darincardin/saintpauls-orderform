@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-router-dom";
 import OrderAPI from '/js/orderAPI.js';
-import ProgressBar from '/jsx/common/widget/ProgressBar.jsx';
 
 import Context from '/js/context.js';
 
@@ -15,15 +14,15 @@ class Page2 extends React.Component{
 			this.context.hideOverlay()
 			this.props.object.id = res;
 			this.props.history.push('/page3')
-		}).catch(context.errorHandler)
+		}).catch(this.context.errorHandler)
 	}
 
 	data = [
-		{label: "First Name", value: props.object.fName },
-		{label: "Last Name", value: props.object.lName },
-		{label: "Quantity", value: props.object.quantity },
-		{label: "Phone", value: props.object.phone },
-		{label: "Address", value: props.object.address }
+		{label: "First Name", value: this.props.object.fName },
+		{label: "Last Name", value: this.props.object.lName },
+		{label: "Quantity", value: this.props.object.quantity },
+		{label: "Phone", value: this.props.object.phone },
+		{label: "Address", value: this.props.object.address }
 	]
 	
 	render(){
@@ -34,7 +33,7 @@ class Page2 extends React.Component{
 					<div className="panel-body">
 						<table >  
 							<tbody>
-							{data.map(i=>(
+							{this.data.map(i=>(
 								<tr> 
 									<td><label className='control-label' htmlFor='inputSuccess4'>{i.label}</label></td>
 									<td>{i.value}</td>
