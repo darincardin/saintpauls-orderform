@@ -1,18 +1,38 @@
 
 	
-	html, body, #app, #app>div {
+	html, body, #app, #app>div, .bg {
 		height: 100%;
 		color: #black;
 		font-size: 15px;
 		font-family: Arial, Tahoma, Verdana;
 	}
 
-    body{
-		background: url('../images/background.jpg');
-        background-repeat: no-repeat;
-        background-size: cover; 
-        background-repeat: repeat;
-   }	
+	/******** Background **********/
+
+
+	.bg{
+		background-repeat: no-repeat;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+	}
+			
+	.bg img{
+		opacity:0;
+		height: inherit;
+		width: 100%;
+		transition: opacity 1s;
+	}
+
+
+	.bg img.fadeIn{
+		opacity:1;
+	}
+
+	/******** end: Background **********/
 
 	h2, label, p {
 		white-space: nowrap;
@@ -42,23 +62,7 @@
 		display: none !important;
 	}
 	
-	.bg{
 
-		background-size: cover;
-		position:fixed;
-		background: #c7c9cb;
-		background-repeat: no-repeat;
-		background-position: center top; 
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-	}
-			
-	.bg img{
-		width: 100%;
-	}
 
 	main {
 		

@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 
-import Header from './common/layout/Header.jsx';
-import Footer from './common/layout/Footer.jsx';
-import ProgressBar from './common/widget/ProgressBar.jsx';
+import {Header, Footer, ProgressBar, Background} from '/jsx/common';
 
 import OrderAPI from '/js/orderAPI.js';
 
@@ -39,6 +37,7 @@ class MyLogin extends React.Component{
 		return (
 		<div> 
 			<Header />
+			<Background />
 			<main >
 			<div className="login">
 				<h2>Login Demo</h2>

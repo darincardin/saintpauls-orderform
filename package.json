@@ -44,6 +44,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-error-boundary": "^1.2.5",
+    "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.1.2",
     "webpack": "^4.0.0 || ^5.0.0",
     "webpack-cli": "^3.3.11",

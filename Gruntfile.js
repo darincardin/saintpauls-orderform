@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		usemin:{ html:['dist/index.html'], admin:['dist/admin.html'], login:['dist/login.html'] },
 		copy:{ 
 			html: {cwd: './src/', src: '*.html', dest: 'dist/' ,  expand: true  },
-			//images: {cwd: './src/assets/images', src: '**', dest: 'dist/assets/images',  expand: true  },
+			images: {cwd: './src/assets/images', src: '**', dest: 'dist/assets/images',  expand: true  },
 			//fonts: {cwd: './src/assets/fonts', src: '**', dest: 'dist/assets/fonts',  expand: true  },
 			favicon: {src: './src/favicon.ico', dest: 'dist/favicon.ico' }
 		}
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 		'uglify',
 		//'cssmin',
 		'usemin',
-		//'copy:images',
+		'copy:images',
 		//'copy:fonts',
 		'copy:favicon',
 		'clean:tmp'

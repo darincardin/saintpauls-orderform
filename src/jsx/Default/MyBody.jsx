@@ -3,22 +3,19 @@ import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 
-import Header from '/jsx/common/layout/Header.jsx';
-import Footer from '/jsx/common/layout/Footer.jsx';
-
-
-import {Page1, Page2, Page3} from '/jsx/pages/';
-
-import Error from '/jsx/common/widget/Error.jsx';
-import ProgressBar from './common/widget/ProgressBar.jsx';
+import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
+import {Page1, Page2, Page3} from '/jsx/Default/Pages/';
 
 import {MyProvider} from '/js/context.js';
 
 
 const newOrder = {fName:"", lName:"", quantity:"", phone:"", address:""}
 
+
+	
+
 class MyBody extends React.Component{
-		
+			
 	state = { object: {...newOrder}, showProgress:false }
 	
 	storeObject = (o = {...newOrder} )=>{
@@ -40,6 +37,7 @@ class MyBody extends React.Component{
 		return (
 		<MyProvider value={{...this.shared}} > 
 			<Header />
+			<Background />
 			<main>			
 				<ErrorBoundary  FallbackComponent={<Error />}  >
 					<Router>
@@ -62,8 +60,15 @@ class MyBody extends React.Component{
 			<Footer />
 			{ReactDOM.createPortal(<ProgressBar show={this.state.showProgress} />, document.getElementById('progress-bar')) }
 		</MyProvider> 
+	
 	  );
 	}
 }
 
 export default MyBody;
+
+/*
+			  <LazyLoad height={200}>
+					<img src="/assets/images/background2.jpg" /> 
+			  </LazyLoad>
+*/

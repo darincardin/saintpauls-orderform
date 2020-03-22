@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MyBody from './jsx/MyBody.jsx';
+import MyBody from './jsx/Default/MyBody.jsx';
 
 import '/assets/css/bootstrap.min.css';
 import '/assets/css/responsive.css';
 import '/assets/css/main.css';
 
 ReactDOM.render(<MyBody></MyBody>,    document.getElementById('app'));
+
 
 

@@ -1,14 +1,10 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
-import Error from '/jsx/common/widget/Error.jsx';
 
-import Header from '/jsx/common/layout/Header.jsx';
-import Footer from '/jsx/common/layout/Footer.jsx';
+import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 
-import List from '/jsx/pages/Admin/List/List.jsx';
-
-import ProgressBar from '/jsx/common/widget/ProgressBar.jsx';
+import List from '/jsx/Admin/List/List.jsx';
 
 import {MyProvider} from '/js/context.js';
 
@@ -45,6 +41,7 @@ class Admin extends React.Component{
 		return (	
 			<MyProvider value={{...this.shared}} > 
 				<Header />
+					<Background />
 					<a href="#" onClick={this.logout} className="logout">Logout</a>  
 						<main>	
 							<ErrorBoundary  FallbackComponent={<Error />}  >

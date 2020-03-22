@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Footer from '/jsx/pages/Admin/Footer/Footer.jsx';
-import Update from '/jsx/pages/Admin/Update/Update.jsx';
+import Footer from '/jsx/Admin/Footer/Footer.jsx';
+import Update from '/jsx/Admin/Update/Update.jsx';
 
 import Context from '/js/context.js';
 import OrderAPI from '/js/orderAPI.js';

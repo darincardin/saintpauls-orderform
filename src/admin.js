@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Admin from './jsx/pages/Admin/Admin.jsx';
+import Admin from './jsx/Admin/Admin.jsx';
 
 
 

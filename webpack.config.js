@@ -64,6 +64,13 @@ module.exports = (env) => {
 			}); 
 			app.post('/php/login.php*',  (req, res)=>res.json(reader(res, 'success.json'))); 
 			app.get('/php/logout.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
+			
+			
+			app.get('/assets/images/background2.jpg',    (req, res)=>{
+				
+				console.log('--------------------------dfdfdffd')
+				return res;
+			})
 		}
 	  },
 
