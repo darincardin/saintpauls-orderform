@@ -1,3 +1,7 @@
+require('file-loader?name=[name].[ext]!./admin.html');
+
+import 'bootstrap';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 

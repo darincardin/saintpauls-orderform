@@ -1,5 +1,4 @@
 
-
 module.exports = function(elem, loaderContext)  {
 
          var input = $(elem).find('.form-control');
@@ -8,12 +7,14 @@ module.exports = function(elem, loaderContext)  {
          input.popover({ placement: placement, html:true, trigger: 'focus' });
     
          var value = function(val) {
+			 
            if (val === undefined) return input.data('bs.popover').options.content;
            input.data('bs.popover').options.content = val;
          }
 
          return {
             show: function(data) {
+				
                if (data != value()) {
                   value(data);
                   input.popover('show');

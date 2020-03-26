@@ -1,3 +1,8 @@
+require('file-loader?name=[name].[ext]!./login.html');
+
+import 'bootstrap';
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MyLogin from './jsx/MyLogin.jsx';

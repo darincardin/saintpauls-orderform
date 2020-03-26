@@ -1,11 +1,14 @@
 import React from "react";
 
+
+
+
 class Background extends React.Component{
 	
 	componentDidMount() {
 		
 		setTimeout( ()=>{
-			$('.bg img').attr("src", "assets/images/background.jpg");
+			$('.bg img').attr("src", "background.jpg");
 			$('.bg img').addClass('fadeIn')
 		}, 500);
 	}

@@ -1,6 +1,8 @@
 const path = require('path');
 var webpack = require('webpack');
 var _ = require('lodash');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 var data = JSON.parse( require('fs').readFileSync(`data/list.json`, 'utf8'))
 
@@ -9,7 +11,14 @@ module.exports = (env) => {
 
 
 	var dir = env.mode || 'dist';
-	var plugins = env.production ? [ new webpack.DefinePlugin({'process.env': { 'NODE_ENV': JSON.stringify('production')} }) ] : [] 
+	var plugins = [ 
+	//	new CleanWebpackPlugin(),
+		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery",  }) ,
+		new CopyPlugin([  { from: './src/assets/images', to: './' },]),
+	];
+	
+	
+	if(env.production)  plugins.push( new webpack.DefinePlugin({'process.env': { 'NODE_ENV': JSON.stringify('production')} }) )
 
 	return  {
 	  resolve: {
@@ -21,6 +30,7 @@ module.exports = (env) => {
 		},
 		extensions: ['*','.js','.jsx']
 	  },
+	  plugins: plugins,
 	  entry: {
 		index: './src/index.js',
 		admin: './src/admin.js',
@@ -31,13 +41,9 @@ module.exports = (env) => {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js'
 	  },
-	  
-	  plugins:plugins,
 	  devServer: {
 		contentBase: path.join(__dirname, dir),
 		publicPath: '/',
-		
-		
 		historyApiFallback: true,   
 		inline: true,
 		port: 7777   ,
@@ -51,11 +57,7 @@ module.exports = (env) => {
 				
 				var {page, amount} = req.query;
 				var list = 	[...data];
-
-				res.json({
-					total: Math.ceil(list.length/amount),
-					data: list.splice(amount*page, amount)
-				});
+				res.json({total: Math.ceil(list.length/amount), data: list.splice(amount*page, amount)});
 			})
 
 			app.get('/php/orders/delete.php*', (req, res)=>{
@@ -64,22 +66,21 @@ module.exports = (env) => {
 			}); 
 			app.post('/php/login.php*',  (req, res)=>res.json(reader(res, 'success.json'))); 
 			app.get('/php/logout.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
-			
-			
-			app.get('/assets/images/background2.jpg',    (req, res)=>{
-				
-				console.log('--------------------------dfdfdffd')
-				return res;
-			})
+
 		}
 	  },
-
-
 	  module: {
 		rules: [
 		  { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
 		  { test: /\.css$/i, exclude: /node_modules/, loader: ['style-loader', 'css-loader'] },
-		  {test: /\.(png|jpe?g|gif)$/i, exclude: /node_modules/, use: [ {loader: 'file-loader'}] },
+		  {
+			  test: /\.(png|jpe?g|gif)$/i, 
+			  exclude: /node_modules/, 
+			  use: [{
+				  loader: 'file-loader',
+			          options: {  name: '[name].[ext]'},
+			  } ]
+	      },
 		  {
 			test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
 			use: [
@@ -88,9 +89,7 @@ module.exports = (env) => {
 				options: { name: '[name].[ext]',  outputPath: 'fonts/'}
 			  }
 			]
-		  }  
-
-		  
+		  }   
 		]
 	  }
 	}
