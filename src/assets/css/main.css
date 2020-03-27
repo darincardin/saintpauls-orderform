@@ -21,9 +21,10 @@
 	}
 			
 	.bg img{
+		width: 100%; 
+		xxmax-width: 200px; 
 		opacity:0;
 		height: inherit;
-		width: 100%;
 		transition: opacity 1s;
 	}
 

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "clear && webpack --env.production=true --mode production",
+    "build": "clear && webpack --env.production=false ",
     "start": "clear && webpack --env.production=false --mode development &&   webpack-dev-server --hot --env.production=false",
-    "dist": "clear &&  webpack-dev-server --hot --env.production=true --env.mode=dist --display-error-details"
+    "dist": "clear &&  webpack-dev-server --hot --env.production=false --env.mode=dist --display-error-details"
   },
   "babel": {
     "plugins": [
