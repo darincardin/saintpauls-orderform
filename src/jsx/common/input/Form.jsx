@@ -9,6 +9,7 @@ import Phone from './Phone.jsx';
 class Form extends React.Component {
 
 	state =  { 
+	  
 	    object: {...this.props.object},
 		submitted: false,
 		errors:{}	

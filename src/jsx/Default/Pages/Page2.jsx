@@ -1,39 +1,47 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-router-dom";
+
+
 import OrderAPI from '/js/orderAPI.js';
 
-import Context from '/js/context.js';
 
-class Page2 extends React.Component{
-    static contextType = Context;
+let Page2 = ({ order, save, overlay, props }) => {
 
-	submitHandler = (e) => {
-		this.context.showOverlay()
 
-		OrderAPI.create(this.props.object).then(res => { 
-			this.context.hideOverlay()
-			this.props.object.id = res;
-			this.props.history.push('/page3')
-		}).catch(this.context.errorHandler)
+	if(!order.fName) props.history.push('/page1')
+
+
+	var submitHandler = () => {
+
+		overlay.open()
+		OrderAPI.create(order).then(res => { 
+
+			overlay.close()       	
+			save({...order, id: res});
+			props.history.push('/page3')
+		})
+	//	.catch(this.context.errorHandler)
 	}
 
-	data = [
-		{label: "First Name", value: this.props.object.fName },
-		{label: "Last Name", value: this.props.object.lName },
-		{label: "Quantity", value: this.props.object.quantity },
-		{label: "Phone", value: this.props.object.phone },
-		{label: "Address", value: this.props.object.address }
+
+	var data = [
+		{label: "First Name", value: order.fName },
+		{label: "Last Name", value: order.lName },
+		{label: "Quantity", value: order.quantity },
+		{label: "Phone", value: order.phone },
+		{label: "Address", value: order.address }
 	]
 	
-	render(){
-		return (
+	return (
 			<div className="page2" >
 				<h2>Confirm Order </h2>
 				<div className="panel panel-default form-horizontal">
 					<div className="panel-body">
+
 						<table >  
 							<tbody>
-							{this.data.map(i=>(
+							{data.map(i=>(
 								<tr> 
 									<td><label className='control-label' htmlFor='inputSuccess4'>{i.label}</label></td>
 									<td>{i.value}</td>
@@ -43,16 +51,27 @@ class Page2 extends React.Component{
 						</table>
 						<hr/>
 						<div className="text-right">
-							<Link to='/'><button  className="btn btn-default">Back</button></Link>
+							<Link to='/'><button className="btn btn-default">Back</button></Link>
 							&nbsp;
-							<button className="btn btn-primary" type='button' onClick={this.submitHandler} >Confirm</button> 	  
+							<button className="btn btn-primary" type='button' onClick={submitHandler} >Confirm</button> 	  
 						</div>
 					</div>
 				</div>
 			</div>		
-		)
-	}
+	)
+
 }
-export default withRouter(Page2);
-								
+
+const mapStateToProps = (state, ownProps) => (
+	{ order: state.order, props: ownProps }
+)
+
+const mapDispatchToProps = (dispatch) => ({
+    save: order => { dispatch({type:"SAVE", order})},
+	overlay:{
+		open: () => { dispatch({type:"OPEN"})},
+		close: () => { dispatch({type:"CLOSE"})}
+	}
+})
+export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page2));
 								
