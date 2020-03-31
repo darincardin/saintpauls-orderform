@@ -16,85 +16,85 @@ var List = ({ state, setState, progressbar, loader }) => {
 
 	useEffect(() => {
 		OrderAPI.progressbar = progressbar;
-		window.addEventListener('resize', handleResize);
+		
+		window.addEventListener('resize', () => {
+			if(cancel) clearTimeout(cancel);
+			cancel = setTimeout( getOrders , 300);
+		});
+		
 		getOrders();
 	}, []);
 
-
-	var getOrders = (page=state.page, onSuccess) => {
-	
+	var getOrders = (page=state.page) => {
 		loader.show();
 
-        OrderAPI.list(page).then(res => { 	
-			loader.hide();	
+        return OrderAPI.list(page).then(res => { 	
 			setState({...res, page});	
-			if(onSuccess) onSuccess();
 		})
-	}
-
-	var handleResize = () => {
-		if(cancel) clearTimeout(cancel);
-		cancel = setTimeout( getOrders , 300);
+		.finally(loader.hide);
 	}
 	
-	var orderOpen = order => {
+	var open = order => {
 		setState({order, showEdit:true});
 	}
 	
-	var orderClose = obj =>{
-		if(obj.id) {
-			progressbar.show()
-		    OrderAPI.update(obj).then(res => { 
-				getOrders(state.page, progressbar.hide);
+	var close = obj =>{
+		if(obj.id) {	
+            progressbar.show()
+			
+			OrderAPI.update(obj).then(res => { 
+			    setState({ showEdit:false});
+				return getOrders(state.page)
 			})
+			.then(progressbar.hide)
 		}
-
-		setState({ showEdit:false});
+		else setState({ showEdit:false});
 	}
 
-	var orderDelete = id => {
+	var deleteOrder = id => {
 		
 		if(confirm(`Delete order ${id}?`) ) {
 			progressbar.show()
 			OrderAPI.delete(id).then(res =>{ 
-				getOrders(state.page, progressbar.hide)
+				return getOrders(state.page)
 			})
+			.then(progressbar.hide)
 		}
 	}
 	
 	return (
-			    <div className="order-window">
-					<ListLoader />
-					<table className="mainGrid">
-						<thead>
-							<tr><td>ID</td>
-							<td>First Name</td>
-							<td>Last Name</td>
-							<td>Quantity</td>
-							<td>Phone</td>
-							<td>Address</td>
-							<td>Actions</td></tr>
-						</thead>
-						<tbody>
-							{state.data && state.data.map( r =>  
-								<tr key={r.id}>
-									<td>{r.id}</td>
-									<td>{r.fName}</td>
-									<td>{r.lName}</td>
-									<td>{r.quantity}</td>
-									<td>{r.phone}</td>
-									<td>{r.address}</td>
-									<td>
-										<a onClick={() => orderOpen(r) } > Edit </a> | 
-										<a onClick={() => orderDelete(r.id)} > Delete </a> 
-									</td>
-								</tr>  
-							)}
-						</tbody>
-					</table>
-					<Footer update={getOrders} page={state.page} max={state.total} />
-					<Update show={state.showEdit} object={state.order} callback={orderClose} />	
-				</div>
+			<div className="order-window">
+				<ListLoader />
+				<table className="mainGrid">
+					<thead>
+						<tr><td>ID</td>
+						<td>First Name</td>
+						<td>Last Name</td>
+						<td>Quantity</td>
+						<td>Phone</td>
+						<td>Address</td>
+						<td>Actions</td></tr>
+					</thead>
+					<tbody>
+						{state.data && state.data.map( r =>  
+							<tr key={r.id}>
+								<td>{r.id}</td>
+								<td>{r.fName}</td>
+								<td>{r.lName}</td>
+								<td>{r.quantity}</td>
+								<td>{r.phone}</td>
+								<td>{r.address}</td>
+								<td>
+									<a onClick={() => open(r) } > Edit </a> | 
+									<a onClick={() => deleteOrder(r.id)} > Delete </a> 
+								</td>
+							</tr>  
+						)}
+					</tbody>
+				</table>
+				<Footer update={getOrders} page={state.page} max={state.total} />
+				<Update show={state.showEdit} object={state.order} callback={close} />	
+			</div>
 	)	
 }		
 

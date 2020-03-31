@@ -11,7 +11,7 @@ let Page3 = ({ order, clear, props }) => {
 			{label: "Order ID", value: order.id },
 			{label: "Name", value: order.lName + ", " + order.fName },
 			{label: "Quantity", value: order.quantity },
-			{label: "Price", value: order.quantity * 12.99 }
+			{label: "Price", value: "$" + (order.quantity * 12.99) }
 		]
 	
 		return (
@@ -49,4 +49,4 @@ const mapDispatchToProps = (dispatch) => ({
     clear: () => { dispatch({type:"CLEAR"})}
 })
 
-export default connect(  mapStateToProps,  mapDispatchToProps)(Page3);
+export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page3));

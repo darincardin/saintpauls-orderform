@@ -8,22 +8,7 @@ import OrderAPI from '/js/orderAPI.js';
 
 let Page2 = ({ order, save, progress, props }) => {
 
-
 	if(!order.fName) props.history.push('/page1')
-
-
-	var submitHandler = () => {
-
-		progress.show()
-		OrderAPI.create(order).then(res => { 
-
-			progress.hide()       	
-			save({...order, id: res});
-			props.history.push('/page3')
-		})
-	//	.catch(this.context.errorHandler)
-	}
-
 
 	var data = [
 		{label: "First Name", value: order.fName },
@@ -32,7 +17,16 @@ let Page2 = ({ order, save, progress, props }) => {
 		{label: "Phone", value: order.phone },
 		{label: "Address", value: order.address }
 	]
-	
+
+	var submitHandler = () => {
+		progress.show()
+		OrderAPI.create(order).then(res => { 
+			progress.hide()       	
+			save({...order, id: res});
+			props.history.push('/page3')
+		})
+	}
+
 	return (
 			<div className="page2" >
 				<h2>Confirm Order </h2>
@@ -73,5 +67,5 @@ const mapDispatchToProps = (dispatch) => ({
 		hide: () => { dispatch({type:"HIDE"})}
 	}
 })
-export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page2));
+export default withRouter(connect( mapStateToProps,  mapDispatchToProps)(Page2));
 								

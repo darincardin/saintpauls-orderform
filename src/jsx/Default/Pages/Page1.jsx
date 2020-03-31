@@ -27,7 +27,6 @@ var Page1 = ({ order, save, props }) => {
 	)
 }
 const mapStateToProps = (state, ownProps) => {
-
 	return{ order: state.order, props: ownProps }
 }
 
