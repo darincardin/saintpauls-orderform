@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-ro
 import OrderAPI from '/js/orderAPI.js';
 
 
-let Page2 = ({ order, save, overlay, props }) => {
+let Page2 = ({ order, save, progress, props }) => {
 
 
 	if(!order.fName) props.history.push('/page1')
@@ -14,10 +14,10 @@ let Page2 = ({ order, save, overlay, props }) => {
 
 	var submitHandler = () => {
 
-		overlay.open()
+		progress.show()
 		OrderAPI.create(order).then(res => { 
 
-			overlay.close()       	
+			progress.hide()       	
 			save({...order, id: res});
 			props.history.push('/page3')
 		})
@@ -68,9 +68,9 @@ const mapStateToProps = (state, ownProps) => (
 
 const mapDispatchToProps = (dispatch) => ({
     save: order => { dispatch({type:"SAVE", order})},
-	overlay:{
-		open: () => { dispatch({type:"OPEN"})},
-		close: () => { dispatch({type:"CLOSE"})}
+	progress:{
+		show: () => { dispatch({type:"SHOW"})},
+		hide: () => { dispatch({type:"HIDE"})}
 	}
 })
 export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page2));

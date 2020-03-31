@@ -1,74 +1,70 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux'
 
 import Footer from '/jsx/Admin/Footer/Footer.jsx';
 import Update from '/jsx/Admin/Update/Update.jsx';
+import ListLoader from './ListLoader.jsx';
 
-import Context from '/js/context.js';
 import OrderAPI from '/js/orderAPI.js';
 
-class List extends React.Component {
-    static contextType = Context;
+
+
+var List = ({ state, setState, progressbar, loader }) => {
+
+	var cancel = null;
+
+	useEffect(() => {
+		OrderAPI.progressbar = progressbar;
+		window.addEventListener('resize', handleResize);
+		getOrders();
+	}, []);
+
+
+	var getOrders = (page=state.page, onSuccess) => {
 	
-	cancel = null;
-	state = { total:0, page:0 , data:[], showEdit: false, loading:false, selected: {}}
+		loader.show();
 
-	componentDidMount = () =>{
-		window.addEventListener('resize', this.handleResize)
-		this.getOrders(0);
-	}
-
-	getOrders = (page, onSuccess) => {
-		
-		var amount =  Math.floor((window.innerHeight - 215) / 43);
-		this.setState({loading:true})
-	    OrderAPI.list(amount, page).then(res => { 
-			if(page > res.total  ) page = total;
-			this.setState({ page, ...res, loading:false})
+        OrderAPI.list(page).then(res => { 	
+			loader.hide();	
+			setState({...res, page});	
 			if(onSuccess) onSuccess();
 		})
-		.catch(this.context.errorHandler)
 	}
 
-	orderOpen = (row) => {
-		this.setState({selected: row, showEdit:true});
+	var handleResize = () => {
+		if(cancel) clearTimeout(cancel);
+		cancel = setTimeout( getOrders , 300);
 	}
 	
-	orderClose = obj =>{
+	var orderOpen = order => {
+		setState({order, showEdit:true});
+	}
+	
+	var orderClose = obj =>{
 		if(obj.id) {
-			this.context.showOverlay()
+			progressbar.show()
 		    OrderAPI.update(obj).then(res => { 
-				this.state.data = this.state.data.map(i=>i.id==obj.id ? obj:i);
-				this.context.hideOverlay()
-				this.setState(this.state);
+				getOrders(state.page, progressbar.hide);
 			})
-			.catch(this.context.errorHandler)	
 		}
 
-		this.setState({ showEdit:false});
+		setState({ showEdit:false});
 	}
 
-	orderDelete = id=>{
+	var orderDelete = id => {
 		
 		if(confirm(`Delete order ${id}?`) ) {
-			this.context.showOverlay()
-			
-			OrderAPI.delete(id).then(res =>{ this.getOrders(this.state.page, this.context.hideOverlay())})
-			.catch(this.context.errorHandler)
+			progressbar.show()
+			OrderAPI.delete(id).then(res =>{ 
+				getOrders(state.page, progressbar.hide)
+			})
 		}
 	}
-
-	handleResize = () => {
-		if(this.cancel) clearTimeout(this.cancel);
-		this.cancel = setTimeout(()=>{ this.getOrders(this.state.page) }, 300);
-	}
 	
-	render(){
-	  return (
-				<div className="order-window">
-		
-					{this.state.loading && <div className="table-loader"></div>	}
-	
+	return (
+			    <div className="order-window">
+					<ListLoader />
 					<table className="mainGrid">
 						<thead>
 							<tr><td>ID</td>
@@ -80,7 +76,7 @@ class List extends React.Component {
 							<td>Actions</td></tr>
 						</thead>
 						<tbody>
-							{ this.state.data.map( r =>  
+							{state.data && state.data.map( r =>  
 								<tr key={r.id}>
 									<td>{r.id}</td>
 									<td>{r.fName}</td>
@@ -89,21 +85,34 @@ class List extends React.Component {
 									<td>{r.phone}</td>
 									<td>{r.address}</td>
 									<td>
-										<a onClick={() => this.orderOpen(r) } > Edit </a> | 
-										<a onClick={() => this.orderDelete(r.id)} > Delete </a> 
+										<a onClick={() => orderOpen(r) } > Edit </a> | 
+										<a onClick={() => orderDelete(r.id)} > Delete </a> 
 									</td>
 								</tr>  
 							)}
 						</tbody>
 					</table>
-
-
-					<Footer update={this.getOrders} page={this.state.page} max={this.state.total} />
-
-					<Update show={this.state.showEdit} object={this.state.selected} callback={this.orderClose} />						
-				
+					<Footer update={getOrders} page={state.page} max={state.total} />
+					<Update show={state.showEdit} object={state.order} callback={orderClose} />	
 				</div>
-	  )
+	)	
+}		
+
+
+const mapStateToProps = (state, ownProps) => {
+	return	{ state:state }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    save: order => { dispatch({type:"SAVE", order})},
+	setState: state =>{dispatch({type:"SET_STATE", state})},
+	progressbar:{
+		show: () => { dispatch({type:"SHOW"})},
+		hide: () => { dispatch({type:"HIDE"})}
+	},
+	loader: {
+		show: () => { dispatch({type:"LOADING"})},
+		hide: () => { dispatch({type:"FINISHED"})}		
 	}
-}			
-export default List;
+})
+export default connect(  mapStateToProps,  mapDispatchToProps)(List);

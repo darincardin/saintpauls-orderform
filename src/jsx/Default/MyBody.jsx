@@ -8,43 +8,9 @@ import {Page1, Page2, Page3} from '/jsx/Default/Pages/';
 
 const newOrder = {fName:"", lName:"", quantity:"", phone:"", address:""}
 import { connect } from 'react-redux'
-/*
-import {Provider} from 'react-redux'
-import {createStore} from 'redux'
-import helloReducer from '/js/reducer.js'
 
-
-
-let store = createStore(helloReducer, {}) 
-
-*/
-
-var MyBody = ({ state, save, props , open}) => {
+var MyBody = ({ state}) => {
 			
-	//var state = { object: {...newOrder}}
-	
-	//var storeObject = (o = {...newOrder} )=>{
-		//setState({object: o})
-
-	//	save(o);
-	//}
-	
-	var shared = {
-		showOverlay : () => {
-			
-			
-		},
-		
-		hideOverlay : () => {
-			
-		},
-		
-		errorHandler : () => {
-			//this.shared.hideOverlay(); 
-			alert("An error occurred. Please try again later.")
-		}			
-	}
-
 	return (
 		
 			<div>
@@ -76,17 +42,8 @@ var MyBody = ({ state, save, props , open}) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	
-	
-	return{ 
-		props: ownProps,
-
-		state: state 
-	}
+	return { state: state }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    open: (order) => { dispatch({type:"OPEN"})}
-})
-export default connect(  mapStateToProps,  mapDispatchToProps)(MyBody);
+export default connect(mapStateToProps)(MyBody);
 	
