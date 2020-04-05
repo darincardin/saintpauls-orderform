@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
 import { connect } from 'react-redux'
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
-import axios from 'axios';
 
+import { progressbar} from '/js/actions.js';
 
 import List from '/jsx/Admin/List/List.jsx';
 
@@ -43,10 +43,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	progressbar:{
-		show: () => { dispatch({type:"SHOW"})},
-		hide: () => { dispatch({type:"HIDE"})}
-	}
+	progressbar:progressbar(dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);

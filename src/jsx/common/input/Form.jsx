@@ -39,6 +39,13 @@ class Form extends React.Component {
 			<form onSubmit={this.onSubmit}>
 				<table>
 					<tbody>
+					{this.props.showID && 
+					<tr>
+							<td><label className="control-label label-id" >ID</label></td>
+							<td>{this.state.object.id}</td>
+					</tr>}					
+					
+					
 						<tr>
 							<td><label className="control-label required">First Name</label></td>
 							<td><Text name="fName" required change={this.change} state={this.state}  /></td>

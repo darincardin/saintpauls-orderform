@@ -23,14 +23,22 @@
 	}
 	
 	.mainGrid   td:nth-child(1){
-		width: 40px;
+		width: 50px;
 	}
 
-	.mainGrid   td:nth-child(3){
-		max-width: 140px;
+
+
+	.mainGrid   td:nth-child(4){
+		width: 90px;
 	}
-		
 	
+	.mainGrid   td:nth-child(5){
+		width: 140px;
+	}		
+	
+	.mainGrid   td:last-child{
+		width: 120px;
+	}	
 	.order-window .foot{
 		position: absolute;
 		bottom: 0;
@@ -66,7 +74,11 @@
 	}	
 			
 			
-	
+	.foot .pagenum{
+		text-align:center;
+		display:inline-block;
+		min-width:25px;
+	}
 	
 	
 	

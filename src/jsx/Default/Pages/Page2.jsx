@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-router-dom";
 
+import {actions, progressbar} from '/js/actions.js';
 
 import OrderAPI from '/js/orderAPI.js';
 
 
-let Page2 = ({ order, save, progress, props }) => {
+let Page2 = ({ order, actions, progressbar, props }) => {
 
-	if(!order.fName) props.history.push('/page1')
+	useEffect(() => {
+		if(!order.fName) props.history.push('/')
+	});
 
 	var data = [
 		{label: "First Name", value: order.fName },
@@ -19,12 +22,15 @@ let Page2 = ({ order, save, progress, props }) => {
 	]
 
 	var submitHandler = () => {
-		progress.show()
-		OrderAPI.create(order).then(res => { 
-			progress.hide()       	
-			save({...order, id: res});
+		
+		progressbar.show();
+		
+		actions.create(order).then(res =>{
 			props.history.push('/page3')
 		})
+		.finally(
+			progressbar.hide
+		)
 	}
 
 	return (
@@ -32,8 +38,7 @@ let Page2 = ({ order, save, progress, props }) => {
 				<h2>Confirm Order </h2>
 				<div className="panel panel-default form-horizontal">
 					<div className="panel-body">
-
-						<table >  
+						<table>  
 							<tbody>
 							{data.map(i=>(
 								<tr> 
@@ -53,19 +58,19 @@ let Page2 = ({ order, save, progress, props }) => {
 				</div>
 			</div>		
 	)
-
 }
 
-const mapStateToProps = (state, ownProps) => (
-	{ order: state.order, props: ownProps }
-)
+const mapStateToProps = (state, ownProps) => {
+	return{ order: state.order, props: ownProps }
+}
 
-const mapDispatchToProps = (dispatch) => ({
-    save: order => { dispatch({type:"SAVE", order})},
-	progress:{
-		show: () => { dispatch({type:"SHOW"})},
-		hide: () => { dispatch({type:"HIDE"})}
-	}
-})
+const mapDispatchToProps = (dispatch) => {	
+	return { 
+		actions: actions(dispatch),
+		progressbar: progressbar(dispatch),
+	}		
+}
+
 export default withRouter(connect( mapStateToProps,  mapDispatchToProps)(Page2));
-								
+		
+

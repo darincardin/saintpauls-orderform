@@ -5,6 +5,7 @@ import {Header, Footer, ProgressBar, Background} from '/jsx/common';
 
 import OrderAPI from '/js/orderAPI.js';
 
+import { progressbar} from '/js/actions.js';
 
 class Login extends React.Component{
 	
@@ -14,7 +15,7 @@ class Login extends React.Component{
 
 		this.props.progressbar.show();
 
-		OrderAPI.login(this.state.username, this.state.password).then(res =>{ 	
+		OrderAPI.login(this.state).then(res =>{ 	
 			if(res.success) window.location.href = '/admin.html';
 			else {
 				this.props.progressbar.show(); 
@@ -72,12 +73,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    save: order => { dispatch({type:"SAVE", order})},
-	setState: state =>{dispatch({type:"SET_STATE", state})},
-	progressbar:{
-		show: () => { dispatch({type:"SHOW"})},
-		hide: () => { dispatch({type:"HIDE"})}
-	}
+	progressbar:progressbar(dispatch)
 })
 export default connect(  mapStateToProps,  mapDispatchToProps)(Login);
 

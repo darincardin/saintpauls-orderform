@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 import Form from '/jsx/common/input/Form.jsx';
 
-var Page1 = ({ order, save, props }) => {
+import {actions} from '/js/actions.js';
 
-	
+var Page1 = ({ order, actions, props }) => {
+
 	var onSuccess = (object)=>{
-		save(object);
+		actions.save(object);
 		props.history.push('/page2')
 	}
 
@@ -31,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    save: order => { dispatch({type:"SAVE", order})}
+	actions: actions(dispatch)
 })
 export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page1));
 	

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 
+import {actions} from '/js/actions.js';
 
-let Page3 = ({ order, clear, props }) => {
+let Page3 = ({ order, actions, props }) => {
 	
-		if(!order.fName) props.history.push('/page1')
+		useEffect(() => {
+			if(!order.fName) props.history.push('/')
+		});
 	
 		var data = [
 			{label: "Order ID", value: order.id },
@@ -31,7 +34,7 @@ let Page3 = ({ order, clear, props }) => {
 						</table>  
 						<hr/>
 						<div className="text-right">
-							<Link to="/" onClick={clear}  >
+							<Link to="/" onClick={actions.clear}  >
 								<button type="button" className="btn btn-primary" >Place Another Order</button> 	
 							</Link>
 						</div>
@@ -46,7 +49,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    clear: () => { dispatch({type:"CLEAR"})}
+	actions: actions(dispatch),
 })
 
 export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page3));

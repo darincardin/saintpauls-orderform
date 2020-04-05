@@ -225,7 +225,9 @@
 	
 	
 	*/
-	
+	.label-id{
+		margin-bottom:0;
+	}
 	
 	
 	[name=my-fName]{

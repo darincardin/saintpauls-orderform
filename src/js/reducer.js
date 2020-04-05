@@ -1,24 +1,24 @@
+import OrderAPI from '/js/orderAPI.js';
 
-const newOrder = {fName:"", lName:"", quantity:"", phone:"", address:""}
 
-const newState = { showProgress:false, loading:false,  order:{...newOrder}, data:null, page:0, total:0 }
+const newOrder = {id:"", fName:"", lName:"", quantity:"", phone:"", address:""}
+
+const newState = { showProgress:false, loading:false,  order:{...newOrder}, data:[], page:0, total:0 }
 
 const reducer = (state = newState, action) => {
 
+	var {type, order, data, total, page} = action;
 
-
-	switch (action.type) {
-      case 'SAVE':  return { ...state, order:{...action.order} };
+	switch (type) {
+	  		
+	  case 'LIST': return { ...state, data, total, page, loading:false };
+	
+	  case 'SAVE':  return { ...state, order };
 	  case 'CLEAR': return { ...state, order:{...newOrder} };
-	  case 'SHOW':  return { ...state, showProgress:true };
+
+	  
+	  case 'SHOW': return { ...state, showProgress:true };
       case 'HIDE': return { ...state, showProgress:false } ;
-	  
-	  case 'LOADING':  return { ...state, loading:true };
-      case 'FINISHED': return { ...state, loading:false } ;
-	  
-	  
-	  case 'SET_STATE': return { ...state, ...action.state };
-	  case 'SET_ARRAY': return { ...state, array:[...action.array] };
 	  
       default:  return state;
     }
