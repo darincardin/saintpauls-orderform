@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 
+import {actions} from '/js/actions.js';
 
-var Page3 = props => {
+let Page3 = ({ order, actions, props }) => {
+	
+		useEffect(() => {
+			if(!order.fName) props.history.push('/')
+		});
 	
 		var data = [
-			{label: "Order ID", value: props.object.id },
-			{label: "Name", value: props.object.lName + ", " + props.object.fName },
-			{label: "Quantity", value: props.object.quantity },
-			{label: "Price", value: props.object.quantity * 12.99 }
+			{label: "Order ID", value: order.id },
+			{label: "Name", value: order.lName + ", " + order.fName },
+			{label: "Quantity", value: order.quantity },
+			{label: "Price", value: "$" + (order.quantity * 12.99) }
 		]
 	
 		return (
@@ -28,7 +34,7 @@ var Page3 = props => {
 						</table>  
 						<hr/>
 						<div className="text-right">
-							<Link to="/" onClick={()=>props.storeObject()}  >
+							<Link to="/" onClick={actions.clear}  >
 								<button type="button" className="btn btn-primary" >Place Another Order</button> 	
 							</Link>
 						</div>
@@ -37,4 +43,13 @@ var Page3 = props => {
 			</div>
 		)
 }
-export default Page3;
+
+const mapStateToProps = (state, ownProps) => {
+	return{ order: state.order, props: ownProps }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	actions: actions(dispatch),
+})
+
+export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page3));

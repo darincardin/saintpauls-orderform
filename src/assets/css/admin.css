@@ -33,9 +33,7 @@
         	
         
         	    
-        	#quantity{
-        		width: 100px;
-        	}	
+
         	
         	textarea {
         		resize: none;
@@ -64,7 +62,11 @@
         	
 
     	
+/*
 
+        	#quantity{
+        		width: 100px;
+        	}	
         	#fName{
         	    width:100%;
         		max-width: 300px;
@@ -91,7 +93,7 @@
         		max-width: 400px;
         	}    
 
-   
+   */
             .loading{
                 background: rgba(0, 0, 0, 0.7);
                 position:fixed;
