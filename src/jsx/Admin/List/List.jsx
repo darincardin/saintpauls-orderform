@@ -24,7 +24,7 @@ class List extends React.Component {
 		this.cancel = setTimeout( ()=>{ this.getOrders() }, 300);
 	}
 	
-	getOrders = (p = this.props.state.page) => {
+	getOrders = (p = this.props.page) => {
 			
 		this.setState({loading:true});
 		
@@ -77,10 +77,10 @@ class List extends React.Component {
 				
 				<table className="mainGrid">
 					<ListHeader />
-					<ListBody data={this.props.state.data} open={this.open} deleteOrder={this.deleteOrder}/>
+					<ListBody data={this.props.data} open={this.open} deleteOrder={this.deleteOrder}/>
 				</table>
 
-				<ListFooter update={this.getOrders} page={this.props.state.page} max={this.props.state.total} />
+				<ListFooter update={this.getOrders} page={this.props.page} max={this.props.total} />
 	
 				<Update show={this.state.showEdit} object={this.state.selected} save={this.save} close={this.close}  />	
 			</div>
@@ -89,10 +89,7 @@ class List extends React.Component {
 }		
 
 const mapStateToProps = (state, ownProps) => {
-	
-	return	{
-		state:state
-    }
+	return{ page:state.page, total:state.total, data:state.data }  
 }
 
 

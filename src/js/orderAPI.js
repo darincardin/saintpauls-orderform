@@ -1,19 +1,18 @@
 
-var url = 'http://api.darincardin.com';
-//var url = "";
+//var url = 'http://api.darincardin.com';
+var url = "";
 
 
 export default class OrderAPI {
 	
 	
 	
-	static list(page){
-		var amount = Math.floor((window.innerHeight - 215) / 43);
-		return OrderAPI.get(`${url}/php/orders/list.php?amount=${amount}&page=${page}`)	
+	static list(page, amount){
+		
+		return OrderAPI.get(`${url}/php/orders/list.php?amount=${amount}&page=${page}`);
 	}
 
 	static create(data){
-
 		return OrderAPI.post(`${url}/php/orders/create.php`, data).then(id =>{   
 			return {...data, id}
 		})
