@@ -9,8 +9,8 @@ export const progressbar = function(dispatch) {
 	}
 }
 
-export const actions = function(dispatch) {
-	
+export const actions = function(dispatch, getState) {
+	debugger
 	return {	
 		create : (data) => { 
 			return OrderAPI.create(data).then(order => { 

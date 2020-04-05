@@ -93,8 +93,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => ({
-	actions: actions(dispatch),
+const mapDispatchToProps = (dispatch, getState) => ({
+	actions: actions(dispatch, getState),
 	progressbar:progressbar(dispatch)
 })
 
