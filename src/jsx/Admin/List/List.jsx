@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 
 import {ListHeader ,ListBody, ListFooter, ListLoader }from '/jsx/Admin/List';
+
+import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
+
 import Update from '/jsx/Admin/Update/Update.jsx';
 
-import {actions, progressbar} from '/js/actions.js';
+import {actions} from '/js/actions.js';
 import OrderAPI from '/js/orderAPI.js';
 
 class List extends React.Component {
-
-	
-	
 
 	state = {showEdit:false, loading:false, selected:null}
 	cancel = null;
@@ -19,7 +19,6 @@ class List extends React.Component {
 	constructor(props){
 		super(props);
 	
-
 		window.addEventListener('resize', this.handleEvent);
 		this.getOrders();
 	}
@@ -40,7 +39,9 @@ class List extends React.Component {
 	}
 	
 	open = selected => {
-		this.setState({showEdit:true, selected });
+		
+		this.props.progress.show();
+		//this.setState({showEdit:true, selected });
 	}
 	
 	close = () =>{
@@ -48,14 +49,16 @@ class List extends React.Component {
 	}
 
 	save = obj =>{
-		this.props.progressbar.show();
+		this.props.show();
+		//this.props.progressbar.show();
 		
 		this.props.actions.update(obj).then(()=>{
 			this.setState({ showEdit:false });
 			return this.getOrders()
 		})
 		.finally(
-			this.props.progressbar.hide
+			//this.props.progressbar.hide
+			this.props.hide
 		)
 	}
 
@@ -96,11 +99,6 @@ class List extends React.Component {
 }		
 
 
-var a = function(){
-	
-	
-	
-}
 
 const mapStateToProps = (state, ownProps) => {
 	return{ page:state.page, total:state.total, data:state.data }  
@@ -108,22 +106,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
 const mapDispatchToProps = (dispatch, getState) => ({
-	actions: actions(dispatch, getState),
-	progressbar:progressbar(dispatch)
+	actions: actions(dispatch, getState)
 })
 
-export default connect(  mapStateToProps,  mapDispatchToProps)(List);
-
-/*
-
-
-
-
-
-
-
-
-				
-
-
-*/
+export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(List));

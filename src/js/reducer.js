@@ -3,7 +3,7 @@ import OrderAPI from '/js/orderAPI.js';
 
 const newOrder = {id:"", fName:"", lName:"", quantity:"", phone:"", address:""}
 
-const newState = { showProgress:false, loading:false,  order:{...newOrder}, data:[], page:0, total:0 }
+const newState = { loading:false,  order:{...newOrder}, data:[], page:0, total:0 }
 
 const reducer = (state = newState, action) => {
 
@@ -16,10 +16,6 @@ const reducer = (state = newState, action) => {
 	  case 'SAVE':  return { ...state, order };
 	  case 'CLEAR': return { ...state, order:{...newOrder} };
 
-	  
-	  case 'SHOW': return { ...state, showProgress:true };
-      case 'HIDE': return { ...state, showProgress:false } ;
-	  
       default:  return state;
     }
     

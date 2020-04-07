@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-import { connect } from 'react-redux'
+
 
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 import {Page1, Page2, Page3} from '/jsx/Default/Pages/';
@@ -39,9 +39,6 @@ var MyBody = ({ showProgress}) => {
 	);
 }
 
-const mapStateToProps = (state, ownProps) => {
-	return { showProgress: state.showProgress }
-}
 
-export default connect(mapStateToProps)(ProgressBar(MyBody));
+export default (MyBody);
 	

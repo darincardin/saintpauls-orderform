@@ -1,13 +1,6 @@
 import OrderAPI from '/js/orderAPI.js';
 
 
-export const progressbar = function(dispatch) {
-	
-	return {	
-		show: () => { dispatch({type:"SHOW"})},
-		hide: () => { dispatch({type:"HIDE"})}
-	}
-}
 
 export const actions = function(dispatch, getState) {
 

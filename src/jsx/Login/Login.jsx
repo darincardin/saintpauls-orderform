@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import { connect } from 'react-redux'
+
 import {Header, Footer, ProgressBar, Background} from '/jsx/common';
 
 import OrderAPI from '/js/orderAPI.js';
 
-import { progressbar} from '/js/actions.js';
+
 
 class Login extends React.Component{
 	
@@ -13,7 +13,7 @@ class Login extends React.Component{
 	
 	submit = () =>{
 
-		this.props.progressbar.show();
+		this.props.progress.show();
 
 		OrderAPI.login(this.state).then(res =>{ 	
 			if(res.success) window.location.href = '/admin.html';
@@ -69,6 +69,7 @@ class Login extends React.Component{
 
 
 }
+/*
 const mapStateToProps = (state, ownProps) => {	
 	return { showProgress: state.showProgress }
 }
@@ -76,6 +77,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
 	progressbar:progressbar(dispatch)
 })
-export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(Login));
+*/
+export default ProgressBar(Login);
 
 

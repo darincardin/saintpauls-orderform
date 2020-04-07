@@ -1,12 +1,9 @@
-
-
-
- 
-
 import React from 'react';
 
 var ProgressBar = (WrappedComponent) => {
 	class Overlay extends React.Component {
+		  
+		state = {show:false}  
 		  
 		attribs = {
 			'className': 'progress-bar progress-bar-info progress-bar-striped active',
@@ -16,24 +13,25 @@ var ProgressBar = (WrappedComponent) => {
 			'aria-valuemax': '100' 
 		}
 		  
-		
-
+		functions = {
+			show: ()=>{ 
+				this.setState({show:true }) 
+			},
+			hide: ()=>{ 
+				this.setState({show:false}) 
+			}
+		}			
+		  
 		render() {
-			debugger;
 			return(
-			<div> 
-				<div className={`order-progress ${this.props.showProgress?"show":"hide"}`} > 
-					<div>
+				<> 
+					<div className={`order-progress ${this.state.show?"show":"hide"}`} > 
 						<div>
-							<div {...this.attribs} >
-							Processing...
-							</div>
+							<div {...this.attribs} >Processing...</div>
 						</div>
-					</div>
-				</div>
-			  
-				<WrappedComponent {...this.props} /> 
-			</div>
+					</div>  
+					<WrappedComponent {...this.props} progress={this.functions} /> 
+				</>
 		)}	
 	}
     

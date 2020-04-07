@@ -1,6 +1,6 @@
 
-var url = 'http://api.darincardin.com';
-//var url = "";
+//var url = 'http://api.darincardin.com';
+var url = "";
 
 
 export default class OrderAPI {
