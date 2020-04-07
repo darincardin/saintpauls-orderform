@@ -34,7 +34,9 @@ class Admin extends React.Component {
 					<a href="#" onClick={this.logout} className="logout">Logout</a>  
 					<main>	
 						<ErrorBoundary  FallbackComponent={<Error />}  >
-							<List />
+							<div className="order-window"> 
+								<List />
+							</div>
 						</ErrorBoundary>
 					</main>	
 				<Footer />

@@ -38,10 +38,8 @@ class List extends React.Component {
 		})
 	}
 	
-	open = selected => {
-		
-		this.props.progress.show();
-		//this.setState({showEdit:true, selected });
+	open = selected => {	
+		this.setState({showEdit:true, selected });
 	}
 	
 	close = () =>{
@@ -49,16 +47,14 @@ class List extends React.Component {
 	}
 
 	save = obj =>{
-		this.props.show();
-		//this.props.progressbar.show();
-		
+		this.props.progress.show();
+
 		this.props.actions.update(obj).then(()=>{
 			this.setState({ showEdit:false });
 			return this.getOrders()
 		})
 		.finally(
-			//this.props.progressbar.hide
-			this.props.hide
+			this.props.progress.hide
 		)
 	}
 
@@ -66,20 +62,20 @@ class List extends React.Component {
 
 		if(confirm(`Delete order ${id}?`) ) {
 
-			this.props.progressbar.show();
+			this.props.progress.show();
 			
 			this.props.actions.remove(id).then(res =>{
 				return this.getOrders()
 			})
 			.finally(
-				this.props.progressbar.hide
+				this.props.progress.hide
 			)	
 		}	
 	}	
 	
 	render = () => {
 	    return  (
-			<div className="order-window"> 
+			<> 
 			
 				
 				
@@ -93,7 +89,7 @@ class List extends React.Component {
 				<ListFooter update={this.getOrders} page={this.props.page} max={this.props.total} />
 	
 				<Update show={this.state.showEdit} object={this.state.selected} save={this.save} close={this.close}  />	
-			</div>
+			</>
 		)
 	}
 }		
