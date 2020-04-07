@@ -22,6 +22,7 @@ class Login extends React.Component{
 				alert("Login was unsuccessful.");
 			}
 		})
+		
 	}
 	
 	change = e=>{	
@@ -61,20 +62,20 @@ class Login extends React.Component{
 				</main>
 						
 				<Footer />
-				{ReactDOM.createPortal(<ProgressBar show={this.props.state.showProgress} />, document.getElementById('progress-bar')) }
+	
 			</div>
 	    );
 	}
 
 
 }
-const mapStateToProps = (state, ownProps) => {
-	return	{ state:state }
+const mapStateToProps = (state, ownProps) => {	
+	return { showProgress: state.showProgress }
 }
 
 const mapDispatchToProps = (dispatch) => ({
 	progressbar:progressbar(dispatch)
 })
-export default connect(  mapStateToProps,  mapDispatchToProps)(Login);
+export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(Login));
 
 

@@ -10,11 +10,16 @@ import OrderAPI from '/js/orderAPI.js';
 
 class List extends React.Component {
 
+	
+	
+
 	state = {showEdit:false, loading:false, selected:null}
 	cancel = null;
 	
 	constructor(props){
 		super(props);
+	
+
 		window.addEventListener('resize', this.handleEvent);
 		this.getOrders();
 	}
@@ -73,8 +78,10 @@ class List extends React.Component {
 	    return  (
 			<div className="order-window"> 
 			
-				<ListLoader show={this.state.loading}/>
 				
+				
+				<ListLoader show={this.state.loading}/>
+
 				<table className="mainGrid">
 					<ListHeader />
 					<ListBody data={this.props.data} open={this.open} deleteOrder={this.deleteOrder}/>
@@ -88,6 +95,13 @@ class List extends React.Component {
 	}
 }		
 
+
+var a = function(){
+	
+	
+	
+}
+
 const mapStateToProps = (state, ownProps) => {
 	return{ page:state.page, total:state.total, data:state.data }  
 }
@@ -99,3 +113,17 @@ const mapDispatchToProps = (dispatch, getState) => ({
 })
 
 export default connect(  mapStateToProps,  mapDispatchToProps)(List);
+
+/*
+
+
+
+
+
+
+
+
+				
+
+
+*/
