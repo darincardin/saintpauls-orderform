@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import TableLink from '../TableLink/TableLink.jsx';
 
 var ListHeader = props =>{
+	//	var a = null;
+	
+	//a.a = "hello"
 	
 	
 	return (

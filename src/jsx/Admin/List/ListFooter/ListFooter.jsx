@@ -4,6 +4,7 @@ import TableLink from '../TableLink/TableLink.jsx';
 
 var ListFooter = props =>{
 	
+
 	return (
 		<div className="foot text-center">
 			<TableLink onClick={()=>props.update(props.page-1)} active={props.page>0} >&lt; Prev</TableLink>

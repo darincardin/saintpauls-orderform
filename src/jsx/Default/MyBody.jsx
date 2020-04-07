@@ -35,7 +35,6 @@ var MyBody = ({ showProgress}) => {
 					</ErrorBoundary >
 				</main>	
 				<Footer />
-				{ReactDOM.createPortal(<ProgressBar show={showProgress} />, document.getElementById('progress-bar')) }
 			</div>
 	);
 }
@@ -44,5 +43,5 @@ const mapStateToProps = (state, ownProps) => {
 	return { showProgress: state.showProgress }
 }
 
-export default connect(mapStateToProps)(MyBody);
+export default connect(mapStateToProps)(ProgressBar(MyBody));
 	

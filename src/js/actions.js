@@ -9,8 +9,8 @@ export const progressbar = function(dispatch) {
 	}
 }
 
-export const actions = function(dispatch) {
-	
+export const actions = function(dispatch, getState) {
+
 	return {	
 		create : (data) => { 
 			return OrderAPI.create(data).then(order => { 
@@ -25,8 +25,11 @@ export const actions = function(dispatch) {
 		remove : (id) => { 
 			return OrderAPI.delete(id).then(res => { return res;})
 		},
-		list : (page) => { 
-			return OrderAPI.list(page).then(res => { 
+		list : (page, total) => { 
+		
+		    var amount = Math.floor((window.innerHeight - 215) / 43);
+
+			return OrderAPI.list(page, amount).then(res => { 
 				dispatch({type:"LIST", ...res, page  } ) 
 			})
 		},

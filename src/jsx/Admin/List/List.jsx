@@ -10,11 +10,16 @@ import OrderAPI from '/js/orderAPI.js';
 
 class List extends React.Component {
 
+	
+	
+
 	state = {showEdit:false, loading:false, selected:null}
 	cancel = null;
 	
 	constructor(props){
 		super(props);
+	
+
 		window.addEventListener('resize', this.handleEvent);
 		this.getOrders();
 	}
@@ -24,7 +29,7 @@ class List extends React.Component {
 		this.cancel = setTimeout( ()=>{ this.getOrders() }, 300);
 	}
 	
-	getOrders = (p = this.props.state.page) => {
+	getOrders = (p = this.props.page) => {
 			
 		this.setState({loading:true});
 		
@@ -73,14 +78,16 @@ class List extends React.Component {
 	    return  (
 			<div className="order-window"> 
 			
-				<ListLoader show={this.state.loading}/>
 				
+				
+				<ListLoader show={this.state.loading}/>
+
 				<table className="mainGrid">
 					<ListHeader />
-					<ListBody data={this.props.state.data} open={this.open} deleteOrder={this.deleteOrder}/>
+					<ListBody data={this.props.data} open={this.open} deleteOrder={this.deleteOrder}/>
 				</table>
 
-				<ListFooter update={this.getOrders} page={this.props.state.page} max={this.props.state.total} />
+				<ListFooter update={this.getOrders} page={this.props.page} max={this.props.total} />
 	
 				<Update show={this.state.showEdit} object={this.state.selected} save={this.save} close={this.close}  />	
 			</div>
@@ -88,17 +95,35 @@ class List extends React.Component {
 	}
 }		
 
-const mapStateToProps = (state, ownProps) => {
+
+var a = function(){
 	
-	return	{
-		state:state
-    }
+	
+	
+}
+
+const mapStateToProps = (state, ownProps) => {
+	return{ page:state.page, total:state.total, data:state.data }  
 }
 
 
-const mapDispatchToProps = (dispatch) => ({
-	actions: actions(dispatch),
+const mapDispatchToProps = (dispatch, getState) => ({
+	actions: actions(dispatch, getState),
 	progressbar:progressbar(dispatch)
 })
 
 export default connect(  mapStateToProps,  mapDispatchToProps)(List);
+
+/*
+
+
+
+
+
+
+
+
+				
+
+
+*/
