@@ -19,7 +19,9 @@ module.exports = function(env) {
 		port: 7777   ,
 		before: function(app, server, compiler) {
 			app.post('/php/orders/create.php',  (req, res)=>res.json(reader(res, 'create.json'))); 
-			app.post('/php/orders/update.php',  (req, res)=>res.json(reader(res, 'success.json'))); 
+			app.post('/php/orders/update.php',  (req, res)=>{
+				return res.json(reader(res, 'success.json')); 
+			})
 			app.get('/php/orders/list.php*',    (req, res)=>{	
 				var {page, amount} = req.query;
 				var list = 	[...data];

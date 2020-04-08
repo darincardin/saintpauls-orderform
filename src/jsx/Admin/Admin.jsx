@@ -12,18 +12,18 @@ import OrderAPI from '/js/orderAPI.js';
 
 class Admin extends React.Component {
 
+
+
+
+
 	logout = () =>{
-		debugger;
-		//progressbar.show(); 
 
 		this.props.progress.show();
-			
 
-/*
 		OrderAPI.logout().then(res =>{ 	 
 			window.location.href = '/login.html';
 		})
-		*/
+		
 	}	
 
 	render = () => {

@@ -17,9 +17,5 @@ import '/assets/css/admin.css';
 import '/assets/css/table.css';
 
 
-
-
-
-
 let store = createStore(reducer) 
 ReactDOM.render( <Provider store={store}><Admin/></Provider>, document.getElementById('app'));

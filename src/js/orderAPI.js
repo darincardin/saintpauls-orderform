@@ -1,6 +1,6 @@
 
-//var url = 'http://api.darincardin.com';
-var url = "";
+var url = 'http://api.darincardin.com';
+//var url = "";
 
 
 export default class OrderAPI {
@@ -19,7 +19,7 @@ export default class OrderAPI {
 	}	
 	
 	static update(data){
-		return OrderAPI.post(`${url}/php/orders/update.php`, data);	
+		return OrderAPI.post(`${url}/php/orders/update.php?id=${data.id}`, data);	
 	}	
 
 	static delete(id){
