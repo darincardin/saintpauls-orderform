@@ -3,15 +3,15 @@ import OrderAPI from '/js/orderAPI.js';
 
 const newOrder = {id:"", fName:"", lName:"", quantity:"", phone:"", address:""}
 
-const newState = { loading:false,  order:{...newOrder}, data:[], page:0, total:0 }
+const newState = {  order:{...newOrder}, data:[]}
 
 const reducer = (state = newState, action) => {
 
-	var {type, order, data, total, page} = action;
+	var {type, order, data} = action;
 
 	switch (type) {
 	  		
-	  case 'LIST': return { ...state, data, total, page, loading:false };
+	  case 'LIST': return { ...state, data };
 	
 	  case 'SAVE':  return { ...state, order };
 	  case 'CLEAR': return { ...state, order:{...newOrder} };

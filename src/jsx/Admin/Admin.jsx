@@ -4,17 +4,11 @@ import ErrorBoundary from 'react-error-boundary';
 import { connect } from 'react-redux'
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 
-
 import List from '/jsx/Admin/List/List.jsx';
-
 import OrderAPI from '/js/orderAPI.js';
 
 
 class Admin extends React.Component {
-
-
-
-
 
 	logout = () =>{
 
@@ -45,18 +39,5 @@ class Admin extends React.Component {
 	}
 }
 
-/*
-const mapStateToProps = (state, ownProps) => {
-	debugger;
-	return { showProgress: state.showProgress }
-}
-
-const mapDispatchToProps = (dispatch) => {
-
-	return {
-
-	}
-}
-*/
 export default ProgressBar(Admin);
 

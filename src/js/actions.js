@@ -18,12 +18,13 @@ export const actions = function(dispatch, getState) {
 		remove : (id) => { 
 			return OrderAPI.delete(id).then(res => { return res;})
 		},
-		list : (page, total) => { 
+		list : (page) => { 
 		
 		    var amount = Math.floor((window.innerHeight - 215) / 43);
 
 			return OrderAPI.list(page, amount).then(res => { 
-				dispatch({type:"LIST", ...res, page  } ) 
+				dispatch({type:"LIST", data:res.data  } ) 
+				return res;
 			})
 		},
 		

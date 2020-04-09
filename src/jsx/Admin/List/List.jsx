@@ -13,7 +13,7 @@ import OrderAPI from '/js/orderAPI.js';
 
 class List extends React.Component {
 
-	state = {showEdit:false, loading:false, selected:null}
+	state = {showEdit:false, selected:null, page:0, total:0, loading:false}
 	cancel = null;
 	
 	constructor(props){
@@ -28,13 +28,15 @@ class List extends React.Component {
 		this.cancel = setTimeout( ()=>{ this.getOrders() }, 300);
 	}
 	
-	getOrders = (p = this.props.page) => {
+	getOrders = (page = this.state.page) => {
 			
 		this.setState({loading:true});
-		
-		this.props.actions.list(p)
-		.finally( ()=>{
-			this.setState( {loading:false} )
+	
+		this.props.actions.list(page).then(res=>{
+			this.setState( {loading:false, page:page, total:res.total})
+		})
+		.catch( err =>{
+			this.setState( {loading:false, page:0, total:0 })
 		})
 	}
 	
@@ -76,9 +78,6 @@ class List extends React.Component {
 	render = () => {
 	    return  (
 			<> 
-			
-				
-				
 				<ListLoader show={this.state.loading}/>
 
 				<table className="mainGrid">
@@ -86,7 +85,7 @@ class List extends React.Component {
 					<ListBody data={this.props.data} open={this.open} deleteOrder={this.deleteOrder}/>
 				</table>
 
-				<ListFooter update={this.getOrders} page={this.props.page} max={this.props.total} />
+				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
 	
 				<Update show={this.state.showEdit} object={this.state.selected} save={this.save} close={this.close}  />	
 			</>
@@ -94,10 +93,8 @@ class List extends React.Component {
 	}
 }		
 
-
-
 const mapStateToProps = (state, ownProps) => {
-	return{ page:state.page, total:state.total, data:state.data }  
+	return{ data:state.data }  
 }
 
 
