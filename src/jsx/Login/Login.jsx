@@ -43,19 +43,20 @@ class Login extends React.Component{
 							<table>
 								<tbody>
 									<tr>
-										<td>Username</td>
+										<td><label className="control-label">Username</label></td>
 										<td> <input type="text"  name="username" onKeyUp={this.change} className="form-control" /> </td>
 									</tr>
 									<tr>
-										<td>Password</td>
+										<td><label className="control-label">Password</label></td>
 										<td> <input type="password"  name="password" onKeyUp={this.change} className="form-control"/> </td>
-									</tr>
-									<tr><td> <br /> </td></tr>
-									<tr>
-										<td><input type="submit" value="Login"  onClick={this.submit} className="btn btn-primary" /></td><td></td>
 									</tr>
 								</tbody>
 							</table>	
+							<hr/>
+							<div className="text-right">
+								<input type="submit" value="Login"  onClick={this.submit} className="btn btn-primary" /> 
+							</div>
+							
 						</div>
 					</div>
 				</div>	

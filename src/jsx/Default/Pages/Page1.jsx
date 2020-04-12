@@ -19,6 +19,7 @@ var Page1 = ({ order, actions, props }) => {
 				<div className="panel panel-default">
 					<div className="panel-body">
 						<Form  onSuccess={onSuccess} object={order}>
+							<hr/>
 							<button type="submit" className="btn btn-primary">Submit</button> 	
 						</Form>
 					</div>

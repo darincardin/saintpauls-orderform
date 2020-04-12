@@ -46,6 +46,7 @@
     "webpack-css-concat-plugin": "0.0.0",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-log": "^2.0.0",
+    "underscore": "latest",
     "webpack-merge-and-include-globally": "^2.1.24"
   },
   "devDependencies": {

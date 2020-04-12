@@ -1,38 +1,12 @@
-    <style>
-        html, body{
-            height: 100%;
-        }
-    
-    	body{
-    		background: url('/assets/images/background.jpg');
-    		background-repeat: no-repeat;
-    		background-position: center top; 	
-    	
-    	}
-    
-    	xxmain {
-    		
-    	    border: solid #DDDDDD 1px;
-    		background: rgba(255,255,255, .6);
-    		padding: 20px;
-    		border-radius: 10px;
-    		overflow: hidden;
-    		text-overflow: ellipsis;
-    		top: 100px;
-    		margin-left: auto;
-    		margin-right: auto;
-    		position: relative;
-    		max-width: 400px;
-    		width: 100%;
-    		overflow: hidden;	
-    
-    	}
-    	
-    	td{
-    		padding: 10px!important;
-    
-    	}
-    	
+
 
     	
-    </style>
+	
+	.login{
+		max-width: 400px;		
+	}	
+	
+	
+	table td:first-child{
+		    width: 33%;
+	}

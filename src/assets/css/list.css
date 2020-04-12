@@ -1,20 +1,32 @@
-	
-	
-	.mainGrid{
+
+		 
+	.main-grid{
 		white-space: nowrap;
 		table-layout:fixed;
-	}
-	
-	.mainGrid thead{
-        font-weight: bold;
-    }
 
-	.mainGrid tbody{
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        width:  calc(100% - 20px);
+		height: calc(100vh - 150px);
+
+		background: rgba(255,255,255, .7);
+		margin-top: 10px;
+
+
+		border: solid #DDDDDD 1px;
+		border-radius: 10px 10px 0 0;
+    }
+        	
+
+
+	.main-grid tbody{
         overflow-y: scroll;
         overflow-x: hidden;
     }	
 
-    .mainGrid td{
+    .main-grid td{
         padding: 10px;
         border-bottom: solid #080808 1px;
         white-space: nowrap;
@@ -22,24 +34,44 @@
 		text-overflow: ellipsis;	
 	}
 	
-	.mainGrid   td:nth-child(1){
+	
+	.main-grid   td:nth-child(1){
 		width: 50px;
 	}
 
+	.main-grid   td:nth-child(2), 
+	.main-grid   td:nth-child(3){
+		width: 250px;
+	}
 
-
-	.mainGrid   td:nth-child(4){
+	.main-grid   td:nth-child(4){
 		width: 90px;
 	}
 	
-	.mainGrid   td:nth-child(5){
+	.main-grid   td:nth-child(5){
 		width: 140px;
 	}		
 	
-	.mainGrid   td:last-child{
+	.main-grid   td:last-child{
 		width: 120px;
 	}	
-	.order-window .foot{
+	
+	
+	
+	
+	
+	
+	/********   HEADER ************/
+
+	.main-grid thead{
+        font-weight: bold;
+    }
+	
+	
+	
+	/********   FOOTER ************/
+	
+	.main-grid .foot{
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -50,21 +82,26 @@
 		padding:10px;
 		height: 40px
 	}
-			
 	
-	.order-window{
-		position:relative;   
+					
+	.main-grid .foot .pagenum{
+		text-align:center;
+		display:inline-block;
+		min-width:25px;
 	}
-		 
-		 
-	.table-loader {
+		
+	
+	
+	/*******  LOADER  ************/
+
+	.main-grid .table-loader {
 		position: absolute;
 		top:41px; left:0;right:0;bottom:0;
 		background: rgba(227, 227, 227, 0.4);
 		z-index: 10;
 	}	
 
-	.table-loader>div {
+	.main-grid .table-loader>div {
 		
 		position: absolute;
 		bottom: 0;
@@ -81,25 +118,6 @@
 		font-size: 30px;
 	}	
 			
-			
-	.foot .pagenum{
-		text-align:center;
-		display:inline-block;
-		min-width:25px;
-	}
-	
-	
-	
-	
-	
-
-	 /**************  HEADER     ********************/  
-    @media screen and  (max-width : 540px) {
-            .mainGrid td:nth-child(5),
-            .mainGrid td:nth-child(6){
-            	 display:none;
-        }
-   }    
 
  	.spin {
 	  -webkit-animation: spin 2s infinite linear;
@@ -107,6 +125,7 @@
 	  -o-animation: spin 2s infinite linear;
 	  animation: spin 2s infinite linear;
 	}
+	
 	@-moz-keyframes spin {
 	  from {
 		-moz-transform: rotate(0deg);
@@ -131,3 +150,14 @@
 		transform: rotate(360deg);
 	  }
 	}
+	
+	
+		
+
+	 /**************  RESPONSIVE     ********************/  
+    @media screen and  (max-width : 540px) {
+            .mainGrid td:nth-child(5),
+            .mainGrid td:nth-child(6){
+            	 display:none;
+        }
+    }    

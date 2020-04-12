@@ -5,18 +5,17 @@ import OrderAPI from '/js/orderAPI.js';
 export const actions = function(dispatch, getState) {
 
 	return {	
-		create : (data) => { 
-			return OrderAPI.create(data).then(order => { 
-				dispatch({type:"SAVE", order } )
+		
+		create : (order) => { 
+			return OrderAPI.create(order).then(res => { 
+				dispatch({type:"SAVE", order: res } )
 			})
 		},
-		update : (data) => { 
-			return OrderAPI.update(data).then(order => { 
-				dispatch({type:"SAVE", order } )
-			})
+		update : (order) => { 
+			return OrderAPI.update(order);
 		},
 		remove : (id) => { 
-			return OrderAPI.delete(id).then(res => { return res;})
+			return OrderAPI.delete(id)
 		},
 		list : (page) => { 
 		

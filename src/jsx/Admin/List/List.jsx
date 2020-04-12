@@ -1,24 +1,15 @@
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
-
 import {ListHeader ,ListBody, ListFooter, ListLoader }from '/jsx/Admin/List';
-
-import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
-
-import Update from '/jsx/Admin/Update/Update.jsx';
-
+import {ProgressBar} from '/jsx/common';
 import {actions} from '/js/actions.js';
-import OrderAPI from '/js/orderAPI.js';
 
 class List extends React.Component {
-
-	state = {showEdit:false, selected:null, page:0, total:0, loading:false}
+	
 	cancel = null;
+	state = {page:0, total:0, loading:false}
 	
-	constructor(props){
-		super(props);
-	
+	componentDidMount(){
 		window.addEventListener('resize', this.handleEvent);
 		this.getOrders();
 	}
@@ -29,38 +20,22 @@ class List extends React.Component {
 	}
 	
 	getOrders = (page = this.state.page) => {
-			
+		
 		this.setState({loading:true});
 	
 		this.props.actions.list(page).then(res=>{
-			this.setState( {loading:false, page:page, total:res.total})
+			this.setState({ loading:false, page:page, total:res.total })
 		})
 		.catch( err =>{
-			this.setState( {loading:false, page:0, total:0 })
+			this.setState({ loading:false, page:0, total:0 })
 		})
+	}	
+	
+	edit = selected => {	
+		this.props.setSelected(selected);
 	}
 	
-	open = selected => {	
-		this.setState({showEdit:true, selected });
-	}
-	
-	close = () =>{
-		this.setState({showEdit:false});
-	}
-
-	save = obj =>{
-		this.props.progress.show();
-
-		this.props.actions.update(obj).then(()=>{
-			this.setState({ showEdit:false });
-			return this.getOrders()
-		})
-		.finally(
-			this.props.progress.hide
-		)
-	}
-
-	deleteOrder = (id,e) => {
+	remove = (id,e) => {
 
 		if(confirm(`Delete order ${id}?`) ) {
 
@@ -77,18 +52,14 @@ class List extends React.Component {
 	
 	render = () => {
 	    return  (
-			<> 
+			<div className="main-grid"> 
 				<ListLoader show={this.state.loading}/>
-
-				<table className="mainGrid">
+				<table >
 					<ListHeader />
-					<ListBody data={this.props.data} open={this.open} deleteOrder={this.deleteOrder}/>
+					<ListBody data={this.props.data} edit={this.edit} remove={this.deleteOrder}/>
 				</table>
-
 				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
-	
-				<Update show={this.state.showEdit} object={this.state.selected} save={this.save} close={this.close}  />	
-			</>
+			</ div>
 		)
 	}
 }		
@@ -96,7 +67,6 @@ class List extends React.Component {
 const mapStateToProps = (state, ownProps) => {
 	return{ data:state.data }  
 }
-
 
 const mapDispatchToProps = (dispatch, getState) => ({
 	actions: actions(dispatch, getState)

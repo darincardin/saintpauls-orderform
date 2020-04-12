@@ -9,9 +9,12 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import reducer from '/js/reducer.js'
 
-import '/assets/css/bootstrap.min.css';
+import '/assets/third-party/bootstrap.min.css';
+import '/assets/css/index.css';
 import '/assets/css/responsive.css';
-import '/assets/css/main.css';
+import '/assets/css/form.css';
+import '/assets/css/progress.css';
+
 
 
 let store = createStore(reducer) 

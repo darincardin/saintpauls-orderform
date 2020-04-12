@@ -45,6 +45,7 @@ let Page3 = ({ order, actions, props }) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
+	
 	return{ order: state.order, props: ownProps }
 }
 

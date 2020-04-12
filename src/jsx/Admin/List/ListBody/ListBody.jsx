@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TableLink from '../TableLink/TableLink.jsx';
 
 var ListBody = props =>{
 	
@@ -15,7 +13,7 @@ var ListBody = props =>{
 					<td>{r.phone}</td>
 					<td>{r.address}</td>
 					<td>
-						<a onClick={() => props.open(r) } > Edit </a> | 
+						<a onClick={() => props.edit(r) } > Edit </a> | 
 						<a onClick={(e) => props.deleteOrder(r.id, e)} > Delete </a> 
 					</td>
 				</tr>  

@@ -1,0 +1,203 @@
+
+	
+	html, body, #app, #app>div, .bg {
+		height: 100%;
+		color: #black;
+		font-size: 15px;
+		font-family: Arial, Tahoma, Verdana;
+	}
+
+
+	h2, label, p {
+		white-space: nowrap;
+	}
+	
+
+	
+    hr{
+		border-color: #a0a0a0!important;
+        xxborder-color: black;
+    }
+	
+	a{cursor:pointer;}
+	
+	
+	
+	
+	.panel{
+		background: rgba(255,255,255, .7);
+		margin-bottom: 0;
+	}
+
+
+
+
+	main {	
+		min-height: calc(100% - 130px);		
+	    overflow:hidden;
+		position: relative;
+		z-index:2;
+	}
+	
+	
+	main>div{
+		vertical-align: top;
+		position: relative;
+		opacity: 1;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 700px;				
+		display: block;		
+	}	
+	
+	
+	.disabled {
+		cursor:not-allowed;
+		color:#777777;
+	}
+			
+	
+
+
+
+
+
+
+
+
+	/******** Background **********/
+
+	.bg{
+		background-repeat: no-repeat;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+	}
+			
+	.bg img{
+		width: 100%; 
+		opacity:0;
+		height: inherit;
+		transition: opacity 1s;
+	}
+
+	.bg img.fadeIn{
+		opacity:1;
+	}
+
+	
+	/**************  HEADER  ********************/
+	header{
+		background: url('../images/bg.jpg');
+		height: 80px;
+		z-index:2;
+		position: relative;
+	    transition: all .1s;
+	    overflow:hidden;
+		color:white;
+	}
+ 
+	header a{
+		xxxbackground: url('../images/header-small.jpg') no-repeat;
+		max-width: 300px;
+		height: 55px;
+        margin-top: 10px;
+	}	
+	
+
+    header .logout{
+        position: absolute;
+		z-index: 10;
+        top: 10px;
+        right: 10px;
+        font-size: 18px;
+    }
+
+
+	/**************  FOOTER  ********************/
+	footer{
+		width: 100%;
+        padding: 5px 15px 30px 15px;
+        height: 50px;
+		background: black;		
+		font-size: 13px;
+		line-height: 21px;
+		color: #626262; 		
+		font-size: 12px;	
+		overflow: hidden;	
+		z-index:2;
+		position: relative;	
+	}
+
+	footer .copyright{
+		color: #BBBBBB;		
+	}	
+
+	
+	
+	
+	
+	
+	
+	
+
+	.popover{
+		font-weight: 700;
+		white-space:nowrap;
+	}
+		
+		
+		
+		
+
+	
+	
+
+		
+		
+
+	
+
+
+
+
+
+	.label-id{
+		margin-bottom:0;
+	}
+	
+	
+
+	
+
+	
+	
+	
+	
+	td {word-wrap: break-word; word-break: break-all;}
+	
+	table{
+	    padding-left: 1px;
+	    padding-right: 1px;
+        width: calc(100% - 2px);
+	    
+	}
+	
+
+	
+	
+	.select-menu{
+	    
+	    display:none!important;
+	}
+	
+    @media only screen and (max-width: 767px) {
+        .select-menu {
+            display:none!important;
+      
+        }
+    }
+    

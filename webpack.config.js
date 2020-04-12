@@ -9,7 +9,7 @@ module.exports = (env) => {
 
 	var plugins = [ 
 	//	new CleanWebpackPlugin(),
-		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery",  }) ,
+		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'underscore' }) ,
 		new CopyPlugin([  { from: './src/assets/images', to: './' },]),
 	];
 	

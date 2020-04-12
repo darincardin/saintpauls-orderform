@@ -11,9 +11,14 @@ import reducer from '/js/reducer.js'
 
 import Login from '/jsx/Login/Login.jsx';
 
-import '/assets/css/bootstrap.min.css';
+import '/assets/third-party/bootstrap.min.css';
+import '/assets/css/index.css';
 import '/assets/css/responsive.css';
-import '/assets/css/main.css';
+import '/assets/css/form.css';
+import '/assets/css/progress.css';
+import '/assets/css/form.css';
+
+import '/assets/css/login.css';
 
 let store = createStore(reducer) 
 ReactDOM.render(<Provider store={store}><Login/></Provider>,    document.getElementById('app'));
