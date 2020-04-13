@@ -56,7 +56,7 @@ class List extends React.Component {
 				<ListLoader show={this.state.loading}/>
 				<table >
 					<ListHeader />
-					<ListBody data={this.props.data} edit={this.edit} remove={this.deleteOrder}/>
+					<ListBody data={this.props.data} edit={this.edit} remove={this.remove}/>
 				</table>
 				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
 			</ div>

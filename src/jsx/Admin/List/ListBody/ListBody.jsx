@@ -14,7 +14,7 @@ var ListBody = props =>{
 					<td>{r.address}</td>
 					<td>
 						<a onClick={() => props.edit(r) } > Edit </a> | 
-						<a onClick={(e) => props.deleteOrder(r.id, e)} > Delete </a> 
+						<a onClick={(e) => props.remove(r.id, e)} > Delete </a> 
 					</td>
 				</tr>  
 			)}
