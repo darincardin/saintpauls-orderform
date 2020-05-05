@@ -114,7 +114,22 @@
 	
 	
 	
-	
+    /**************  RESPONSIVE     ********************/  
+    @media screen and  (max-width : 540px) {
+
+
+
+		table td:first-child{
+				width: 10px;
+				text-align:left;
+		}
+
+		.control-label {
+
+			padding-right: 15px; 
+		}
+    }    
+
 	
 	
 	

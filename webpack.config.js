@@ -57,7 +57,13 @@ module.exports = (env) => {
 				options: { name: '[name].[ext]',  outputPath: 'fonts/'}
 			  }
 			]
-		  }   
+		  },
+		  {
+			test: /\.(css|sass|scss)$/,
+			use: ExtractTextPlugin.extract({
+			  use: ['raw-loader', 'sass-loader'],
+			})
+		  }
 		]
 	  }
 	}
