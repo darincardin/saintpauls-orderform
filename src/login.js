@@ -1,6 +1,4 @@
-require('file-loader?name=[name].[ext]!./login.html');
 
-import 'bootstrap';
 
 
 import React from 'react';
@@ -11,14 +9,15 @@ import reducer from '/js/reducer.js'
 
 import Login from '/jsx/Login/Login.jsx';
 
-import '/assets/third-party/bootstrap.min.css';
-import '/assets/css/index.css';
-import '/assets/css/responsive.css';
-import '/assets/css/form.css';
-import '/assets/css/progress.css';
-import '/assets/css/form.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
-import '/assets/css/login.css';
+import '/assets/css/index.scss';
+
+import '/assets/css/progress.scss';
+
+
+import '/assets/css/login.scss';
 
 let store = createStore(reducer) 
 ReactDOM.render(<Provider store={store}><Login/></Provider>,    document.getElementById('app'));

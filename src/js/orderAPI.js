@@ -5,11 +5,9 @@ var url = 'http://api.darincardin.com';
 
 export default class OrderAPI {
 	
-	
-	
-	static list(page, amount){
-		
-		return OrderAPI.get(`${url}/php/orders/list.php?amount=${amount}&page=${page}`);
+
+	static list(page, sort, amount){	
+		return OrderAPI.get(`${url}/php/orders/list.php?amount=${amount}&page=${page}&sortBy=${sort.by}&sortDir=${sort.dir}`);
 	}
 
 	static create(data){

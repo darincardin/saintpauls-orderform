@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-import Form from '/jsx/common/input/Form.jsx';
+import Form from 'form';
 
 import {actions} from '/js/actions.js';
 
 var Page1 = ({ order, actions, props }) => {
+
+	var inputs = [ 
+		{label:"First Name", name:"fName",  tag:"text",  required:true},
+		{label:"Last Name",  name:"lName",  tag:"text",  required:true},
+		{label:"Quantity",   name:"quantity", tag:"number",  required:true},
+		{label:"Phone",      name:"phone",  tag:"phone",  required:true},
+		{label:"Address",    name:"address", tag:"text"},
+	]	
 
 	var onSuccess = (object)=>{
 		actions.save(object);
@@ -18,10 +26,11 @@ var Page1 = ({ order, actions, props }) => {
 				<h2> Order Form </h2>
 				<div className="panel panel-default">
 					<div className="panel-body">
-						<Form  onSuccess={onSuccess} object={order}>
+						<Form  onSuccess={onSuccess} object={order} inputs={inputs}>
 							<hr/>
 							<button type="submit" className="btn btn-primary">Submit</button> 	
-						</Form>
+						</Form>			
+
 					</div>
 				</div>
 			</div>
@@ -37,3 +46,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page1));
 	
+	
+	/*
+	
+
+	
+	*/

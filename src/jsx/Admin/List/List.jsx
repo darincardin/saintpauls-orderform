@@ -1,75 +1,100 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux'
-import {ListHeader ,ListBody, ListFooter, ListLoader }from '/jsx/Admin/List';
-import {ProgressBar} from '/jsx/common';
-import {actions} from '/js/actions.js';
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import ListHeader from './ListHeader/ListHeader.jsx';
+import ListBody from './ListBody/ListBody.jsx';
+import ListFooter from './ListFooter/ListFooter.jsx';
+import ListLoader from './ListLoader/ListLoader.jsx';
+
+
+import './list.scss';
+
+const INITIAL_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}}
+const ROW_SIZE = 40;
+
 
 class List extends React.Component {
+	AMOUNT = 0;   
+	state = {...INITIAL_STATE}
+
+	constructor(props){
+		super(props)
+		this.ref = React.createRef()	
+	}
+
+
+	generateAmount = () => {
+		
+		var height = this.ref.current.parentElement.offsetHeight;
+		this.AMOUNT = Math.floor((height/ROW_SIZE) - 2);	
+		
+		this.ref.current.style.height =  ((this.AMOUNT + 2) * ROW_SIZE) + "px" ;
+	}
 	
-	cancel = null;
-	state = {page:0, total:0, loading:false}
-	
-	componentDidMount(){
-		window.addEventListener('resize', this.handleEvent);
+	componentDidMount = ()=>{
+
+		if(this.props.amount) this.AMOUNT = this.props.amount;
+		else {
+			//this.generateAmount();
+			//window.addEventListener('resize', this.handleEvent);
+		}
+			
 		this.getOrders();
+		if(this.props.action) this.showActions = true;
 	}
 	
 	handleEvent = () => {
 		if(this.cancel) clearTimeout(this.cancel);
-		this.cancel = setTimeout( ()=>{ this.getOrders() }, 300);
+		
+		this.cancel = setTimeout( ()=>{ 
+			this.generateAmount();
+			this.getOrders() 
+		}, 300);
 	}
 	
-	getOrders = (page = this.state.page) => {
-		
-		this.setState({loading:true});
+	getOrders = (page = this.state.page, sort = this.state.sort) => {
 	
-		this.props.actions.list(page).then(res=>{
-			this.setState({ loading:false, page:page, total:res.total })
+		this.setState({loading:true})
+
+		this.props.getData(page, sort, this.AMOUNT).then(res=>{
+			this.setState({ page, total:res.total,  sort:sort,  loading:false })	
 		})
 		.catch( err =>{
-			this.setState({ loading:false, page:0, total:0 })
-		})
+			this.setState({...INITIAL_STATE})
+		})	
 	}	
 	
-	edit = selected => {	
-		this.props.setSelected(selected);
+	onActionClick = (row, action) =>{
+		
+		var promise = action(row);
+		
+		if(promise)
+			promise.then( res=>{
+				this.getOrders()
+			});
 	}
-	
-	remove = (id,e) => {
-
-		if(confirm(`Delete order ${id}?`) ) {
-
-			this.props.progress.show();
-			
-			this.props.actions.remove(id).then(res =>{
-				return this.getOrders()
-			})
-			.finally(
-				this.props.progress.hide
-			)	
-		}	
-	}	
 	
 	render = () => {
 	    return  (
-			<div className="main-grid"> 
-				<ListLoader show={this.state.loading}/>
-				<table >
-					<ListHeader />
-					<ListBody data={this.props.data} edit={this.edit} remove={this.remove}/>
+			<div ref={this.ref} className="list"> 
+				<ListLoader show={this.state.loading} />
+				
+				<table>
+					<ListHeader update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
+					<ListBody data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
+				
 				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
-			</ div>
+			</div>
 		)
 	}
 }		
 
-const mapStateToProps = (state, ownProps) => {
-	return{ data:state.data }  
-}
+List.propTypes = {
+    data: PropTypes.array.isRequired,
+    getData: PropTypes.func.isRequired,
+	action: PropTypes.func,
+	amount: PropTypes.number,
+};
 
-const mapDispatchToProps = (dispatch, getState) => ({
-	actions: actions(dispatch, getState)
-})
-
-export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(List));
+export default List;

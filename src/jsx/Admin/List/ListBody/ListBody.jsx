@@ -1,21 +1,24 @@
 import React from 'react';
 
 var ListBody = props =>{
-	
-	return (
+
+	return (	
 		<tbody>
 			{props.data  && props.data.map( r =>  
 				<tr key={r.id}>
 					<td>{r.id}</td>
 					<td>{r.fName}</td>
 					<td>{r.lName}</td>
-					<td>{r.quantity}</td>
-					<td>{r.phone}</td>
-					<td>{r.address}</td>
+					<td>{r.quantity}</td>	
+						<td>{r.phone}</td>	
+					<td>{r.address}</td>						
+				
 					<td>
-						<a onClick={() => props.edit(r) } > Edit </a> | 
-						<a onClick={(e) => props.remove(r.id, e)} > Delete </a> 
-					</td>
+						{React.Children.map(props.children, child => {
+							if(child.props) return React.cloneElement(child, {onClick:()=>{ props.onClick(r, child.props.action)} }, child.props.children);
+							else return React.cloneElement(<span/>, {}, child);
+						})}
+					</td>	
 				</tr>  
 			)}
 		</tbody>

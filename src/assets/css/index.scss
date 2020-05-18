@@ -5,7 +5,10 @@
 		color: #black;
 		font-size: 15px;
 		font-family: Arial, Tahoma, Verdana;
+		margin:0;
 	}
+
+
 
 
 	h2, label, p {
@@ -16,7 +19,6 @@
 	
     hr{
 		border-color: #a0a0a0!important;
-        xxborder-color: black;
     }
 	
 	a{cursor:pointer;}
@@ -89,57 +91,7 @@
 	}
 
 	
-	/**************  HEADER  ********************/
-	header{
-		background: url('../images/bg.jpg');
-		height: 80px;
-		z-index:2;
-		position: relative;
-	    transition: all .1s;
-	    overflow:hidden;
-		color:white;
-	}
- 
-	header a{
-		xxxbackground: url('../images/header-small.jpg') no-repeat;
-		max-width: 300px;
-		height: 55px;
-        margin-top: 10px;
-	}	
-	
 
-    header .logout{
-        position: absolute;
-		z-index: 10;
-        top: 10px;
-        right: 10px;
-        font-size: 18px;
-    }
-
-
-	/**************  FOOTER  ********************/
-	footer{
-		width: 100%;
-        padding: 5px 15px 30px 15px;
-        height: 50px;
-		background: black;		
-		font-size: 13px;
-		line-height: 21px;
-		color: #626262; 		
-		font-size: 12px;	
-		overflow: hidden;	
-		z-index:2;
-		position: relative;	
-	}
-
-	footer .copyright{
-		color: #BBBBBB;		
-	}	
-
-	
-	
-	
-	
 	
 	
 	

@@ -1,0 +1,219 @@
+
+html, body, #app {
+
+	height: 100%;
+}
+
+.list {	 
+	xxxheight: calc(100vh - 150px);
+	xxheight: 210px;
+	
+	padding-bottom: 41px;
+	white-space: nowrap;
+	table-layout:fixed;
+    overflow: hidden;
+    position: relative;
+    width:  calc(100%);
+	
+
+	background: rgba(255,255,255, .7);
+	
+
+	border: solid #DDDDDD 1px;
+	border-radius: 10px 10px 0 0;
+   
+    a { cursor:pointer; }
+	
+ 	.disabled {
+		cursor:not-allowed;
+		color:#b3b3b3;
+		text-shadow: 1px 1px 1px #ffffff;
+	}
+			
+	       	
+	table{
+		width: 100%;
+		table-layout: fixed;
+	}
+	
+	tr{ height: 40px; }
+
+	tbody{
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }	
+
+    td{
+		xxdisplay:inline-block;
+        padding: 0 10px;
+        border-bottom: solid #d2d2d2 1px;
+        white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;	
+	}
+	
+	
+	td:nth-child(1){
+		width: 55px;
+	}
+
+	td:nth-child(2), 
+	td:nth-child(3){
+		width: 120px;
+	}
+
+	td:nth-child(4){
+		width: 65px;
+	}
+	
+	td:nth-child(5) {
+		width: 130px;
+	}
+
+	
+	td:nth-child(7) {
+		width: 150px;
+	}
+
+	
+	
+	/********   HEADER ************/
+
+	thead{
+        font-weight: bold;
+		
+		
+		td {
+			padding: 0;
+		}
+		
+		a {
+			color: black;
+			padding: 10px;
+			user-select: none;
+		}
+		
+		
+		a.ASC:after  {
+			content:" ▲";	
+		}
+		
+		a.DESC:after  {
+			content:" ▼";
+		}
+		
+    }
+	
+	
+	
+	/********   FOOTER ************/
+	
+	.foot{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-top: solid #d4d4d4 1px;
+		background: #e6e6e6ed;
+		user-select: none;
+		padding:10px;
+		height: 40px;
+		text-align: center;
+	}
+	
+					
+	.foot .pagenum{
+		text-align:center;
+		display:inline-block;
+		min-width:25px;
+	}
+		
+	
+	
+	/*******  LOADER  ************/
+
+	.table-loader {
+		position: absolute;
+		top:41px; left:0;right:0;bottom:0;
+		background: rgba(227, 227, 227, 0.4);
+		z-index: 10;
+	}	
+
+	.table-loader>div {
+		
+		position: absolute;
+		bottom: 0;
+		padding: 10px;
+	}
+
+
+	.glyphicon-spin {
+		color: #828282;
+		margin: 10px auto;
+		display: block;
+		width: 30px;
+		height: 30px;
+		font-size: 30px;
+	}	
+			
+
+ 	.spin {
+	  -webkit-animation: spin 2s infinite linear;
+	  -moz-animation: spin 2s infinite linear;
+	  -o-animation: spin 2s infinite linear;
+	  animation: spin 2s infinite linear;
+	}
+	
+	@-moz-keyframes spin {
+	  from {
+		-moz-transform: rotate(0deg);
+	  }
+	  to {
+		-moz-transform: rotate(360deg);
+	  }
+	}
+	@-webkit-keyframes spin {
+	  from {
+		-webkit-transform: rotate(0deg);
+	  }
+	  to {
+		-webkit-transform: rotate(360deg);
+	  }
+	}
+	@keyframes spin {
+	  from {
+		transform: rotate(0deg);
+	  }
+	  to {
+		transform: rotate(360deg);
+	  }
+	}
+	
+	
+	/**************  RESPONSIVE  ********************/  
+	
+	@media screen and  (min-width : 992px) {
+		xxheight: 254px;
+		
+	}	
+	
+	
+	@media screen and  (max-width : 991px) {	
+
+	
+		xxheight: 235px;
+		
+		td:nth-child(5){
+			display:none;
+		}	 
+	}		
+	
+	@media screen and  (max-width : 767px) {	
+
+	
+		xxheight: 254px;
+		
+ 
+	}	
+}
+ 

@@ -20,8 +20,10 @@ export const actions = function(dispatch, getState) {
 		list : (page) => { 
 		
 		    var amount = Math.floor((window.innerHeight - 215) / 43);
+			
+			var sort = {by:"id", dir:"ASC"}
 
-			return OrderAPI.list(page, amount).then(res => { 
+			return OrderAPI.list(page, sort, amount).then(res => { 
 				dispatch({type:"LIST", data:res.data  } ) 
 				return res;
 			})

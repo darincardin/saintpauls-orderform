@@ -1,0 +1,26 @@
+
+	header{
+		background: url('/bg.jpg');
+		height: 80px;
+		z-index:2;
+		position: relative;
+	    transition: all .1s;
+	    overflow:hidden;
+		color:white;
+		
+		a{
+			
+			max-width: 300px;
+			height: 55px;
+			margin-top: 10px;
+		}	
+	
+		.logout{
+			position: absolute;
+			z-index: 10;
+			top: 10px;
+			right: 10px;
+			font-size: 18px;
+		}
+	}
+
