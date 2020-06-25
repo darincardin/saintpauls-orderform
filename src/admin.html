@@ -4,11 +4,35 @@
 		<meta charset="utf-8">
 		<title>Admin</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<style>
+				
+		html, body, #app{ margin:0;height:100%; }
+
+		.loader {
+
+			position: relative;
+			width: 32px;
+			margin: auto;
+			height: 50%;	
+		}
+
+		.loader img {	
+			position: absolute;
+			bottom: -16px;
+			height: 32px;
+			width: 32px;		
+		}
+
+		</style>
 	</head>
 	<body>
-		<div id="app" ></div>
-	    <div id="progress-barxxx" ></div>
-		<div id="modalxxx" ></div>
+		<div id="app" >
+			<div class="loader">
+				<img  src="preloader.gif" />
+			</div>			
+		</div>
+	    <div id="progress-bar" ></div>
+		<div id="modal" ></div>
 		
 		<script type="text/javascript" src="admin.js"></script>
 

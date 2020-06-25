@@ -42,7 +42,7 @@
 	}
 	
 	
-	main>div{
+	main>div:nth-child(2){
 		vertical-align: top;
 		position: relative;
 		opacity: 1;
@@ -50,6 +50,7 @@
 		margin-right: auto;
 		max-width: 700px;				
 		display: block;		
+		z-index: 3;
 	}	
 	
 	
@@ -71,7 +72,7 @@
 
 	.bg{
 		background-repeat: no-repeat;
-		position: fixed;
+		position: absolute;
 		top: 0;
 		bottom: 0;
 		left: 0;
@@ -80,8 +81,8 @@
 	}
 			
 	.bg img{
-		width: 100%; 
-		opacity:0;
+		width: 100%;
+		opacity: 0;
 		height: inherit;
 		transition: opacity 1s;
 	}

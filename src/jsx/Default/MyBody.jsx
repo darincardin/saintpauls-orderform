@@ -14,8 +14,9 @@ var MyBody = ({ showProgress}) => {
 		
 		<div>
 			<Header />
-			<Background />
-			<main>			
+			
+			<main>		
+				<Background />			
 				<ErrorBoundary  FallbackComponent={<Error />}  >
 					<Router>
 						<div>

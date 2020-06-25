@@ -10,6 +10,7 @@ class Update extends React.Component {
 
 
 	inputs = [ 
+		{label:"ID", name:"id",  tag:"label"},
 		{label:"First Name", name:"fName",  tag:"text",  required:true},
 		{label:"Last Name",  name:"lName",  tag:"text",  required:true},
 		{label:"Quantity",   name:"quantity", tag:"number",  required:true},
@@ -29,7 +30,8 @@ class Update extends React.Component {
 	}
 	
 	close = ()=>{
-		this.props.setSelected(null);
+		debugger;
+		this.props.close({});
 	}
 	
 	render = () => {
@@ -37,14 +39,14 @@ class Update extends React.Component {
 		var html = (
 			<Modal show={this.props.selected != null} close={this.close}>
 				<div>
-				{
+				{this.props.selected &&
 					<Form object={this.props.selected} onSuccess={this.save} inputs={this.inputs}  >
 						<div className="modal-footer text-right">
 							<button type="button" onClick={this.close} className="btn btn-default">Cancel</button> &nbsp;
 							<button type="submit"  className="btn btn-primary">Update</button> 
 						</div>
 					</Form>
-				}			
+				}
 				</div>
 			</Modal>
 		)
