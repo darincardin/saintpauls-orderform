@@ -6,9 +6,15 @@ import { connect } from 'react-redux'
 import {ProgressBar} from '/jsx/common';
 import {actions} from '/js/actions.js';
 
+import OrderAPI, {Order} from '/js/orderAPI.js';
+
 class Update extends React.Component {
 
-
+	constructor(props){
+		super(props)
+		this.elem = React.createRef();
+	}
+	
 	inputs = [ 
 		{label:"ID", name:"id",  tag:"label"},
 		{label:"First Name", name:"fName",  tag:"text",  required:true},
@@ -18,36 +24,45 @@ class Update extends React.Component {
 		{label:"Address",    name:"address", tag:"text"},
 	]
 
+
+	shouldComponentUpdate(props){
+		return props.selected.id? true:false;
+	}
+
+
 	save = (obj)=>{
 		
 		this.props.progress.show();
-
-		this.props.actions.update(obj).then(()=>{
+	
+		OrderAPI.update(obj).then(()=>{
 			this.close()
 			window.dispatchEvent( new Event('resize') );
 		})
-		.finally( this.props.progress.hide )		
+		.finally( this.props.progress.hide )	
+		
 	}
 	
 	close = ()=>{
-		debugger;
-		this.props.close({});
+	    this.props.clearSelect( ()=>{
+			this.elem.current.close();
+		})
 	}
 	
-	render = () => {
 
+	
+	render = () => {
+	
+		if(this.props.selected.id)	this.elem?.current?.open();
+			
+			
 		var html = (
-			<Modal show={this.props.selected != null} close={this.close}>
-				<div>
-				{this.props.selected &&
+			<Modal ref={this.elem} show={true} close={this.close}>
 					<Form object={this.props.selected} onSuccess={this.save} inputs={this.inputs}  >
 						<div className="modal-footer text-right">
 							<button type="button" onClick={this.close} className="btn btn-default">Cancel</button> &nbsp;
 							<button type="submit"  className="btn btn-primary">Update</button> 
 						</div>
 					</Form>
-				}
-				</div>
 			</Modal>
 		)
 		return (ReactDOM.createPortal(html, document.getElementById('modal')))
@@ -62,5 +77,5 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, getState) => ({
 	actions: actions(dispatch, getState)
 })
-
-export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(Update));
+export default ProgressBar(Update);
+//export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(Update));

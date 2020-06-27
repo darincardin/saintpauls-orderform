@@ -8,8 +8,8 @@ import OrderAPI from '/js/orderAPI.js';
 
 class Admin extends React.Component {
 
-	state = { data:[], selected:{id:'', fName:'', lName:'', quantity:'', phone:'', address:''}}
-	
+	state = { data:[], selected:{}}
+	//state = { data:[], selected:{id:'1', fName:'AAA', lName:'bbb', quantity:'1', phone:'', address:''}}
 	labels = [
 		{name:'ID',id:'id'},
 		{name:'First Name',id:'fName'},
@@ -21,6 +21,7 @@ class Admin extends React.Component {
 	
 	getData = (page, sort, amount)=>{
 		return OrderAPI.list(page, sort, amount).then(res=>{
+	
 			this.setState({ data:res.data })
 			return res;
 		})
@@ -32,24 +33,24 @@ class Admin extends React.Component {
 	}
 	
 	setSelected = (selected) => {
-		debugger;
+	
 		this.setState({selected: selected})	
 	}
 	
-	clearSelect = ()=>{
-		//this.setState({selected:{id:'', fName:'', lName:'', quantity:'', phone:'', address:''}})
-		this.setState({selected:null})
+	clearSelect = (f)=>{
+	
+		
+		this.setState({selected:{}}, f)
 	}
 
 	onEdit = obj =>{
-		obj.fName = "David"
 		return OrderAPI.update(obj)
 	}
 	
 	onDelete = obj =>{
-		
-		if(confirm(`Delete order ${obj.id}?`))
+		if(confirm(`Delete order ${obj.id}?`)) {		
 			return OrderAPI.delete(obj.id)
+		}		
 	}
 	
 
@@ -64,12 +65,11 @@ class Admin extends React.Component {
 					<Background />	
 					<ErrorBoundary  FallbackComponent={<Error />} >
 
-						<List  labels={this.labels}  data={this.state.data} getData={this.getData}   >	
-								<a onClick={this.setSelected}>Edit</a> |  <a onClick={this.onDelete}>Delete</a> 
+						<List labels={this.labels} data={this.state.data} getData={this.getData}   >	
+							<a onClick={this.setSelected}>Edit</a> |  <a onClick={this.onDelete}>Delete</a> 
 						</List>
-			
-						<Update selected={this.state.selected} close={this.clearSelect} />
-					
+						
+						<Update selected={this.state.selected} clearSelect={this.clearSelect} />
 					</ErrorBoundary>
 				</main>	
 				<Footer />
@@ -80,12 +80,3 @@ class Admin extends React.Component {
 
 export default Admin;
 
-/*
-
-
-
-*/
-
-// 	<Background /> ProgressBar
-	//<Update selected={this.state.selected} setSelected={this.setSelected} />	
-//

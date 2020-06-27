@@ -3,7 +3,25 @@ var url = 'http://api.darincardin.com';
 //var url = "";
 
 
-export default class OrderAPI {
+class Order {
+	
+	constructor(o){
+		Object.assign(this, o);	
+	}
+	
+	
+	static toArray(arr){
+		return arr.map(i=>new Order(i));
+	}
+	
+	
+	equals(o){
+		return (o != null & this.id == o.id);
+	}
+}
+
+
+ class OrderAPI {
 	
 
 	static list(page, sort, amount){	
@@ -48,7 +66,12 @@ export default class OrderAPI {
 		
 		if(data) opts.body = JSON.stringify(data)
 		
-		return fetch(url, opts).then(res => res.json()).catch( err =>{
+		return fetch(url, opts).then(res => res.json()).then(res=>{
+
+			if(res?.data?.length != undefined)res.data = Order.toArray(res.data)
+
+			return res;
+		}).catch( err =>{
 			alert('An error occurred. Please try again later.')	
 			throw err;
 		})	
@@ -63,3 +86,5 @@ export default class OrderAPI {
 
 
 
+export  {Order};
+export default OrderAPI;

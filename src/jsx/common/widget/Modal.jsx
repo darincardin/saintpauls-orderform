@@ -13,6 +13,12 @@ class Modal extends React.Component{
 	
 	}
 
+	xxxshouldComponentUpdate(a,b,c,d,e){
+		debugger
+		console.log('shouldComponentUpdate')
+		return true;
+	}
+
 	componentWillReceiveProps(props,a,b,c) {
 	
 	}
@@ -26,13 +32,12 @@ class Modal extends React.Component{
 	}
 
 	close = () =>{
-		if(this.props.close) this.props.close();
 		this.elem.modal('hide');	
 	}
 	
     render() {
 
-		if(this.elem) this.props.show ? this.open() : this.close()
+	//	if(this.elem) this.props.show ? this.open() : this.close()
 		
 		return (
 		
@@ -40,7 +45,7 @@ class Modal extends React.Component{
 			<div className="modal-dialog">
 				<div className="modal-content">
 					<div className="modal-header">
-						<button type="button" className="close" onClick={ this.close } aria-hidden="true">X</button>
+						<button type="button" className="close" onClick={ this.props.close } aria-hidden="true">X</button>
 						<h4 className="modal-title" id="myModalLabel">Edit</h4>
 					</div>
 					<div className="modal-body">
@@ -54,12 +59,3 @@ class Modal extends React.Component{
 	}
 }
 export default Modal;
-
-/*
-
-					<div className="modal-footer text-right">
-						<button type="button" onClick={this.close} className="btn btn-default">Cancel</button> &nbsp;
-						<button type="submit"  className="btn btn-primary">Update</button> 
-					</div>
-*/
-//$('#basicModal').modal('show');
