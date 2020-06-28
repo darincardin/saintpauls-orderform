@@ -6,33 +6,51 @@ import {BrowserRouter as Router, Switch, Redirect,Route, Link, withRouter} from 
 
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 import {Page1, Page2, Page3} from '/jsx/Default/Pages/';
+import {Order} from '/js/orderAPI.js';
 
+class MyBody extends React.Component {
 
-var MyBody = ({ showProgress}) => {
+	state = {order: new Order()}
+	
 
-	return (
-		
-		<div>
-			<Header />
+	update = obj =>{
+		this.setState({order: obj})	
+	}
+	
+	render() {
+		return (
 			
-			<main>		
-				<Background />			
-				<ErrorBoundary  FallbackComponent={<Error />}  >
-					<Router>
-						<div>
-							<Switch>
-								<Route path="/page1" component={Page1} />
-								<Route path="/page2" component={Page2} />
-								<Route path="/page3" component={Page3} />
-								<Redirect from="/" to="/page1" />	
-							</Switch>
-						</div>
-					</Router>
-				</ErrorBoundary >
-			</main>	
-			<Footer />
-		</div>
-	);
+			<div>
+				<Header />
+				
+				<main>		
+					<Background />			
+					<ErrorBoundary  FallbackComponent={<Error />}  >
+						<Router>
+							<div>
+								<Switch>
+									<Route path="/page1"  >
+										<Page1 order={this.state.order} update={this.update}/>
+									</Route>
+									
+									<Route path="/page2"  >
+										<Page2 order={this.state.order} update={this.update}/>
+									</Route>
+									
+									<Route path="/page3"  >
+										<Page3 order={this.state.order} update={this.update} />
+									</Route>
+									
+									<Redirect from="/" to="/page1" />	
+								</Switch>
+							</div>
+						</Router>
+					</ErrorBoundary >
+				</main>	
+				<Footer />
+			</div>
+		);
+	}
 }
 
 

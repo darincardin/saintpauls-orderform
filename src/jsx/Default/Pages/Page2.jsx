@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux'
+//import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-router-dom";
-import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
-import {actions} from '/js/actions.js';
+import { ProgressBar, Error, Background} from '/jsx/common';
+//import {actions} from '/js/actions.js';
 
 import OrderAPI from '/js/orderAPI.js';
 
@@ -15,23 +15,22 @@ class Page2 extends React.Component {
 	}
 
 	data = [
-		{label: "First Name", value: this.props.order.fName },
-		{label: "Last Name", value: this.props.order.lName },
-		{label: "Quantity", value: this.props.order.quantity },
-		{label: "Phone", value: this.props.order.phone },
-		{label: "Address", value: this.props.order.address }
+		{name:'fName', label: "First Name" },
+		{name:'lName', label: "Last Name" },
+		{name:'quantity', label: "Quantity" },
+		{name:'phone', label: "Phone" },
+		{name:'address', label: "Address" }	
 	]
 
 	submitHandler = () => {
 		
 		this.props.progress.show();
 		
-		this.props.actions.create(this.props.order).then(res =>{
+		OrderAPI.create(this.props.order).then(res =>{
+			this.props.update(res);
 			this.props.history.push('/page3')
 		})
-		.finally(
-			this.props.progress.hide
-		)
+		.finally( this.props.progress.hide )
 	}
 
     render() {
@@ -45,7 +44,7 @@ class Page2 extends React.Component {
 								{this.data.map(i=>(
 									<tr> 
 										<td><label className='control-label' htmlFor='inputSuccess4'>{i.label}</label></td>
-										<td>{i.value}</td>
+										<td>{ this.props.order[i.name]}</td>
 									</tr>
 								))}
 								</tbody>
@@ -62,7 +61,9 @@ class Page2 extends React.Component {
 		)
 	}
 }
-
+export default withRouter(ProgressBar(Page2));
+	
+/*
 const mapStateToProps = (state, ownProps) => {
 	return{ order: state.order, props: ownProps }
 }
@@ -75,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default withRouter(connect( mapStateToProps,  mapDispatchToProps)(ProgressBar(Page2)));
 		
-
+*/

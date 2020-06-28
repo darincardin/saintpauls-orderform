@@ -37,10 +37,10 @@ class Admin extends React.Component {
 		this.setState({selected: selected})	
 	}
 	
-	clearSelect = (f)=>{
+	clearSelect = callback=>{
 	
 		
-		this.setState({selected:{}}, f)
+		this.setState({selected:{}}, callback)
 	}
 
 	onEdit = obj =>{

@@ -5,8 +5,17 @@ var url = 'http://api.darincardin.com';
 
 class Order {
 	
+	id="";
+	fName="";
+	lName="";
+	quantity="";
+	phone="";
+	address="";
+	
+	
 	constructor(o){
-		Object.assign(this, o);	
+		
+		if(o) Object.assign(this, o);	
 	}
 	
 	

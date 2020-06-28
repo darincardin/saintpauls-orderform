@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 var ProgressBar = (WrappedComponent) => {
 	class Overlay extends React.Component {
@@ -22,20 +23,35 @@ var ProgressBar = (WrappedComponent) => {
 			}
 		}			
 		  
+		  
+
 		render() {
-			return(
-				<> 
+			
+			var html = (
 					<div className={`order-progress ${this.state.show?"show":"hide"}`} > 
 						<div>
 							<div {...this.attribs} >Processing...</div>
 						</div>
 					</div>  
-					<WrappedComponent {...this.props} progress={this.functions} /> 
+			)	
+			
+			return(
+				<> 
+					{ReactDOM.createPortal(html, document.getElementsByTagName('body')[0]   )   }
+					 <WrappedComponent {...this.props} progress={this.functions} /> 
 				</>
-		)}	
+				)
+		}	
 	}
     
 	return Overlay;
 };
 
-export default ProgressBar;
+export default ProgressBar;			
+			/*
+			return(
+				<> 
+				  (ReactDOM.createPortal(html, document.getElementById('progress-bar')))
+				  <WrappedComponent {...this.props} progress={this.functions} /> 
+				</>
+				*/

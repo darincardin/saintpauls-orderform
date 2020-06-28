@@ -24,16 +24,14 @@ class Update extends React.Component {
 		{label:"Address",    name:"address", tag:"text"},
 	]
 
-
 	shouldComponentUpdate(props){
 		return props.selected.id? true:false;
 	}
 
 
 	save = (obj)=>{
-		
-		this.props.progress.show();
-	
+		this.props.progress.show();	
+
 		OrderAPI.update(obj).then(()=>{
 			this.close()
 			window.dispatchEvent( new Event('resize') );
@@ -48,13 +46,10 @@ class Update extends React.Component {
 		})
 	}
 	
-
-	
 	render = () => {
 	
-		if(this.props.selected.id)	this.elem?.current?.open();
-			
-			
+		if(this.props.selected.id)	this.elem?.current?.open();		
+		
 		var html = (
 			<Modal ref={this.elem} show={true} close={this.close}>
 					<Form object={this.props.selected} onSuccess={this.save} inputs={this.inputs}  >
@@ -65,7 +60,7 @@ class Update extends React.Component {
 					</Form>
 			</Modal>
 		)
-		return (ReactDOM.createPortal(html, document.getElementById('modal')))
+		return (ReactDOM.createPortal(html, document.getElementsByTagName('body')  [0] ))
 	}
 }
 
