@@ -8,13 +8,14 @@ class Order {
 	id="";
 	fName="";
 	lName="";
-	quantity="";
 	phone="";
-	address="";
 	
+	quantity="";
+	deliver = false;
+	address="";
+	time=""
 	
 	constructor(o){
-		
 		if(o) Object.assign(this, o);	
 	}
 	
@@ -34,21 +35,21 @@ class Order {
 	
 
 	static list(page, sort, amount){	
-		return OrderAPI.get(`${url}/php/orders/list.php?amount=${amount}&page=${page}&sortBy=${sort.by}&sortDir=${sort.dir}`);
+		return OrderAPI.get(`${url}/php/orders/controllers/list.php?amount=${amount}&page=${page}&sortBy=${sort.by}&sortDir=${sort.dir}`);
 	}
 
 	static create(data){
-		return OrderAPI.post(`${url}/php/orders/create.php`, data).then(id =>{   
+		return OrderAPI.post(`${url}/php/orders/controllers/create.php`, data).then(id =>{   
 			return {...data, id}
 		})
 	}	
 	
 	static update(data){
-		return OrderAPI.post(`${url}/php/orders/update.php?id=${data.id}`, data);	
+		return OrderAPI.post(`${url}/php/orders/controllers/update.php?id=${data.id}`, data);	
 	}	
 
 	static delete(id){
-		return OrderAPI.get(`${url}/php/orders/delete.php?id=${id}`);
+		return OrderAPI.get(`${url}/php/orders/controllers/delete.php?id=${id}`);
 	}
 	
 	static login(data){

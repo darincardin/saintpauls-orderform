@@ -8,46 +8,12 @@ import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 import {Page1, Page2, Page3} from '/jsx/Default/Pages/';
 import {Order} from '/js/orderAPI.js';
 
-import { AnimatedSwitch } from 'react-router-transition';
+
 
 var obj =  {fName:"Becky", lName:"Lee", quantity:"2", phone:"222-333-4444"}
 
 
-import { spring, AnimatedRoute } from 'react-router-transition';
 
-//import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-/*
-function bounce(val) {
-  return spring(val, {
-    stiffness: 330,
-    damping: 22,
-  });
-}
-
-const bounceTransition = {
-  atEnter: { opacity: 0, scale: 1.2 },
-  atLeave: { opacity: bounce(0),  scale: bounce(0.8) },
-  atActive: { opacity: bounce(1),  scale: bounce(1)},
-};
-
-										atEnter={bounceTransition.atEnter}
-										atLeave={bounceTransition.atLeave}
-										atActive={bounceTransition.atActive}
-*/
-
-
-
-
-function mapStyles(styles) {
-	console.log(styles)
-  return {
-    opacity: .5,
-   //transform: `scale(${styles.scale})`,
-  };
-}
-
-//	mapStyles={mapStyles}
 
 class MyBody extends React.Component {
 
@@ -61,35 +27,36 @@ class MyBody extends React.Component {
 		return (
 			
 			<div>
-				<Header />
-				
-				<main>		
-					<Background />			
-					<ErrorBoundary  FallbackComponent={<Error />}  >
+				<Router>
+					<Header login={true} />
+					
+					<main>		
+						<Background />			
+						<ErrorBoundary  FallbackComponent={<Error />}  >
 
-								
-								  <Router>
-									<Switch >
+									
+									  
+										<Switch >
+											<Route path="/page1"  >
+												<Page1 order={this.state.order} update={this.update}/>
+											</Route>
+											
+											<Route path="/page2"  >
+												<Page2 order={this.state.order} update={this.update}/>
+											</Route>
+											
+											<Route path="/page3"  >
+												<Page3 order={this.state.order} update={this.update} />
+											</Route>
+											
+											<Redirect from="/" to="/page1" />	
+										</Switch>
+									
 
-										<Route path="/page1"  >
-											<Page1 order={this.state.order} update={this.update}/>
-										</Route>
-										
-										<Route path="/page2"  >
-											<Page2 order={this.state.order} update={this.update}/>
-										</Route>
-										
-										<Route path="/page3"  >
-											<Page3 order={this.state.order} update={this.update} />
-										</Route>
-										
-										<Redirect from="/" to="/page1" />	
-									</Switch>
-								  </Router>
-
-					</ErrorBoundary >
-				</main>	
-				<Footer />
+						</ErrorBoundary >
+					</main>	
+					<Footer />
+				 </Router>
 			</div>
 		);
 	}
@@ -97,20 +64,7 @@ class MyBody extends React.Component {
 
 
 export default (MyBody);
-	/*
 	
 	
-									<Route path="/page1"  >
-										<Page1 order={this.state.order} update={this.update}/>
-									</Route>
-									
-									<Route path="/page2"  >
-										<Page2 order={this.state.order} update={this.update}/>
-									</Route>
-									
-									<Route path="/page3"  >
-										<Page3 order={this.state.order} update={this.update} />
-									</Route>
-									
-									<Redirect from="/" to="/page1" />	
-	*/
+	
+	

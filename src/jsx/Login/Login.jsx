@@ -18,7 +18,8 @@ class Login extends React.Component{
 		OrderAPI.login(this.state).then(res =>{ 	
 			if(res.success) window.location.href = '/admin.html';
 			else {
-				this.props.progressbar.show(); 
+	
+				this.props.progress.hide(); 
 				alert("Login was unsuccessful.");
 			}
 		})
@@ -36,24 +37,26 @@ class Login extends React.Component{
 				<Background />
 				<main >
 				<div className="login">
-					<h2>Login Demo</h2>
-					<h3>* use any password to login</h3>
+					
+				
 					<div className="panel panel-default">
 						<div className="panel-body">
-							<table>
-								<tbody>
-									<tr>
-										<td><label className="control-label">Username</label></td>
-										<td> <input type="text"  name="username" onKeyUp={this.change} className="form-control" /> </td>
-									</tr>
-									<tr>
-										<td><label className="control-label">Password</label></td>
-										<td> <input type="password"  name="password" onKeyUp={this.change} className="form-control"/> </td>
-									</tr>
-								</tbody>
-							</table>	
-							<hr/>
-							<div className="text-right">
+						
+							<h2>Login Demo</h2>
+								<sub>(use any username/password)</sub>
+								<br />
+								<div className="input-group">
+									<span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
+									<input  type="text" className="form-control" name="username" placeholder="User" onKeyUp={this.change} />
+								</div>		
+								<div className="spacer"/>
+								<div className="input-group">
+									<span className="input-group-addon"><i className="glyphicon glyphicon-lock"></i></span>
+									<input type="password" className="form-control" name="password" placeholder="Password" onKeyUp={this.change} />
+								</div>		
+		
+							<br />
+							<div className="text-left">
 								<input type="submit" value="Login"  onClick={this.submit} className="btn btn-primary" /> 
 							</div>
 							

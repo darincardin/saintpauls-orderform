@@ -50,6 +50,7 @@
     "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.2.0",
     "react-router-transition": "^2.0.0",
+    "reactstrap": "^8.5.1",
     "tokenizer": "darincardin/tokenizer",
     "underscore": "latest",
     "webpack": "^4.0.0 || ^5.0.0",

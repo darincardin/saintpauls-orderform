@@ -15,14 +15,29 @@ class Update extends React.Component {
 		this.elem = React.createRef();
 	}
 	
-	inputs = [ 
+
+	fields = [ 
+		{label:"Personal Info",  tag:"header"  },
 		{label:"ID", name:"id",  tag:"label"},
 		{label:"First Name", name:"fName",  tag:"text",  required:true},
 		{label:"Last Name",  name:"lName",  tag:"text",  required:true},
-		{label:"Quantity",   name:"quantity", tag:"number",  required:true},
 		{label:"Phone",      name:"phone",  tag:"phone",  required:true},
-		{label:"Address",    name:"address", tag:"text"},
-	]
+		
+		{label:"Order Info",  tag:"header"  },
+		{label:"Quantity",   name:"quantity", tag:"number",  required:true},
+		//{label:"Deliver",   name:"deliver", tag:"checkbox",  showIf:{name: "quantity", func:v=>v>5 }},
+		
+		{label:"Address",    name:"address", tag:"text", required:false },
+		
+		/*
+		{label:"Time",       name:"time",    tag:"select",  options: [  
+			{id:"1", label:"10:30 AM"},
+			{id:"2", label:"11:00 AM"},
+			{id:"3", label:"11:30 AM"}
+		]}
+		*/
+	]	
+
 
 	shouldComponentUpdate(props){
 		return props.selected.id? true:false;
@@ -52,7 +67,7 @@ class Update extends React.Component {
 		
 		var html = (
 			<Modal ref={this.elem} show={true} close={this.close}>
-					<Form object={this.props.selected} onSuccess={this.save} inputs={this.inputs}  >
+					<Form object={this.props.selected} onSuccess={this.save} fields={this.fields}  >
 						<div className="modal-footer text-right">
 							<button type="button" onClick={this.close} className="btn btn-default">Cancel</button> &nbsp;
 							<button type="submit"  className="btn btn-primary">Update</button> 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ErrorBoundary from 'react-error-boundary';
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
+import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 import List from 'list';
 import Update from '/jsx/Admin/Update/Update.jsx';
 import OrderAPI from '/js/orderAPI.js';
@@ -24,6 +25,8 @@ class Admin extends React.Component {
 	
 			this.setState({ data:res.data })
 			return res;
+		}).catch(e =>{
+			//window.location.href = '/login.html';
 		})
 	}
 
@@ -60,7 +63,8 @@ class Admin extends React.Component {
 		
 		return (	
 			<>
-				<Header showLogout={true}/>	
+				<Router>
+				<Header logout={true}/>	
 				<main>	
 					<Background />	
 					<ErrorBoundary  FallbackComponent={<Error />} >
@@ -73,6 +77,7 @@ class Admin extends React.Component {
 					</ErrorBoundary>
 				</main>	
 				<Footer />
+				</Router>
 			</>
 		);	
 	}

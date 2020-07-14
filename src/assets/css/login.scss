@@ -3,10 +3,27 @@
     	
 	
 	.login{
-		max-width: 400px;		
+		sub {
+			color:gray;
+			font-size:16px;
+			display:block;
+		}
+		
+		max-width: 350px;	
+		margin: 20px auto;		
+		
+		h2{
+			margin:5px;
+		}
+		.spacer {
+			height: 10px;
+		}
+		
+		table td{
+			padding: 5px 5px;
+		}
+
 	}	
 	
+	  
 	
-	table td:first-child{
-		    width: 33%;
-	}

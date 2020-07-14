@@ -1,8 +1,5 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -16,7 +13,7 @@ import {createStore} from 'redux'
 import reducer from '/js/reducer.js'
 
 import '/assets/css/index.scss';
-import '/assets/css/progress.scss';
+
 
 
 

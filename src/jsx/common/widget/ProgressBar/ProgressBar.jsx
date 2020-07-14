@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
+import './styles.scss';
+
 var ProgressBar = (WrappedComponent) => {
-	class Overlay extends React.Component {
+	class Widget extends React.Component {
 		  
 		state = {show:false}  
 		  
@@ -44,14 +47,7 @@ var ProgressBar = (WrappedComponent) => {
 		}	
 	}
     
-	return Overlay;
+	return Widget;
 };
 
 export default ProgressBar;			
-			/*
-			return(
-				<> 
-				  (ReactDOM.createPortal(html, document.getElementById('progress-bar')))
-				  <WrappedComponent {...this.props} progress={this.functions} /> 
-				</>
-				*/

@@ -8,11 +8,20 @@
 	    overflow:hidden;
 		color:white;
 		
+		.controls {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 20px;
+			font-size: 23px;
+			text-decoration: underline;
+		}
+		
 		a{
 			
-			max-width: 300px;
-			height: 55px;
-			margin-top: 10px;
+			xxmax-width: 300px;
+			xxxheight: 55px;
+			xxmargin-top: 10px;
 		}	
 	
 		.logout{
