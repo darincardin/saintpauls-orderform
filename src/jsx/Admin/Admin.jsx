@@ -4,25 +4,17 @@ import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 import List from 'list';
 import Update from '/jsx/Admin/Update/Update.jsx';
-import OrderAPI from '/js/orderAPI.js';
+import OrderAPI, {Order} from '/js/orderAPI.js';
+
+import { connect, actions } from 'reducer'
 
 
 class Admin extends React.Component {
 
-	state = { data:[], selected:{}}
-	//state = { data:[], selected:{id:'1', fName:'AAA', lName:'bbb', quantity:'1', phone:'', address:''}}
-	labels = [
-		{name:'ID',id:'id'},
-		{name:'First Name',id:'fName'},
-		{name:'Last Name',id:'lName'},
-		{name:'Qty',id:'quantity'},
-		{name:'Phone',id:'phone'},
-		{name:'Address',id:'address'}
-	]
+	state = { data:[] }
 	
 	getData = (page, sort, amount)=>{
 		return OrderAPI.list(page, sort, amount).then(res=>{
-	
 			this.setState({ data:res.data })
 			return res;
 		}).catch(e =>{
@@ -31,19 +23,17 @@ class Admin extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState){
-		return true;
-		//return !_.isEqual(this.state.selected, nextState.selected);		
+		return true;	
 	}
 	
-	setSelected = (selected) => {
-	
-		this.setState({selected: selected})	
+	setSelected = order => {
+		this.props.actions.setOrder(order)
 	}
 	
 	clearSelect = callback=>{
-	
 		
-		this.setState({selected:{}}, callback)
+		this.props.actions.setOrder(new Order())
+		callback()
 	}
 
 	onEdit = obj =>{
@@ -55,12 +45,8 @@ class Admin extends React.Component {
 			return OrderAPI.delete(obj.id)
 		}		
 	}
-	
-
-	
-	
-	render = () => {
 		
+	render = () => {
 		return (	
 			<>
 				<Router>
@@ -69,11 +55,11 @@ class Admin extends React.Component {
 					<Background />	
 					<ErrorBoundary  FallbackComponent={<Error />} >
 
-						<List labels={this.labels} data={this.state.data} getData={this.getData}   >	
-							<a onClick={this.setSelected}>Edit</a> |  <a onClick={this.onDelete}>Delete</a> 
+						<List labels={Order.display.columns} data={this.state.data} getData={this.getData}  >	
+							<a onClick={this.setSelected}>Edit</a>&nbsp;|&nbsp;<a onClick={this.onDelete}>Delete</a> 
 						</List>
 						
-						<Update selected={this.state.selected} clearSelect={this.clearSelect} />
+						<Update />
 					</ErrorBoundary>
 				</main>	
 				<Footer />
@@ -83,5 +69,16 @@ class Admin extends React.Component {
 	}
 }
 
-export default Admin;
+
+const mapStateToProps = (state, ownProps) => {
+	return{  }  
+}
+
+
+const mapDispatchToProps = (dispatch, getState) => ({
+	actions: actions(dispatch, getState)
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin) ;
 

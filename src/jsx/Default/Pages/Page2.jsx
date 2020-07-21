@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-//import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch,  Route,Link, withRouter} from "react-router-dom";
 import { ProgressBar, Error, Background} from '/jsx/common';
-//import {actions} from '/js/actions.js';
+import {connect, actions} from 'reducer'
 
 import OrderAPI from '/js/orderAPI.js';
 
@@ -27,7 +26,7 @@ class Page2 extends React.Component {
 		this.props.progress.show();
 		
 		OrderAPI.create(this.props.order).then(res =>{
-			this.props.update(res);
+			this.props.actions.setOrder(res);
 			this.props.history.push('/page3')
 		})
 		.finally( this.props.progress.hide )
@@ -61,19 +60,16 @@ class Page2 extends React.Component {
 		)
 	}
 }
-export default withRouter(ProgressBar(Page2));
+
 	
-/*
 const mapStateToProps = (state, ownProps) => {
-	return{ order: state.order, props: ownProps }
+	return { order: state.order }
 }
 
-const mapDispatchToProps = (dispatch) => {	
-	return { 
-		actions: actions(dispatch)
-	}		
-}
+const mapDispatchToProps = (dispatch) => ({
+	actions: actions(dispatch)
+})
 
-export default withRouter(connect( mapStateToProps,  mapDispatchToProps)(ProgressBar(Page2)));
-		
-*/
+export default ProgressBar(withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page2)));
+	
+	

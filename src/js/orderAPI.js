@@ -26,8 +26,42 @@ class Order {
 	
 	
 	equals(o){
-		return (o != null & this.id == o.id);
+		return (o != null && this.id == o.id);
 	}
+	
+	static display = {
+		columns: [
+			{name:'ID', id:'id'},
+			{name:'First Name', id:'fName'},
+			{name:'Last Name', id:'lName'},
+			{name:'Qty', id:'quantity'},
+			{name:'Phone', id:'phone'},
+			{name:'Address', id:'address'}
+		],
+		inputs: [ 
+			{label:"Personal Info", name:"personal-info",  tag:"header"  },
+			{label:"First Name", name:"fName",  tag:"text",  required:true},
+			{label:"Last Name",  name:"lName",  tag:"text",  required:true},
+			{label:"Phone",      name:"phone",  tag:"phone",  required:true},
+			
+			{label:"Order Info", name:"order-info", tag:"header"  },
+			{label:"Quantity",   name:"quantity", tag:"number",  required:true},
+			//{label:"Deliver",   name:"deliver", tag:"checkbox",  showIf:{name: "quantity", func:v=>v>5 }},
+			
+			{label:"Address",    name:"address", tag:"text", required:false },
+			
+			/*
+			{label:"Time",       name:"time",    tag:"select",  options: [  
+				{id:"1", label:"10:30 AM"},
+				{id:"2", label:"11:00 AM"},
+				{id:"3", label:"11:30 AM"}
+			]}
+			*/
+		]
+		
+	}
+
+	
 }
 
 

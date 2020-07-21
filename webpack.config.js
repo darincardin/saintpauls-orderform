@@ -30,6 +30,7 @@ module.exports = (env) => {
 		   "/js": path.resolve(__dirname, 'src/js/'),
 		   "/jsx": path.resolve(__dirname, 'src/jsx/'),
 		   "/assets": path.resolve(__dirname, 'src/assets/'),
+		   "reducer": path.resolve(__dirname, 'src/js/reducer'),
 		   '$': "jquery"
 		},
 		extensions: ['*','.js','.jsx']

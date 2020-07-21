@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from 'form';
-import Modal from '/jsx/common/widget/Modal.jsx';
-import { connect } from 'react-redux'
-import {ProgressBar} from '/jsx/common';
-import {actions} from '/js/actions.js';
+
+import {connect, actions} from 'reducer'
+import {ProgressBar, Modal} from '/jsx/common';
 
 import OrderAPI, {Order} from '/js/orderAPI.js';
 
@@ -15,55 +14,31 @@ class Update extends React.Component {
 		this.elem = React.createRef();
 	}
 	
-
-	fields = [ 
-		{label:"Personal Info",  tag:"header"  },
-		{label:"ID", name:"id",  tag:"label"},
-		{label:"First Name", name:"fName",  tag:"text",  required:true},
-		{label:"Last Name",  name:"lName",  tag:"text",  required:true},
-		{label:"Phone",      name:"phone",  tag:"phone",  required:true},
-		
-		{label:"Order Info",  tag:"header"  },
-		{label:"Quantity",   name:"quantity", tag:"number",  required:true},
-		//{label:"Deliver",   name:"deliver", tag:"checkbox",  showIf:{name: "quantity", func:v=>v>5 }},
-		
-		{label:"Address",    name:"address", tag:"text", required:false },
-		
-		/*
-		{label:"Time",       name:"time",    tag:"select",  options: [  
-			{id:"1", label:"10:30 AM"},
-			{id:"2", label:"11:00 AM"},
-			{id:"3", label:"11:30 AM"}
-		]}
-		*/
-	]	
-
-
+	fields = Order.display.inputs;
+	
+	
 	shouldComponentUpdate(props){
 		return props.selected.id? true:false;
 	}
 
-
 	save = (obj)=>{
 		this.props.progress.show();	
-
+		
 		OrderAPI.update(obj).then(()=>{
 			this.close()
 			window.dispatchEvent( new Event('resize') );
 		})
-		.finally( this.props.progress.hide )	
-		
+		.finally( this.props.progress.hide )		
 	}
 	
 	close = ()=>{
-	    this.props.clearSelect( ()=>{
-			this.elem.current.close();
-		})
+		this.props.actions.setOrder(new Order());
+		this.elem.current.close();
 	}
 	
 	render = () => {
 	
-		if(this.props.selected.id)	this.elem?.current?.open();		
+		if(this.props?.selected?.id)	this.elem?.current?.open();		
 		
 		var html = (
 			<Modal ref={this.elem} show={true} close={this.close}>
@@ -80,12 +55,12 @@ class Update extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return{ data:state.data }  
+	return { selected: state.order }  
 }
 
 
 const mapDispatchToProps = (dispatch, getState) => ({
 	actions: actions(dispatch, getState)
 })
-export default ProgressBar(Update);
-//export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(Update));
+
+export default connect(  mapStateToProps,  mapDispatchToProps)(ProgressBar(Update));

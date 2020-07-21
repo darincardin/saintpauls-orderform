@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
-//import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 import {Order} from '/js/orderAPI.js';
 
-//import {actions} from '/js/actions.js';
+import {connect, actions} from 'reducer'
 
 class Page3 extends React.Component {
 	
@@ -13,7 +12,7 @@ class Page3 extends React.Component {
 		}
 	
 		clear = () =>{
-			this.props.update( new Order() );
+			this.props.actions.setOrder(new Order());
 		}
 	
 	
@@ -53,13 +52,8 @@ class Page3 extends React.Component {
 		}
 }
 
-export default withRouter(Page3);
-
-
-/*
 const mapStateToProps = (state, ownProps) => {
-	
-	return{ order: state.order, props: ownProps }
+	return { order: state.order }
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,4 +62,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default withRouter(connect(  mapStateToProps,  mapDispatchToProps)(Page3));
 
-*/

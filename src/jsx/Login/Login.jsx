@@ -17,11 +17,11 @@ class Login extends React.Component{
 
 		OrderAPI.login(this.state).then(res =>{ 	
 			if(res.success) window.location.href = '/admin.html';
-			else {
-	
-				this.props.progress.hide(); 
-				alert("Login was unsuccessful.");
-			}
+			else throw new Error();
+		})
+		.catch( e=>{
+			this.props.progress.hide(); 
+			alert("Login was unsuccessful.");
 		})
 		
 	}
@@ -70,18 +70,8 @@ class Login extends React.Component{
 			</div>
 	    );
 	}
-
-
-}
-/*
-const mapStateToProps = (state, ownProps) => {	
-	return { showProgress: state.showProgress }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	progressbar:progressbar(dispatch)
-})
-*/
 export default ProgressBar(Login);
 
 
