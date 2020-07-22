@@ -1,7 +1,7 @@
 import React from "react";
 
 
-
+import './styles.scss';
 
 class Background extends React.Component{
 	

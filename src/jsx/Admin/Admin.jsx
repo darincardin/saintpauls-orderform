@@ -48,26 +48,27 @@ class Admin extends React.Component {
 		
 	render = () => {
 		return (	
-			<>
+			<div>
 				<Router>
-				<Header logout={true}/>	
+				<Header title="Admin Panel" logout={true}/>	
 				<main>	
 					<Background />	
 					<ErrorBoundary  FallbackComponent={<Error />} >
-
 						<List labels={Order.display.columns} data={this.state.data} getData={this.getData}  >	
 							<a onClick={this.setSelected}>Edit</a>&nbsp;|&nbsp;<a onClick={this.onDelete}>Delete</a> 
-						</List>
-						
+						</List>					
 						<Update />
 					</ErrorBoundary>
 				</main>	
 				<Footer />
 				</Router>
-			</>
+			</div>
 		);	
 	}
 }
+
+
+
 
 
 const mapStateToProps = (state, ownProps) => {

@@ -33,7 +33,7 @@ class Login extends React.Component{
     render() {
 		return (
 			<div> 
-				<Header />
+				<Header title="Login"/>
 				<Background />
 				<main >
 				<div className="login">

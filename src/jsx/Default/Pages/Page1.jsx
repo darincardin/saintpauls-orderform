@@ -18,16 +18,14 @@ class Page1 extends React.Component {
 		return (
 			<div className="page1" >
 				<div>
-					<h2> Order Form </h2>
-					<div className="panel panel-default">
-						<div className="panel-body">
-							Lobster rolls cost $12.99 and include a bag of chips. Orders can be picked up XX.<br /><br />
+				
+
+							<p>Lobster rolls cost $12.99 and include a bag of chips. Orders can be picked up May 10th at noon.</p>
 							
 							<Form  onSuccess={this.onSuccess} object={this.state.order} fields={Order.display.inputs} >
 								<button type="submit" className="btn btn-primary">Submit</button> 	
 							</Form>			
-						</div>
-					</div>
+				
 				</div>
 			</div>	
 		)

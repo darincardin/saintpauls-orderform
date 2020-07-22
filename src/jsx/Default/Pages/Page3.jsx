@@ -26,9 +26,9 @@ class Page3 extends React.Component {
 		render() { 
 			return (
 				<div className="page3" >
-					<h2>Order Successfull!</h2>
-					<div className="panel panel-default form-horizontal">
-						<div className="panel-body">
+
+					<h3 style={{'font-weight':'600'}}>Order Successful! </h3>
+	
 							<table >  
 								<tbody>
 								{this.data.map(i=>(
@@ -45,8 +45,7 @@ class Page3 extends React.Component {
 									<button type="button" className="btn btn-primary" >Place Another Order</button> 	
 								</Link>
 							</div>
-						</div>
-					</div>
+				
 				</div>
 			)
 		}

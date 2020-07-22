@@ -1,6 +1,6 @@
 import {Order} from '/js/orderAPI.js';
 
-const newState = { order: new Order() }
+const newState = { step:0,  order: new Order() }
 
 const reducer = (state = newState, action) => {
 

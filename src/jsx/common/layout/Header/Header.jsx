@@ -8,7 +8,7 @@ class Header extends React.Component{
 		return (
 			<header>
 				<div>
-					<h1 className="text-center">Placeholder</h1>
+					<h1 className="text-center">{this.props.title}</h1>
 				</div>	
 				<span className="controls">
 					{this.props.login && <a className="login" href="/login.html" >Login</a>  }

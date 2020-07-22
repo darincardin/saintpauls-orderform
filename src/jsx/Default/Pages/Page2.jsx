@@ -35,9 +35,8 @@ class Page2 extends React.Component {
     render() {
 		return (
 				<div className="page2" >
-					<h2>Confirm Order </h2>
-					<div className="panel panel-default form-horizontal">
-						<div className="panel-body">
+					<h3 style={{'font-weight':'600'}}>Confirm Order </h3>
+
 							<table>  
 								<tbody>
 								{this.data.map(i=>(
@@ -54,8 +53,7 @@ class Page2 extends React.Component {
 								&nbsp;
 								<button className="btn btn-primary" type='button' onClick={this.submitHandler} >Confirm</button> 	  
 							</div>
-						</div>
-					</div>
+				
 				</div>		
 		)
 	}

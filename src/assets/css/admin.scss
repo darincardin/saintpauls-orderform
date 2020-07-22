@@ -1,5 +1,22 @@
 
         	
-main>.list {
-    max-width: calc(100% - 20px) !important;
+main {
+
+	min-height: calc(100% - 150px);		
+
+	
+
+	&>.list {
+		margin: 20px 10px 10px 10px;
+		max-width: calc(100% - 20px) !important;
+
+	}
+	
+	@media only screen and (max-width: 550px) {
+		&>.list {
+			xxxmargin: 2px;
+			max-width: calc(100% - 4px) !important;
+		}
+    }
+    
 }
