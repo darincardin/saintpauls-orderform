@@ -1,20 +1,20 @@
 
         	
 main {
+	height: calc(100% - 130px);		
 
-	min-height: calc(100% - 150px);		
-
-	
+	@media only screen and (max-width: 550px) {
+		& { height: calc(100% - 110px);	}
+	}	
 
 	&>.list {
-		margin: 20px 10px 10px 10px;
+		margin: 10px;
 		max-width: calc(100% - 20px) !important;
-
 	}
 	
 	@media only screen and (max-width: 550px) {
 		&>.list {
-			xxxmargin: 2px;
+			margin: 10px 2px;
 			max-width: calc(100% - 4px) !important;
 		}
     }

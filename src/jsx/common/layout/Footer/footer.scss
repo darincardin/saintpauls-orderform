@@ -12,10 +12,14 @@
 		overflow: hidden;	
 		z-index:2;
 		position: relative;	
-		.copyright{
-			color: #BBBBBB;		
-		}	
 		
+		.copyright{	color: #BBBBBB; }	
+		
+		@media only screen and (max-width: 550px) {
+			& {
+				height: 30px;
+			}
+		}
 	}
 
 
