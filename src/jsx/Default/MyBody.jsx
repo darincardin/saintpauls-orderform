@@ -23,9 +23,8 @@ var Main = withRouter( class Main extends React.Component {
 	constructor(props){
 		super(props)
 		
-		this.props.history.listen( loc => {
-			var result = this.map[loc.pathname];		
-			this.setState({step: result})
+		this.props.history.listen( loc => {	
+			this.setState({step: this.map[loc.pathname]})
 		});	
 	}
 	

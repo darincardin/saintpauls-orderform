@@ -8,8 +8,8 @@ class StepBar extends React.Component{
 	
 	
 	array = [
-		{label:"Submit"},
-		{label:"Confirm"},
+		{label:"Customer Info"},
+		{label:"Order Info"},
 		{label:"Done"}
 	]
 	

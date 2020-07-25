@@ -9,14 +9,15 @@ import OrderAPI, {Order} from '/js/orderAPI.js';
 
 class Update extends React.Component {
 
+	fields = [ ...Order.display.inputs.customerInfo, ...Order.display.inputs.orderInfo ]
+
+
+
 	constructor(props){
 		super(props)
 		this.elem = React.createRef();
 	}
-	
-	fields = Order.display.inputs;
-	
-	
+
 	shouldComponentUpdate(props){
 		return props.selected.id? true:false;
 	}
