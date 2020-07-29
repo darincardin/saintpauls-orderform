@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
 import {BrowserRouter as Router, Switch, Redirect,Route, Link, withRouter} from "react-router-dom";
-import {Header, Footer, ProgressBar, Error,StepBar, Background} from '/jsx/common';
-import {Page1, Page2, Page3} from '/jsx/Default/Pages/';
+import {Header, Footer, ProgressBar, Error,  Background} from '/jsx/common';
+import {Page1, Page2, Page3} from '/jsx/Default/Pages';
+
+import StepBar from 'stepbar';
 
 import {Order} from '/js/orderAPI.js';
 
@@ -19,6 +21,11 @@ var Main = withRouter( class Main extends React.Component {
 		'/page3':2
 	}
 	
+	array = [
+		{label:"Customer Info"},
+		{label:"Order Info"},
+		{label:"Done"}
+	]
 	
 	constructor(props){
 		super(props)
@@ -38,7 +45,7 @@ var Main = withRouter( class Main extends React.Component {
 					<div className="panel panel-default">
 							<div className="panel-body">
 											
-								<StepBar step={this.state.step} />
+								<StepBar index={this.state.step} array={this.array}/>
 								<br /><br />
 								<Switch >		
 									<Route path="/page1"  component={Page1} />

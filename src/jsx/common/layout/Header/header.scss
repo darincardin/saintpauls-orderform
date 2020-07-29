@@ -15,16 +15,16 @@
 			margin: 20px;
 			font-size: 23px;
 			text-decoration: underline;
+			
+			@media only screen and (max-width: 550px) {
+				& {	margin:4px;}
+			}				
+			
 		}
 		
-		a{
-			
-			xxmax-width: 300px;
-			xxxheight: 55px;
-			xxmargin-top: 10px;
-		}	
+		
 	
-		.logout{
+		.xxxlogout{
 			position: absolute;
 			z-index: 10;
 			top: 10px;

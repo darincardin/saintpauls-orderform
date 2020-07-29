@@ -50,12 +50,14 @@ class Admin extends React.Component {
 		return (	
 			<div>
 				<Router>
-				<Header title="Admin Panel" logout={true}/>	
+				<Header title="Admin" logout={true}/>	
 				<main>	
 					<Background />	
 					<ErrorBoundary  FallbackComponent={<Error />} >
 						<List labels={Order.display.columns} data={this.state.data} getData={this.getData}  >	
-							<a onClick={this.setSelected}>Edit</a>&nbsp;|&nbsp;<a onClick={this.onDelete}>Delete</a> 
+							<a className="edit" onClick={this.setSelected}>Edit</a>
+							&nbsp;|&nbsp;
+							<a className="delete" onClick={this.onDelete}>Delete</a> 
 						</List>					
 						<Update />
 					</ErrorBoundary>
@@ -67,7 +69,7 @@ class Admin extends React.Component {
 	}
 }
 
-
+//
 
 
 

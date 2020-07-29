@@ -51,7 +51,7 @@
     "react-router-dom": "^5.2.0",
     "react-router-transition": "^2.0.0",
     "reactstrap": "^8.5.1",
-    "tokenizer": "darincardin/tokenizer",
+    "stepbar": "darincardin/stepbar",
     "underscore": "latest",
     "webpack": "^4.0.0 || ^5.0.0",
     "webpack-cli": "^3.3.11",

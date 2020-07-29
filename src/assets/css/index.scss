@@ -11,9 +11,10 @@
 
 
 
-	h2, label, p {
+	h2, label {
 		white-space: nowrap;
 	}
+	
 	
 
 	
@@ -94,6 +95,7 @@
 	}
 		
 
+
 	.label-id{
 		margin-bottom:0;
 	}
@@ -110,7 +112,12 @@
 	    
 	}
 	
-
+	.step-bar {
+		width: 100%;
+		max-width: 400px;
+		margin: auto;
+	
+	}
 	
 	
 	.select-menu{
