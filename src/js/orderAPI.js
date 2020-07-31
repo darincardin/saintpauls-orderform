@@ -43,15 +43,15 @@ class Order {
 		inputs: {
 			id: [{label:"ID", name:"id", tag:'label'}],
 			customerInfo: [ 
-				{label:"Customer Info", name:"customer-info",  tag:"header"  },
-				{label:"First Name", name:"fName",  tag:"text",  required:true},
-				{label:"Last Name",  name:"lName",  tag:"text",  required:true},
-				{label:"Phone",      name:"phone",  tag:"phone",  required:true},
+				{label:"Customer Info", name:"cust-info", tag:"header"  },
+				{label:"First Name",    name:"fName",  	  tag:"text",  required:true},
+				{label:"Last Name",     name:"lName",  	  tag:"text",  required:true},
+				{label:"Phone",         name:"phone",  	  tag:"phone", required:true, format:true}
 			],
 			orderInfo: [ 
 				{label:"Order Info", name:"order-info", 	tag:"header" },
-				{label:"Quantity",   name:"quantity",   	tag:"number",  required:true, showIf:{target: "deliveryMethod", test:v=>v>5 }},
-				{label:"Deliver",    name:"deliveryMethod", tag:"radio", showIf:{target:['address', 'time'], test:true },  options: [
+				{label:"Quantity",   name:"quantity",   	tag:"number", showIf:{target: "deliveryMethod", test:v=>v>5 }, required:true},
+				{label:"Deliver",    name:"deliveryMethod", tag:"radio",  showIf:{target:['address', 'time'], test:true },  options: [
 					{label:"Pickup",  value:false },
 					{label:"Deliver", value:true }
 				]},
@@ -64,10 +64,8 @@ class Order {
 				{label:"Instructions",    name:"instructions",    tag:"textarea" },
 			]
 		}
-	}
-	
+	}	
 }
-
 
  class OrderAPI {
 	
@@ -125,14 +123,6 @@ class Order {
 		})	
 	}
 }
-
-
-
-
-
-
-
-
 
 export  {Order};
 export default OrderAPI;
