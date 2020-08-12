@@ -4,7 +4,7 @@ import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
 import List from 'list';
 import Update from '/jsx/Admin/Update/Update.jsx';
-import OrderAPI, {Order} from '/js/orderAPI.js';
+import {OrderAPI, Order} from  '/js/order';
 
 import { connect, actions } from 'reducer'
 

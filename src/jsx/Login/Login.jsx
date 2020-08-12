@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Header, Footer, ProgressBar, Background} from '/jsx/common';
 
-import OrderAPI from '/js/orderAPI.js';
+import {OrderAPI, Order} from  '/js/order';
 
 
 

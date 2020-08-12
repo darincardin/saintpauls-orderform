@@ -1,4 +1,4 @@
-import OrderAPI from '/js/orderAPI.js';
+import {OrderAPI, Order} from  '/js/order';
 
 
 

@@ -1,4 +1,4 @@
-import {Order} from '/js/orderAPI.js';
+import {Order} from  '/js/order';
 
 const newState = { step:0,  order: new Order() }
 

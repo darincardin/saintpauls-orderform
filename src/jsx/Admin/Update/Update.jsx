@@ -5,7 +5,7 @@ import Form from 'form';
 import {connect, actions} from 'reducer'
 import {ProgressBar, Modal} from '/jsx/common';
 
-import OrderAPI, {Order} from '/js/orderAPI.js';
+import {OrderAPI, Order} from  '/js/order';
 
 class Update extends React.Component {
 

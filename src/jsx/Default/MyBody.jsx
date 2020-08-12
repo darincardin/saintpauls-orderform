@@ -7,13 +7,18 @@ import {Page1, Page2, Page3} from '/jsx/Default/Pages';
 
 import StepBar from 'stepbar';
 
-import {Order} from '/js/orderAPI.js';
+import {Order} from '/js/order';
+
+
+import { AnimateOnChange } from 'react-animation'
+
+
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 var Main = withRouter( class Main extends React.Component { 
 	
-	state = { step:0 }
-	
-	
+	state = { step:0, display: true }
+		
 	map = {
 		undefined:0,
 		'/page1':0,
@@ -36,7 +41,11 @@ var Main = withRouter( class Main extends React.Component {
 	}
 	
 	
+	
+	
 	render() {
+		
+		
 		return (
 			<main>		
 				<Background />			
@@ -45,14 +54,22 @@ var Main = withRouter( class Main extends React.Component {
 					<div className="panel panel-default">
 							<div className="panel-body">
 											
-								<StepBar index={this.state.step} array={this.array}/>
+								<StepBar index={this.state.step} array={this.array} />
 								<br /><br />
-								<Switch >		
-									<Route path="/page1"  component={Page1} />
-									<Route path="/page2"  component={Page2} />
-									<Route path="/page3"  component={Page3} />
-									<Redirect from="/" to="/page1" />						
-								</Switch>
+								
+
+
+												<Switch location={this.props.location}>		
+													<Route path="/page1"  component={Page1} />
+													<Route path="/page2"  component={Page2} />
+													<Route path="/page3"  component={Page3} />
+													<Redirect from="/" to="/page1" />						
+												</Switch>
+											
+
+
+
+
 							</div>
 					</div>	
 				</ErrorBoundary >
@@ -61,6 +78,40 @@ var Main = withRouter( class Main extends React.Component {
 	}
 	
 })
+
+/*
+
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+								<CSSTransition
+								  in={this.state.display}
+								  timeout={2000}
+								  classNames="display"
+								  unmountOnExit
+								>
+								  <div className="menu">
+									<ul className="list">
+									  <li className="list-item">Rajat</li>
+									  <li className="list-item">Writes about React</li>
+									  <li className="list-item">Loves Pizza</li>
+									</ul>
+								  </div>
+								</CSSTransition>
+								
+
+									
+*/
 
 
 

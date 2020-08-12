@@ -3,14 +3,14 @@ import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-ro
 import Form from 'form';
 
 import {connect, actions} from 'reducer'
-import {Order} from '/js/orderAPI.js';
+import {Order} from '/js/order';
 
 class Page1 extends React.Component {
 
 	state = { order: this.props.order }
 
-	onSuccess = order =>{
-		this.props.actions.setOrder(order);
+	onSuccess = o =>{
+		this.props.actions.setOrder(new Order(o));
 		this.props.history.push('/page2')
 	}
 
@@ -18,7 +18,7 @@ class Page1 extends React.Component {
 		return (
 			<div className="page1" >
 				<div>
-					<p>Lobster rolls cost $12.99 and include a bag of chips. Orders can be picked up May 10th at noon.</p>	
+					<p>Lobster rolls cost ${Order.price} and include a bag of chips. Orders can be picked up May 10th at noon.</p>	
 					<Form  onSuccess={this.onSuccess} object={this.state.order} fields={Order.display.inputs.customerInfo} >
 						<button type="submit" className="btn btn-primary">Next</button> 	
 					</Form>			
