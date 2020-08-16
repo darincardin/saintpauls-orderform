@@ -43,6 +43,7 @@
     "form": "darincardin/form",
     "jquery": "3.4.1",
     "list": "darincardin/list",
+    "react-lazy-load": "^3.0.13",
     "lodash": "^4.17.15",
     "react": "^16.8.4",
     "react-animation": "^1.2.2",

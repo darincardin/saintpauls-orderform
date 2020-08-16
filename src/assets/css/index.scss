@@ -9,8 +9,6 @@
 	}
 
 
-
-
 	h2, label {
 		white-space: nowrap;
 	}
@@ -131,6 +129,27 @@
 	
 	
 	
+		.spinner {
+			xxbackground: white;
+			position: relative;
+			width: 100px;
+			text-align: center;
+			margin: auto;
+			height: 100px;
+			xxborder: solid #5e5e5e 1px;
+			border-radius: 5px;
+			left: 0;
+			right: 0;
+
+		}
+
+		.spinner img {	
+			position: relative;
+			top: 34px;
+			height: 32px;
+			width: 32px;
+		}
+
 	
 	
 	

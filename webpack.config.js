@@ -56,7 +56,7 @@ module.exports = (env) => {
 			{ test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
             { test:/\.(s*)css$/, use:['style-loader','css-loader', 'sass-loader']  },			
 			{
-			    test: /\.(png|jpe?g|gif)$/i, 
+			    test: /\.(png|jpe?g|gif|ico)$/i, 
 				exclude: /node_modules/, 
 				use: [{  loader: 'file-loader',  options: {  name: '[name].[ext]'}} ]
 			},
@@ -65,7 +65,7 @@ module.exports = (env) => {
 				loader: 'url-loader'
 			},
 			
-			
+				
             {
                 test: require.resolve('jquery'),
                 use: [{
