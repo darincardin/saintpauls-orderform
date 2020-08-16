@@ -17,7 +17,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 var Main = withRouter( class Main extends React.Component { 
 	
-	state = { step:0, display: true }
+	state = { step:0, className: '' }
 		
 	map = {
 		undefined:0,
@@ -36,16 +36,17 @@ var Main = withRouter( class Main extends React.Component {
 		super(props)
 		
 		this.props.history.listen( loc => {	
-			this.setState({step: this.map[loc.pathname]})
+		
+			var step = this.map[loc.pathname];
+		
+			var className = step > this.state.step ? '':'reverse';
+			
+			this.setState({className, step})
 		});	
 	}
 	
-	
-	
-	
 	render() {
-		
-		
+
 		return (
 			<main>		
 				<Background />			
@@ -53,65 +54,26 @@ var Main = withRouter( class Main extends React.Component {
 					<br />
 					<div className="panel panel-default">
 							<div className="panel-body">
-											
+		
 								<StepBar index={this.state.step} array={this.array} />
-								<br /><br />
 								
-
-
-												<Switch location={this.props.location}>		
-													<Route path="/page1"  component={Page1} />
-													<Route path="/page2"  component={Page2} />
-													<Route path="/page3"  component={Page3} />
-													<Redirect from="/" to="/page1" />						
-												</Switch>
-											
-
-
-
-
+								<TransitionGroup className={'body ' + this.state.className}>
+									<CSSTransition timeout={500} classNames="slide" key={this.props.location.key} >  
+										<Switch location={this.props.location}>
+											<Route path="/page1"  component={Page1} />
+											<Route path="/page2"  component={Page2} />
+											<Route path="/page3"  component={Page3} />
+											<Redirect from="/" to="/page1" />			
+										</Switch>
+									</CSSTransition>
+								</TransitionGroup>
 							</div>
 					</div>	
 				</ErrorBoundary >
 			</main>		
 		)
 	}
-	
 })
-
-/*
-
-
-		
-		
-
-
-
-
-
-
-
-
-
-
-								<CSSTransition
-								  in={this.state.display}
-								  timeout={2000}
-								  classNames="display"
-								  unmountOnExit
-								>
-								  <div className="menu">
-									<ul className="list">
-									  <li className="list-item">Rajat</li>
-									  <li className="list-item">Writes about React</li>
-									  <li className="list-item">Loves Pizza</li>
-									</ul>
-								  </div>
-								</CSSTransition>
-								
-
-									
-*/
 
 
 

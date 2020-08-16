@@ -39,8 +39,8 @@ var ProgressBar = (WrappedComponent) => {
 			
 			return(
 				<> 
-					{ReactDOM.createPortal(html, document.getElementsByTagName('body')[0]   )   }
 					 <WrappedComponent {...this.props} progress={this.functions} /> 
+					 {ReactDOM.createPortal(html, document.getElementsByTagName('body')[0]   )   }
 				</>
 				)
 		}	

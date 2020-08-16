@@ -4,7 +4,8 @@ import Form from 'form';
 
 import {ProgressBar} from '/jsx/common';
 import {connect, actions} from 'reducer'
-import {OrderAPI, Order} from  '/js/order';
+import {OrderAPI, Order} from  'order';
+
 
 class Page2 extends React.Component {
 
@@ -15,12 +16,16 @@ class Page2 extends React.Component {
 	
 	state = { order: this.props.order }
 
+	onSuccessBackup = order =>{
+		this.props.actions.setOrder(new Order(order));
+		this.props.history.push('/page3')
+	}
+
 	onSuccess = order =>{
 
 		this.props.progress.show();	
 		
 		OrderAPI.create(order).then(res =>{
-			debugger;
 			this.props.actions.setOrder(res);
 			this.props.history.push('/page3')
 		})
@@ -29,7 +34,7 @@ class Page2 extends React.Component {
 
 	render = ()=> {
 		return (
-			<div className="page2" >
+			<div className="page page2" >
 				<div>
 					<Form  onSuccess={this.onSuccess} object={this.state.order} fields={Order.display.inputs.orderInfo} >
 						<Link to='/page1'><button className="btn btn-default">Back</button></Link>

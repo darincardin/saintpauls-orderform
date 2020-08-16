@@ -28,7 +28,7 @@ class Page3 extends React.Component {
 	
 		render() { 
 			return (
-				<div className="page3" >
+				<div className="page page3" >
 					<h3 style={{'font-weight':'600'}}>Order Successful!</h3>
 	
 							<table >  

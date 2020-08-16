@@ -16,7 +16,7 @@ class Page1 extends React.Component {
 
 	render = ()=> {
 		return (
-			<div className="page1" >
+			<div className="page page1" >
 				<div>
 					<p>Lobster rolls cost ${Order.price} and include a bag of chips. Orders can be picked up May 10th at noon.</p>	
 					<Form  onSuccess={this.onSuccess} object={this.state.order} fields={Order.display.inputs.customerInfo} >

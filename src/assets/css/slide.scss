@@ -1,0 +1,59 @@
+
+	
+	
+	
+	.body {
+		position:relative;
+		overflow:hidden;
+		
+		&>div{ white-space:nowrap; }
+				
+		.page {
+			display:inline-block;
+			width:100%;
+			position:relative;
+			left: 0px;
+			transition: all .5s;
+			
+			&.slide-enter {left: 1000px;	}
+			
+			&.slide-enter-active {	left: 0px;	}
+			
+			&.slide-exit {
+				position: absolute;
+				left: 0px;
+			}
+				
+			&.slide-exit-active {	left: -1000px; }	
+		}
+	}	
+	
+	.body.reverse {
+		.page {
+
+			&.slide-enter {left: -1000px; }
+			
+			&.slide-enter-active { left: 0px; }
+			
+			&.slide-exit {
+				position: absolute;
+				left: 0px;
+			}
+				
+			&.slide-exit-active { left: 1000px; }			
+		}		
+	}
+
+		
+			
+		
+
+	
+
+	
+
+	
+
+	
+	
+	
