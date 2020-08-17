@@ -17,7 +17,7 @@ class Page2 extends React.Component {
 	state = { order: this.props.order }
 
 	onSuccessBackup = order =>{
-		this.props.actions.setOrder(new Order(order));
+		this.props.actions.setOrder(order);
 		this.props.history.push('/page3')
 	}
 

@@ -5,9 +5,7 @@
 	.body {
 		position:relative;
 		overflow:hidden;
-		
-		&>div{ white-space:nowrap; }
-				
+			
 		.page {
 			display:inline-block;
 			width:100%;

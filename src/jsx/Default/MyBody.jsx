@@ -17,8 +17,17 @@ import {Page1, Page2, Page3} from './Pages/';
 var thirdParty = Promise.all([
 	import ('jquery'),
 	import ('bootstrap/dist/js/bootstrap.js'),
+	
+	
+	
+	
 ])
 
+
+var getPromise = () =>{
+	
+	
+}
 
 
 var Main = withRouter( class Main extends React.Component { 
@@ -62,7 +71,10 @@ var Main = withRouter( class Main extends React.Component {
 		{label:"Done"}
 	]
 	
+	renderxx() {
 
+		return <div></div>
+	}
 	
 	render() {
 

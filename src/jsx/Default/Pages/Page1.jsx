@@ -10,7 +10,7 @@ class Page1 extends React.Component {
 	state = { order: this.props.order }
 
 	onSuccess = o =>{
-		this.props.actions.setOrder(new Order(o));
+		this.props.actions.setOrder(o);
 		this.props.history.push('/page2')
 	}
 
