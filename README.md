@@ -1,5 +1,5 @@
 # react_orderform
-Order Form and Admin List with React and Webpack
+Order Form and Admin List with React and Webpack...
 
 
 Project can be run on a dev server using NodeJS with the command:\
