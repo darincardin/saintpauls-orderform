@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 module.exports = function(env) {
 	
-	var dir = env.mode || 'dist';
+	var dir = env && env.mode || 'dist';
 	
 	var reader = function(res, path){   return JSON.parse( require('fs').readFileSync(`devServer/data/${path}`, 'utf8')) }
 
@@ -16,7 +16,8 @@ module.exports = function(env) {
 		publicPath: '/',
 		historyApiFallback: true,   
 		inline: true,
-		port: 7777   ,
+		   disableHostCheck: true,   // That solved it
+		port: 80   ,
 		before: function(app, server, compiler) {
 			app.post('/php/orders/create.php',  (req, res)=>res.json(reader(res, 'create.json'))); 
 			app.post('/php/orders/update.php',  (req, res)=>{

@@ -10,18 +10,19 @@ module.exports = (env) => {
 	var plugins = [ 
 
 		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'underscore' }) ,
-		new CopyPlugin([  
-			{ from: './src/assets/images', to: './' },
-			{ from: 'src/index.html', to: '' },
-			{ from: 'src/admin.html', to: '' },
-			{ from: 'src/login.html', to: '' }
-		])
-				
-
+	    new CopyPlugin({
+	      patterns: [
+	        { from: path.resolve('./src/assets/images'), to: '' },
+	        { from: path.resolve('./src/favicon.ico'), to: '' },
+		    { from: path.resolve('src/index.html'), to: '' },
+		    { from: path.resolve('src/admin.html'), to: '' },
+		    { from: path.resolve('src/login.html'), to: '' }
+	      ]
+	     })
 	];
 	
 	
-	if(env.production)  plugins.push( new webpack.DefinePlugin({'process.env': { 'NODE_ENV': JSON.stringify('production')} }) )
+	//if(env.production)  plugins.push( new webpack.DefinePlugin({'process.env': { 'NODE_ENV': JSON.stringify('production')} }) )
 
 	return  {
 	  resolve: {
@@ -32,6 +33,9 @@ module.exports = (env) => {
 		   "/assets": path.resolve(__dirname, 'src/assets/'),
 		   "reducer": path.resolve(__dirname, 'src/js/reducer'),
 		   "order": path.resolve(__dirname, 'src/js/order'),
+		   "list": path.resolve(__dirname, 'src/jsx/common/list/List.jsx'),
+		   "form": path.resolve(__dirname, 'src/jsx/common/form/Form.jsx'),
+		   "stepbar": path.resolve(__dirname, 'src/jsx/common/stepbar/StepBar.jsx'),
 		   '$': "jquery"
 		},
 		extensions: ['*','.js','.jsx']
@@ -65,7 +69,7 @@ module.exports = (env) => {
 				loader: 'url-loader'
 			},
 			
-				
+				/*
             {
                 test: require.resolve('jquery'),
                 use: [{
@@ -88,7 +92,7 @@ module.exports = (env) => {
                 ]
             }					
 			
-			
+			*/
 			
 		]
 	  }

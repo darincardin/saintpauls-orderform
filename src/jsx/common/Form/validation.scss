@@ -1,0 +1,37 @@
+	
+form {
+
+
+	.glyphicon-ok, 
+	.glyphicon-remove{
+		display:none;
+	}
+	
+	.has-feedback .form-control {
+		padding-right: 25.5px;
+	}	
+
+	.has-success .glyphicon-ok, 
+	.has-error .glyphicon-remove {
+		display:block;
+	}
+		
+	input[type=checkbox] ~ .glyphicon-ok,
+	input[type=checkbox] ~ .glyphicon-remove,
+	.radio ~ .glyphicon-ok,
+	.radio ~ .glyphicon-remove,
+	select ~ .glyphicon-ok,
+	select ~ .glyphicon-remove{
+		display:none!important;
+	}
+}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	

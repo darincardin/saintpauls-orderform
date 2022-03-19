@@ -43,7 +43,7 @@ class Login extends React.Component{
 						<div className="panel-body">
 						
 							<h2>Login Demo</h2>
-								<sub>(use any username/password)</sub>
+							
 								<br />
 								<div className="input-group">
 									<span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
