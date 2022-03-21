@@ -8,13 +8,13 @@ var url = 'http://localhost:8888';
 class OrderAPI {
 	
 
-	static list(page, sort, amount){	
-		return OrderAPI.get(`${url}/php/orders/controllers/list.php?amount=${amount}&page=${page}&sortBy=${sort.by}&sortDir=${sort.dir}`);
+	static list(page, sort, amount, search){	
+		return OrderAPI.get(`${url}/php/orders/controllers/list.php?search=${search}&amount=${amount}&page=${page}&sortBy=${sort.by}&sortDir=${sort.dir}`);
 	}
 
 	static create(data){
 		return OrderAPI.post(`${url}/php/orders/controllers/create.php`, data).then(id =>{   
-			return new Order({...data, id})
+			return new Order({...data, id});
 		})
 	}	
 	

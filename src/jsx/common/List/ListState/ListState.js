@@ -1,4 +1,4 @@
-import { withCookies, Cookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 
 
 
@@ -6,7 +6,7 @@ class ListState {
 	
 	static cookie = new Cookies('my-cookie');
 	
-	static DEFAULT_STATE = {page:0, total:0, loading:false, sort:{by:"id", dir:"ASC"}};
+	static DEFAULT_STATE = {page:0, total:0, search: "", loading:false, sort:{by:"id", dir:"ASC"}};
 
 	constructor(){
 

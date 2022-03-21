@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ErrorBoundary from 'react-error-boundary';
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
-import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import List from 'list';
 import Update from '/jsx/Admin/Update/Update.jsx';
 import {OrderAPI, Order} from  '/js/order';
@@ -13,8 +13,8 @@ class Admin extends React.Component {
 
 	state = { data:[] }
 	
-	getData = (page, sort, amount)=>{
-		return OrderAPI.list(page, sort, amount).then(res=>{
+	getData = (page, sort, amount, search)=>{
+		return OrderAPI.list(page, sort, amount, search).then(res=>{
 			this.setState({ data:res.data })
 			return res;
 		}).catch(e =>{
@@ -30,8 +30,7 @@ class Admin extends React.Component {
 		this.props.actions.setOrder(order)
 	}
 	
-	clearSelect = callback=>{
-		
+	clearSelect = callback=>{	
 		this.props.actions.setOrder(new Order())
 		callback()
 	}

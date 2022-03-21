@@ -19,6 +19,12 @@ html, body, #app {
 	border: solid #DDDDDD 1px;
 	border-radius: 10px 10px 0 0;
    
+   	.search {
+		text-align: right;
+		width: 100%;
+		max-width:400px
+	}
+   
     a { cursor:pointer; }
 	
  	.disabled {

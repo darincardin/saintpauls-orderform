@@ -25,12 +25,13 @@ class List extends React.Component {
 	}
 
 	setHeight = ()=>{
-		this.height = ((this.AMOUNT + 2) * ROW_SIZE) + "px" ;		
+		this.height = ((this.AMOUNT + 3 ) * ROW_SIZE ) + "px" ;		
 	}
 
 	generateAmount = () => {	
-		var height = this.ref.current.parentElement.offsetHeight;
-		this.AMOUNT = Math.floor((height/ROW_SIZE) - 2);
+		var height = this.ref.current.parentElement.offsetHeight - 10 ;
+		this.AMOUNT = Math.floor((height/ROW_SIZE)) -3;
+		console.log(this.AMOUNT)
 		this.setHeight();
 	}
 	
@@ -58,12 +59,12 @@ class List extends React.Component {
 		}, 300);
 	}
 	
-	getOrders = (page = this.state.page, sort = this.state.sort) => {
+	getOrders = (page = this.state.page, sort = this.state.sort, search = this.state.search) => {
 	
-		this.setState({loading:true})
+		this.setState({loading:true});
 
-		this.props.getData(page, sort, this.AMOUNT).then(res=>{
-			this.setState({ page, total:res.total,  sort:sort, loading:false },
+		this.props.getData(page, sort, this.AMOUNT, search).then(res=>{
+			this.setState({ page, total:res.total, search:search, sort:sort, loading:false },
 				()=>{  ListState.set(this.state)  }
 			)	
 		})
@@ -81,17 +82,36 @@ class List extends React.Component {
 			});
 	}
 	
+	onSearch = ($event)=>{		
+		var value =  $event.currentTarget.value;
+		this.setState({search: value})
+		
+		
+		if(this.cancel) clearTimeout(this.cancel);
+		
+		this.cancel = setTimeout( ()=>{ 
+			this.getOrders(this.state.page, this.state.sort, value) 
+		}, 300);	
+		
+	}
+	
 	render = () => {
 	    return  (
-			<div ref={this.ref} className="list" style={{height: this.height}}> 
+			<div  className="list" ref={this.ref} style={{height: this.height}}> 
 				<ListLoader show={this.state.loading} />
-				
+	
+				<div className="input-group search">
+						<span className="input-group-addon"><i className="glyphicon glyphicon-search"></i></span>
+						<input  type="text" className="form-control"  name="search" placeholder="Search" value={this.state.search} onChange={this.onSearch} />
+				</div>					
+		
 				<table>
 					<ListHeader labels={this.props.labels} update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
 					<ListBody   labels={this.props.labels} data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
-				
+					
 				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
+			
 			</div>
 		)
 	}
