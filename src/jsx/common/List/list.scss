@@ -73,42 +73,11 @@ html, body, #app {
 	}
 
 	
-	td:nth-child(7) {
+	td:last-child { 
 		width: 150px;
 		text-align: right;
 		padding-right: 8px;
 	}
-
-	
-	
-	/********   HEADER ************/
-
-	thead{
-        font-weight: bold;
-		
-		
-		td {
-			padding: 0;
-		}
-		
-		a {
-			color: black;
-			padding: 10px;
-			user-select: none;
-		}
-		
-		
-		a.ASC:after  {
-			content:" ▲";	
-		}
-		
-		a.DESC:after  {
-			content:" ▼";
-		}
-		
-    }
-	
-	
 	
 	/********   FOOTER ************/
 	
@@ -134,90 +103,8 @@ html, body, #app {
 		
 	
 	
-	/*******  LOADER  ************/
-
-	.table-loader {
-		position: absolute;
-		top:41px; left:0;right:0;bottom:0;
-		background: rgba(227, 227, 227, 0.4);
-		z-index: 10;
-	}	
-
-	.table-loader>div {
-		
-		position: absolute;
-		bottom: 0;
-		padding: 10px;
-	}
-
-
-	.glyphicon-spin {
-		color: #828282;
-		margin: 10px auto;
-		display: block;
-		width: 30px;
-		height: 30px;
-		font-size: 30px;
-	}	
-			
-
- 	.spin {
-	  -webkit-animation: spin 2s infinite linear;
-	  -moz-animation: spin 2s infinite linear;
-	  -o-animation: spin 2s infinite linear;
-	  animation: spin 2s infinite linear;
-	}
-	
-	@-moz-keyframes spin {
-	  from {
-		-moz-transform: rotate(0deg);
-	  }
-	  to {
-		-moz-transform: rotate(360deg);
-	  }
-	}
-	@-webkit-keyframes spin {
-	  from {
-		-webkit-transform: rotate(0deg);
-	  }
-	  to {
-		-webkit-transform: rotate(360deg);
-	  }
-	}
-	@keyframes spin {
-	  from {
-		transform: rotate(0deg);
-	  }
-	  to {
-		transform: rotate(360deg);
-	  }
-	}
-	
-	
-	/**************  RESPONSIVE  ********************/  
-	
-	@media screen and  (min-width : 992px) {
-		xxheight: 254px;
-		
-	}	
-	
-	
-	@media screen and  (max-width : 991px) {	
 
 	
-		xxheight: 235px;
-		
-		td:nth-child(5){
-			display:none;
-		}	 
-	}		
-	
-	@media screen and  (max-width : 767px) {	
 
-	
-		xxheight: 254px;
-		
- 
-	}	
 }
  

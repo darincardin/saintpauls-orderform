@@ -1,0 +1,34 @@
+
+.list {	
+
+	/**************  RESPONSIVE  ********************/  
+	
+	@media screen and  (min-width : 992px) {
+	
+		
+	}	
+	
+	
+	@media screen and  (max-width : 991px) {				
+		td:nth-child(5){
+			display:none;
+		}	 
+	}		
+	
+	@media screen and  (max-width : 767px) {	
+
+	}	
+	
+	@media screen and  (max-width : 550px) {	
+		td:last-child {
+			width: 80px!important;
+		}		
+	}	
+	
+	@media screen and  (max-width : 315px) {	
+		td:nth-child(2), td:nth-child(6) {
+			display:none;
+		}		
+	}		
+}
+ 

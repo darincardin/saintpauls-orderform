@@ -9,14 +9,16 @@ import ListState from './ListState/ListState.js';
 
 
 import './list.scss';
-
+import './list.header.scss';
+import './list.spinner.scss';
+import './list.media.scss';
 
 const ROW_SIZE = 40;
 
 
 class List extends React.Component {
 		
-	AMOUNT = 0;   
+	//pageSize = 0;   
 	state = { ...new ListState() }
 
 	constructor(props){
@@ -25,21 +27,26 @@ class List extends React.Component {
 	}
 
 	setHeight = ()=>{
-		this.height = ((this.AMOUNT + 3 ) * ROW_SIZE ) + "px" ;		
+		this.height = ((this.state.pageSize + 3 ) * ROW_SIZE ) + "px" ;		
 	}
 
-	generateAmount = () => {	
-		var height = this.ref.current.parentElement.offsetHeight - 10 ;
-		this.AMOUNT = Math.floor((height/ROW_SIZE)) -3;
-		console.log(this.AMOUNT)
+	generateAmount = () => {			
+		this.setAmount();
 		this.setHeight();
+	}
+	
+	setAmount(){
+		var height = this.ref.current.parentElement.offsetHeight - 10 ;
+		var amount =  Math.floor((height/ROW_SIZE)) -3;
+		this.state.pageSize = amount >= 2 ? amount : 2;
+		
 	}
 	
 	componentDidMount = ()=>{
 
 		window.addEventListener('list.update', this.handleEvent);
 
-		if(this.props.amount) this.AMOUNT = this.props.amount;
+		if(this.props.amount) this.state.pageSize = this.props.amount;
 		else {
 			this.generateAmount();
 			window.addEventListener('resize', this.handleEvent);
@@ -61,16 +68,22 @@ class List extends React.Component {
 	
 	getOrders = (page = this.state.page, sort = this.state.sort, search = this.state.search) => {
 	
-		this.setState({loading:true});
+		var obj = {loading:true };
+			debugger;
+		var totalPages = Math.ceil(this.state.total /  this.state.pageSize);
+		
+		if(this.state.page > totalPages-1) obj['page'] = page = totalPages-1;
 
-		this.props.getData(page, sort, this.AMOUNT, search).then(res=>{
-			this.setState({ page, total:res.total, search:search, sort:sort, loading:false },
-				()=>{  ListState.set(this.state)  }
-			)	
-		})
-		.catch( err =>{
-			this.setState({...ListState.DEFAULT_STATE})
-		})	
+	
+		this.setState(obj, ()=>{
+			
+			this.props.getData(page, sort, this.state.pageSize, search).then(res=>{			
+				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ ListState.set(this.state) })	
+			})
+			.catch( ()=>{
+				this.setState({...ListState.DEFAULT_STATE})
+			})							
+		});
 	}	    
 	
 	onActionClick = (row, action) =>{
@@ -84,8 +97,7 @@ class List extends React.Component {
 	
 	onSearch = ($event)=>{		
 		var value =  $event.currentTarget.value;
-		this.setState({search: value})
-		
+		this.setState({search: value})	
 		
 		if(this.cancel) clearTimeout(this.cancel);
 		
@@ -110,7 +122,7 @@ class List extends React.Component {
 					<ListBody   labels={this.props.labels} data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
 					
-				<ListFooter update={this.getOrders} page={this.state.page} max={this.state.total} />
+				<ListFooter update={this.getOrders} listState={this.state} />
 			
 			</div>
 		)
