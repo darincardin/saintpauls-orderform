@@ -9,7 +9,9 @@ class OrderAPI {
 	
 
 	static list(page, sort, pageSize, search){	
-		return OrderAPI.get(`${url}/php/orders/controllers/list.php?search=${search}&pageSize=${pageSize}&page=${page}&sortBy=${sort.by}&sortDir=${sort.dir}`);
+		var params =new URLSearchParams({page, pageSize, search, sortBy: sort.by, sortDir: sort.dir}).toString();
+		
+		return OrderAPI.get(`${url}/php/orders/controllers/list.php?${params}`);
 	}
 
 	static create(data){
@@ -58,7 +60,7 @@ class OrderAPI {
 
 			return res;
 		}).catch( err =>{
-			alert('An error occurred. Please try again later.')	
+			console.log('An error occurred. Please try again later.')	
 			throw err;
 		})	
 	}

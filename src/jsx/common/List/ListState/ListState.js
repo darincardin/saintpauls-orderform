@@ -2,20 +2,36 @@ import { Cookies } from 'react-cookie';
 
 
 
+
+
 class ListState {
 	
 	static cookie = new Cookies('my-cookie');
 	
-	static DEFAULT_STATE = {page:0, pageSize:0, total:0, search: "", loading:false, sort:{by:"id", dir:"ASC"}};
-
+	page = 0;
+	pageSize = 0;
+	total = 0;
+	search =  "";
+	loading = false;
+	sort = {by:"id", dir:"ASC"};
+	
+	error = false;
+	
 	constructor(){
 
-		var state =  ListState.get();
+		//var state =  ListState.get();
 		
-		const INITIAL_STATE = state || ListState.DEFAULT_STATE;
+		//return ( state || this );
+	}		
+	
+	
+	
+
+	
+	isActive(){
 		
-		return INITIAL_STATE;
-	}	
+		return true;
+	}
 	
 	static get(){
 		return ListState.cookie.get('list-state');

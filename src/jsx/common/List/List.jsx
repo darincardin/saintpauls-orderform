@@ -6,96 +6,80 @@ import ListBody from './ListBody/ListBody.jsx';
 import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
 import ListState from './ListState/ListState.js';
-
+import ListHeight from './list.height.js';
 
 import './list.scss';
 import './list.header.scss';
 import './list.spinner.scss';
 import './list.media.scss';
 
-const ROW_SIZE = 40;
+
 
 
 class List extends React.Component {
 		
-	//pageSize = 0;   
-	state = { ...new ListState() }
-
+	state = new ListState();
+	height = 0;
+	
+	
 	constructor(props){
 		super(props)
 		this.ref = React.createRef()	
 	}
 
-	setHeight = ()=>{
-		this.height = ((this.state.pageSize + 3 ) * ROW_SIZE ) + "px" ;		
-	}
-
-	generateAmount = () => {			
-		this.setAmount();
-		this.setHeight();
-	}
-	
-	setAmount(){
-		var height = this.ref.current.parentElement.offsetHeight - 10 ;
-		var amount =  Math.floor((height/ROW_SIZE)) -3;
-		this.state.pageSize = amount >= 2 ? amount : 2;
-		
-	}
-	
-	componentDidMount = ()=>{
-
-		window.addEventListener('list.update', this.handleEvent);
-
-		if(this.props.amount) this.state.pageSize = this.props.amount;
-		else {
-			this.generateAmount();
-			window.addEventListener('resize', this.handleEvent);
-		}
-		
-		this.setHeight();
-			
+	updateList = () => {
+		this.height =  this.ref.current.parentElement.offsetHeight - 15 ;		
+		this.setState({pageSize:ListHeight.updatePageSize(this.ref)})		
 		this.getOrders();
+	}	
+
+	componentDidMount = ()=>{	
+		window.addEventListener('resize', this.handleEvent);
+		this.updateList();
 	}
 	
 	handleEvent = () => {
 		if(this.cancel) clearTimeout(this.cancel);
 		
 		this.cancel = setTimeout( ()=>{ 
-			this.generateAmount();
-			this.getOrders() 
+			this.updateList();
 		}, 300);
 	}
 	
 	getOrders = (page = this.state.page, sort = this.state.sort, search = this.state.search) => {
-	
+		
 		var obj = {loading:true };
-			debugger;
+
 		var totalPages = Math.ceil(this.state.total /  this.state.pageSize);
 		
-		if(this.state.page > totalPages-1) obj['page'] = page = totalPages-1;
+		if(this.state.page > totalPages-1) {
+			obj['page'] = page =   (totalPages>0) ? totalPages-1 : 0  ;	
+		}
 
-	
 		this.setState(obj, ()=>{
 			
 			this.props.getData(page, sort, this.state.pageSize, search).then(res=>{			
 				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ ListState.set(this.state) })	
 			})
 			.catch( ()=>{
-				this.setState({...ListState.DEFAULT_STATE})
+				this.showError();
+				this.setState({ loading:false, page:0})
+				//this.setState({...ListState.DEFAULT_STATE})
 			})							
 		});
 	}	    
 	
 	onActionClick = (row, action) =>{
+		
 		var promise = action(row);
 		
 		if(promise)
-			promise.then( res=>{
+			action(row).then( res=>{
 				this.getOrders()
 			});
 	}
 	
-	onSearch = ($event)=>{		
+	onSearch = $event=>{		
 		var value =  $event.currentTarget.value;
 		this.setState({search: value})	
 		
@@ -104,12 +88,29 @@ class List extends React.Component {
 		this.cancel = setTimeout( ()=>{ 
 			this.getOrders(this.state.page, this.state.sort, value) 
 		}, 300);	
+	}
+	
+	
+	showError = () =>{
+		this.setState({error:true})
+		setTimeout( ()=>{ 
+			this.setState({error:false})
+		}, 4000);		
 		
 	}
 	
 	render = () => {
+		var errorMsg = 'error-msg ' +  (this.state.error?'show':'');
+		
 	    return  (
-			<div  className="list" ref={this.ref} style={{height: this.height}}> 
+			<div  className="list" ref={this.ref}  style={{height: this.height}}> 
+			
+				<div className={errorMsg} >
+					<div className="alert alert-danger">
+						<strong>Error:</strong> List could not be loaded
+					</div>
+				</div>		
+
 				<ListLoader show={this.state.loading} />
 	
 				<div className="input-group search">
