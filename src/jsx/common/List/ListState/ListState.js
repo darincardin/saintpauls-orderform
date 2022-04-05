@@ -6,7 +6,10 @@ import { Cookies } from 'react-cookie';
 
 class ListState {
 	
+	ref = null;
+	
 	static cookie = new Cookies('my-cookie');
+
 	
 	page = 0;
 	pageSize = 0;
@@ -17,14 +20,25 @@ class ListState {
 	
 	error = false;
 	
-	constructor(){
-
+	constructor(ref){
+		this.ref = ref;
 		//var state =  ListState.get();
 		
 		//return ( state || this );
+		
+		console.log('sssss')
 	}		
 	
 	
+	get height(){
+		debugger;
+		return this.ref.current && this.ref.current.parentElement.offsetHeight - 15 ;	
+	}
+	
+	getHeight = ()=>{
+		
+		return this.ref.current.parentElement.offsetHeight - 15 ;	
+	}
 	
 
 	
@@ -33,12 +47,12 @@ class ListState {
 		return true;
 	}
 	
-	static get(){
-		return ListState.cookie.get('list-state');
+	static getxxx(){
+	//	return ListState.cookie.get('list-state');
 	}	
 	
-	static set(s){
-		ListState.cookie.set('list-state', s)
+	static setxxx(s){
+	//	ListState.cookie.set('list-state', s)
 	}
 }
 

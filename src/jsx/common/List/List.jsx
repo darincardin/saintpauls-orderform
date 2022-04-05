@@ -18,17 +18,17 @@ import './list.media.scss';
 
 class List extends React.Component {
 		
-	state = new ListState();
-	height = 0;
+	state = null;
+
 	
 	
 	constructor(props){
 		super(props)
 		this.ref = React.createRef()	
+		this.state = new ListState(this.ref);
 	}
 
 	updateList = () => {
-		this.height =  this.ref.current.parentElement.offsetHeight - 15 ;		
 		this.setState({pageSize:ListHeight.updatePageSize(this.ref)})		
 		this.getOrders();
 	}	
@@ -39,6 +39,7 @@ class List extends React.Component {
 	}
 	
 	handleEvent = () => {
+		
 		if(this.cancel) clearTimeout(this.cancel);
 		
 		this.cancel = setTimeout( ()=>{ 
@@ -59,7 +60,9 @@ class List extends React.Component {
 		this.setState(obj, ()=>{
 			
 			this.props.getData(page, sort, this.state.pageSize, search).then(res=>{			
-				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ ListState.set(this.state) })	
+				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ //ListState.set(this.state)
+				
+				 })	
 			})
 			.catch( ()=>{
 				this.showError();
@@ -103,7 +106,7 @@ class List extends React.Component {
 		var errorMsg = 'error-msg ' +  (this.state.error?'show':'');
 		
 	    return  (
-			<div  className="list" ref={this.ref}  style={{height: this.height}}> 
+			<div  className="list" ref={this.ref}  style={{height: this.state.height}}> 
 			
 				<div className={errorMsg} >
 					<div className="alert alert-danger">
