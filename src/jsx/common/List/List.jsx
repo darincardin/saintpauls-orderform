@@ -102,11 +102,16 @@ class List extends React.Component {
 		
 	}
 	
+	height = 100;
+	
 	render = () => {
+		debugger;
+		var height = this.state.getHeight();
+		
 		var errorMsg = 'error-msg ' +  (this.state.error?'show':'');
 		
 	    return  (
-			<div  className="list" ref={this.ref}  style={{height: this.state.height}}> 
+			<div  className="list" ref={this.ref}  style={{height: height}}> 
 			
 				<div className={errorMsg} >
 					<div className="alert alert-danger">

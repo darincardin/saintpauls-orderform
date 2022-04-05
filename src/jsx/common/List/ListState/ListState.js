@@ -29,17 +29,17 @@ class ListState {
 		console.log('sssss')
 	}		
 	
+
 	
-	get height(){
-		debugger;
+
+	
+	
+	getHeight = ()=>{
+
 		return this.ref.current && this.ref.current.parentElement.offsetHeight - 15 ;	
 	}
 	
-	getHeight = ()=>{
-		
-		return this.ref.current.parentElement.offsetHeight - 15 ;	
-	}
-	
+
 
 	
 	isActive(){
