@@ -5,7 +5,7 @@ import TableLink from '../TableLink/TableLink.jsx';
 var ListFooter = props =>{
 	
 	function showNext(){			
-		return props.listState.page <  (Math.ceil(props.listState.total / props.listState.pageSize) -1);
+		return props.listState.page <  (Math.ceil(props.listState.total / props.listState.getPageSize()) -1);
 	}
 	
 	
@@ -15,7 +15,7 @@ var ListFooter = props =>{
 	
 	var totalPages = [];
 
-	var maxPage = Math.ceil(props.listState.total / props.listState.pageSize);
+	var maxPage = Math.ceil(props.listState.total / props.listState.getPageSize());
 	
 	for(var i = 0; i < maxPage;i++) totalPages.push(i);;
 

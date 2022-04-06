@@ -5,8 +5,8 @@ import ListHeader from './ListHeader/ListHeader.jsx';
 import ListBody from './ListBody/ListBody.jsx';
 import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
-import ListState from './ListState/ListState.js';
-import ListHeight from './list.height.js';
+import {ListState, ListStore} from './ListState/ListState.js';
+
 
 import './list.scss';
 import './list.header.scss';
@@ -19,23 +19,17 @@ import './list.media.scss';
 class List extends React.Component {
 		
 	state = null;
-
-	
-	
 	constructor(props){
 		super(props)
 		this.ref = React.createRef()	
-		this.state = new ListState(this.ref);
+		this.state = new ListState(this.ref);	
 	}
 
-	updateList = () => {
-		this.setState({pageSize:ListHeight.updatePageSize(this.ref)})		
-		this.getOrders();
-	}	
-
 	componentDidMount = ()=>{	
+		
+		ListStore.save(this.state)
 		window.addEventListener('resize', this.handleEvent);
-		this.updateList();
+		this.getOrders();
 	}
 	
 	handleEvent = () => {
@@ -43,24 +37,22 @@ class List extends React.Component {
 		if(this.cancel) clearTimeout(this.cancel);
 		
 		this.cancel = setTimeout( ()=>{ 
-			this.updateList();
+			
+			var page = this.state.getCurrentPage();
+			
+			this.getOrders(page);
 		}, 300);
 	}
 	
+	
 	getOrders = (page = this.state.page, sort = this.state.sort, search = this.state.search) => {
-		
-		var obj = {loading:true };
 
-		var totalPages = Math.ceil(this.state.total /  this.state.pageSize);
-		
-		if(this.state.page > totalPages-1) {
-			obj['page'] = page =   (totalPages>0) ? totalPages-1 : 0  ;	
-		}
-
-		this.setState(obj, ()=>{
+		this.setState({loading:true }, ()=>{
 			
-			this.props.getData(page, sort, this.state.pageSize, search).then(res=>{			
-				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ //ListState.set(this.state)
+			this.props.getData(page, sort, this.state.getPageSize(), search).then(res=>{		
+				
+				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ 
+				//	ListStore.save(this.state)
 				
 				 })	
 			})
@@ -73,23 +65,19 @@ class List extends React.Component {
 	}	    
 	
 	onActionClick = (row, action) =>{
-		
-		var promise = action(row);
-		
-		if(promise)
-			action(row).then( res=>{
-				this.getOrders()
-			});
+		action(row).then( res=>{
+			if(res) this.getOrders();
+		});
 	}
 	
 	onSearch = $event=>{		
-		var value =  $event.currentTarget.value;
-		this.setState({search: value})	
+		var search =  $event.currentTarget.value;
+		this.setState({search})	
 		
 		if(this.cancel) clearTimeout(this.cancel);
 		
 		this.cancel = setTimeout( ()=>{ 
-			this.getOrders(this.state.page, this.state.sort, value) 
+			this.getOrders(this.state.page, this.state.sort, search) 
 		}, 300);	
 	}
 	
@@ -98,14 +86,11 @@ class List extends React.Component {
 		this.setState({error:true})
 		setTimeout( ()=>{ 
 			this.setState({error:false})
-		}, 4000);		
-		
+		}, 4000);			
 	}
 	
-	height = 100;
-	
 	render = () => {
-		debugger;
+
 		var height = this.state.getHeight();
 		
 		var errorMsg = 'error-msg ' +  (this.state.error?'show':'');

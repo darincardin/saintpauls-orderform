@@ -28,6 +28,7 @@ class Admin extends React.Component {
 	
 	setSelected = order => {
 		this.props.actions.setOrder(order)
+		return Promise.resolve();
 	}
 	
 	clearSelect = callback=>{	
@@ -39,10 +40,8 @@ class Admin extends React.Component {
 		return OrderAPI.update(obj)
 	}
 	
-	onDelete = obj =>{
-		if(confirm(`Delete order ${obj.id}?`)) {		
-			return OrderAPI.delete(obj.id)
-		}		
+	onDelete = obj =>{	
+		return (confirm(`Delete order ${obj.id}?`)) ? OrderAPI.delete(obj.id) : Promise.resolve();
 	}
 		
 	render = () => {

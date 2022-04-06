@@ -2,59 +2,67 @@ import { Cookies } from 'react-cookie';
 
 
 
-
+const ROW_SIZE = 40;
 
 class ListState {
 	
 	ref = null;
 	
-	static cookie = new Cookies('my-cookie');
-
 	
-	page = 0;
-	pageSize = 0;
+	
+	page = 0;	
 	total = 0;
 	search =  "";
-	loading = false;
 	sort = {by:"id", dir:"ASC"};
 	
+	loading = false;
 	error = false;
 	
 	constructor(ref){
+	
+	//	var state =  ListState.retrieve() || this;
+		
+		//var state = this;
+		debugger;
 		this.ref = ref;
-		//var state =  ListState.get();
 		
-		//return ( state || this );
-		
-		console.log('sssss')
+		//return ( state );
 	}		
 	
 
 	
-
-	
-	
-	getHeight = ()=>{
-
-		return this.ref.current && this.ref.current.parentElement.offsetHeight - 15 ;	
+	getHeight = function getHeight(){
+		return this.ref.current ? this.ref.current.parentElement.offsetHeight - 15 : 1 ;	
 	}
 	
 
-
-	
-	isActive(){
+	getTotalPages = function getTotalPages(){
+		var value = (Math.ceil(this.total /  this.getPageSize()) -1);
 		
-		return true;
+		return value > 0 ? value : 0;
 	}
-	
-	static getxxx(){
-	//	return ListState.cookie.get('list-state');
-	}	
-	
-	static setxxx(s){
-	//	ListState.cookie.set('list-state', s)
+
+	getPageSize = function getPageSize(){				
+		var value = Math.floor((this.getHeight()/ROW_SIZE)) -3;
+		return  value || 1;
+	}
+
+
+	getCurrentPage = function getCurrentPage(){
+		var totalPages = this.getTotalPages();			
+		return (this.page > totalPages) ? totalPages : this.page;	
 	}
 }
 
 
-export default ListState;
+class ListStore {
+	static cookie = new Cookies('my-cookie');
+
+	static save(s){
+		
+	//	ListStore.cookie.set('list-state', s)
+	}
+	
+}
+
+export  {ListState, ListStore};
