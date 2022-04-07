@@ -5,6 +5,7 @@ import ListHeader from './ListHeader/ListHeader.jsx';
 import ListBody from './ListBody/ListBody.jsx';
 import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
+import ListError from './ListError/ListError.jsx';
 import {ListState, ListStore} from './ListState/ListState.js';
 
 
@@ -93,22 +94,18 @@ class List extends React.Component {
 
 		var height = this.state.getHeight();
 		
-		var errorMsg = 'error-msg ' +  (this.state.error?'show':'');
+		
 		
 	    return  (
-			<div  className="list" ref={this.ref}  style={{height: height}}> 
+			<div className="list" ref={this.ref} style={{height: height}}> 
 			
-				<div className={errorMsg} >
-					<div className="alert alert-danger">
-						<strong>Error:</strong> List could not be loaded
-					</div>
-				</div>		
+				<ListError show={this.state.error} />
 
 				<ListLoader show={this.state.loading} />
 	
 				<div className="input-group search">
-						<span className="input-group-addon"><i className="glyphicon glyphicon-search"></i></span>
-						<input  type="text" className="form-control"  name="search" placeholder="Search" value={this.state.search} onChange={this.onSearch} />
+					<span className="input-group-addon"><i className="glyphicon glyphicon-search"></i></span>
+					<input  type="text" className="form-control"  name="search" placeholder="Search" value={this.state.search} onChange={this.onSearch} />
 				</div>					
 		
 				<table>
@@ -117,7 +114,6 @@ class List extends React.Component {
 				</table>
 					
 				<ListFooter update={this.getOrders} listState={this.state} />
-			
 			</div>
 		)
 	}
