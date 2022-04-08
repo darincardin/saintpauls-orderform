@@ -1,6 +1,8 @@
 import React from 'react';
 import TableLink from '../TableLink/TableLink.jsx';
 
+import './list.footer.scss';			
+			
 			
 var ListFooter = props =>{
 	
@@ -25,10 +27,8 @@ var ListFooter = props =>{
 			<TableLink onClick={()=>props.update(props.listState.page-1)} active={showPrev() } >&lt; Prev</TableLink>
 				&nbsp;
 				{totalPages.map( (obj,i) =>  
-					<span key={i}>
-						&nbsp;
-						{ props.listState.page==i ? <b>{i+1}</b> : <a onClick={()=>props.update(i)}>{i+1}</a> }	
-						&nbsp;
+					<span key={i}>					
+						{ props.listState.page==i ? <b>{i+1}</b> : <a onClick={()=>props.update(i)}>{i+1}</a> }			
 					</span>	
 				)}
 				&nbsp;

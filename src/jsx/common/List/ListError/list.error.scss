@@ -1,0 +1,26 @@
+
+.list {	 
+
+	.error-msg{
+	    position: absolute;
+	    z-index: 1000;
+	    width: 100%;
+	    text-align: center;
+	    overflow: hidden;
+	    height: 0;
+	    opacity: 0;
+	    transition: all .5s;
+		 
+		&.show {height: 100px; opacity: 1;}    
+		    
+	    .alert{
+		    margin: 10px 20%;
+		
+		    color: #a94442;
+		    background-color: #f2dede;
+		    border-color: #ebccd1;
+				
+		} 
+	}
+}
+ 

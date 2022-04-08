@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './list.loader.scss';
 
 class ListLoader extends React.Component {
 		

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './list.error.scss';
 
 class ListError extends React.Component {
 		

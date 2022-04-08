@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+import './list.header.scss';
+
 var Href = props => { 
 
 	var className = (props.sort.by == props.name) ? props.sort.dir:"";

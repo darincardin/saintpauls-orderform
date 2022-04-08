@@ -6,12 +6,11 @@ import ListBody from './ListBody/ListBody.jsx';
 import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
 import ListError from './ListError/ListError.jsx';
+import ListSearch from './ListSearch/ListSearch.jsx';
 import {ListState, ListStore} from './ListState/ListState.js';
 
 
 import './list.scss';
-import './list.header.scss';
-import './list.spinner.scss';
 import './list.media.scss';
 
 
@@ -23,7 +22,8 @@ class List extends React.Component {
 	constructor(props){
 		super(props)
 		this.ref = React.createRef()	
-		this.state = new ListState(this.ref);	
+		debugger;
+		this.state = ListState.get(this.ref);	
 	}
 
 	componentDidMount = ()=>{	
@@ -53,7 +53,7 @@ class List extends React.Component {
 			this.props.getData(page, sort, this.state.getPageSize(), search).then(res=>{		
 				
 				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ 
-				//	ListStore.save(this.state)
+					ListStore.save(this.state)
 				
 				 })	
 			})
@@ -103,10 +103,10 @@ class List extends React.Component {
 
 				<ListLoader show={this.state.loading} />
 	
-				<div className="input-group search">
-					<span className="input-group-addon"><i className="glyphicon glyphicon-search"></i></span>
-					<input  type="text" className="form-control"  name="search" placeholder="Search" value={this.state.search} onChange={this.onSearch} />
-				</div>					
+	
+				<ListSearch value={this.state.search} onChange={this.onSearch}  />
+	
+
 		
 				<table>
 					<ListHeader labels={this.props.labels} update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
