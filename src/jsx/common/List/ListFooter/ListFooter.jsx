@@ -7,7 +7,7 @@ import './list.footer.scss';
 var ListFooter = props =>{
 	
 	function showNext(){			
-		return props.listState.page <  (Math.ceil(props.listState.total / props.listState.getPageSize()) -1);
+		return props.listState.page < (Math.ceil(props.listState.total / props.listState.getPageSize()) -1);
 	}
 	
 	

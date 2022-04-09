@@ -5,11 +5,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
 module.exports = (env) => {
 
 	var plugins = [ 
 
-		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'underscore' }) ,
+		
+		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'lodash' }) ,
 	    new CopyPlugin({
 	      patterns: [
 	        { from: path.resolve('./src/assets/images'), to: '' },
@@ -56,6 +59,7 @@ module.exports = (env) => {
 	  
 	  
 	  module: {
+
 		rules: [
 			{ test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
             { test:/\.(s*)css$/, use:['style-loader','css-loader', 'sass-loader']  },			

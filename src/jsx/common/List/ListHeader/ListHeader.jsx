@@ -14,7 +14,7 @@ var Href = props => {
 			dir:className=="ASC" ? "DESC" : "ASC"
 		}
 		
-		props.update( undefined, sort )
+		props.update(  sort )
 	}
 		
 	return <a className={className} name={props.name} onClick={onClick}>{props.children}</a>

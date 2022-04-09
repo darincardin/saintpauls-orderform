@@ -13,55 +13,38 @@ import {ListState, ListStore} from './ListState/ListState.js';
 import './list.scss';
 import './list.media.scss';
 
-
-
-
 class List extends React.Component {
 		
 	state = null;
+	
 	constructor(props){
 		super(props)
-		this.ref = React.createRef()	
-		debugger;
+		this.ref = React.createRef()		
 		this.state = ListState.get(this.ref);	
 	}
 
 	componentDidMount = ()=>{	
-		
-		ListStore.save(this.state)
 		window.addEventListener('resize', this.handleEvent);
 		this.getOrders();
 	}
 	
-	handleEvent = () => {
-		
+	handleEvent = () => {	
 		if(this.cancel) clearTimeout(this.cancel);
 		
-		this.cancel = setTimeout( ()=>{ 
-			
-			var page = this.state.getCurrentPage();
-			
-			this.getOrders(page);
+		this.cancel = setTimeout( ()=>{ 				
+			this.setState( {page: this.state.getCurrentPage()}, this.getOrders );	
 		}, 300);
 	}
 	
-	
-	getOrders = (page = this.state.page, sort = this.state.sort, search = this.state.search) => {
+	getOrders = () => {
 
-		this.setState({loading:true }, ()=>{
-			
-			this.props.getData(page, sort, this.state.getPageSize(), search).then(res=>{		
-				
-				this.setState({ page, total:res.total, search, sort, loading:false }, ()=>{ 
+		this.setState( {loading:true}, ()=>{
+			this.props.getData(this.state.page, this.state.sort, this.state.getPageSize(), this.state.search).then(res=>{					
+				this.setState({ total:res.total, loading:false }, ()=>{ 
 					ListStore.save(this.state)
-				
-				 })	
+				})	
 			})
-			.catch( ()=>{
-				this.showError();
-				this.setState({ loading:false, page:0})
-				//this.setState({...ListState.DEFAULT_STATE})
-			})							
+			.catch(this.handleError)							
 		});
 	}	    
 	
@@ -71,49 +54,40 @@ class List extends React.Component {
 		});
 	}
 	
-	onSearch = $event=>{		
-		var search =  $event.currentTarget.value;
-		this.setState({search})	
+	onSearch = search => {		
+		this.setState( {search, page:0}, this.getOrders );	
+	}	
 		
-		if(this.cancel) clearTimeout(this.cancel);
-		
-		this.cancel = setTimeout( ()=>{ 
-			this.getOrders(this.state.page, this.state.sort, search) 
-		}, 300);	
+	onSort = sort => {
+		this.setState( {sort}, this.getOrders ); 
 	}
 	
+	goToPage = page => {
+		this.setState( {page}, this.getOrders ); 	
+	}
 	
-	showError = () =>{
-		this.setState({error:true})
-		setTimeout( ()=>{ 
-			this.setState({error:false})
-		}, 4000);			
+	handleError = () =>{		
+		this.setState( {error:true, loading:false, page:0} )
+		setTimeout( ()=>{ this.setState({error:false}) }, 4000);			
 	}
 	
 	render = () => {
 
 		var height = this.state.getHeight();
 		
-		
-		
 	    return  (
 			<div className="list" ref={this.ref} style={{height: height}}> 
 			
-				<ListError show={this.state.error} />
-
-				<ListLoader show={this.state.loading} />
-	
-	
+				<ListError  show={this.state.error} />
+				<ListLoader show={this.state.loading} />	
 				<ListSearch value={this.state.search} onChange={this.onSearch}  />
-	
 
-		
 				<table>
-					<ListHeader labels={this.props.labels} update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
+					<ListHeader labels={this.props.labels} update={this.onSort} sort={this.state.sort} hasActions={this.props.children!=null} />
 					<ListBody   labels={this.props.labels} data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
 					
-				<ListFooter update={this.getOrders} listState={this.state} />
+				<ListFooter update={this.goToPage} listState={this.state} />
 			</div>
 		)
 	}
@@ -123,8 +97,7 @@ List.propTypes = {
 	labels: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,
     getData: PropTypes.func.isRequired,
-	action: PropTypes.func,
-	amount: PropTypes.number,
+	action: PropTypes.func
 };
 
 export default List;
