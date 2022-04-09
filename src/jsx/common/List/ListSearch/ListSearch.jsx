@@ -12,7 +12,7 @@ class ListSearch extends React.Component {
 		
 		this.cancel = setTimeout( ()=>{ 
 			
-			this.props.onChange(this.state.value);
+			this.props.onChange({search:this.state.value});
 			
 		}, 300);	
 	}			

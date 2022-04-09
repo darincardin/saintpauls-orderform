@@ -32,13 +32,13 @@ class List extends React.Component {
 		if(this.cancel) clearTimeout(this.cancel);
 		
 		this.cancel = setTimeout( ()=>{ 				
-			this.setState( {page: this.state.getCurrentPage()}, this.getOrders );	
+			this.getOrders({ page: this.state.getCurrentPage() })		
 		}, 300);
 	}
 	
-	getOrders = () => {
+	getOrders = (data = {}) => {
 
-		this.setState( {loading:true}, ()=>{
+		this.setState( {loading:true, ...data}, ()=>{
 			this.props.getData(this.state.page, this.state.sort, this.state.getPageSize(), this.state.search).then(res=>{					
 				this.setState({ total:res.total, loading:false }, ()=>{ 
 					ListStore.save(this.state)
@@ -54,21 +54,17 @@ class List extends React.Component {
 		});
 	}
 	
-	onSearch = search => {		
-		this.setState( {search, page:0}, this.getOrders );	
-	}	
+	handleError = () =>{	
 		
-	onSort = sort => {
-		this.setState( {sort}, this.getOrders ); 
-	}
-	
-	goToPage = page => {
-		this.setState( {page}, this.getOrders ); 	
-	}
-	
-	handleError = () =>{		
+			//this.setState( {error:true});
 		this.setState( {error:true, loading:false, page:0} )
-		setTimeout( ()=>{ this.setState({error:false}) }, 4000);			
+		//setTimeout( ()=>{ this.setState({error:false}) }, 4000);			
+	}
+	
+	
+	complete = ()=>{
+		debugger;
+		this.setState({error: false});
 	}
 	
 	render = () => {
@@ -78,16 +74,17 @@ class List extends React.Component {
 	    return  (
 			<div className="list" ref={this.ref} style={{height: height}}> 
 			
-				<ListError  show={this.state.error} />
+			
+				{ this.state.error && <ListError  complete={this.complete}  /> }
 				<ListLoader show={this.state.loading} />	
-				<ListSearch value={this.state.search} onChange={this.onSearch}  />
+				<ListSearch value={this.state.search} onChange={this.getOrders}  />
 
 				<table>
-					<ListHeader labels={this.props.labels} update={this.onSort} sort={this.state.sort} hasActions={this.props.children!=null} />
+					<ListHeader labels={this.props.labels} update={this.getOrders} sort={this.state.sort} hasActions={this.props.children!=null} />
 					<ListBody   labels={this.props.labels} data={this.props.data} children={this.props.children} onClick={this.onActionClick}   />
 				</table>
 					
-				<ListFooter update={this.goToPage} listState={this.state} />
+				<ListFooter update={this.getOrders} listState={this.state} />
 			</div>
 		)
 	}

@@ -10,7 +10,6 @@ var ListFooter = props =>{
 		return props.listState.page < (Math.ceil(props.listState.total / props.listState.getPageSize()) -1);
 	}
 	
-	
 	function showPrev(){
 		return props.listState.page > 0;
 	}
@@ -24,15 +23,15 @@ var ListFooter = props =>{
 
 	return (
 		<div className="foot text-center">
-			<TableLink onClick={()=>props.update(props.listState.page-1)} active={showPrev() } >&lt; Prev</TableLink>
+			<TableLink onClick={()=>props.update({page:props.listState.page-1})} active={showPrev() } >&lt; Prev</TableLink>
 				&nbsp;
 				{totalPages.map( (obj,i) =>  
 					<span key={i}>					
-						{ props.listState.page==i ? <b>{i+1}</b> : <a onClick={()=>props.update(i)}>{i+1}</a> }			
+						{ props.listState.page==i ? <b>{i+1}</b> : <a onClick={()=>props.update({page:i})}>{i+1}</a> }			
 					</span>	
 				)}
 				&nbsp;
-			<TableLink onClick={()=>props.update(props.listState.page+1)} active={showNext()} >Next &gt;</TableLink>
+			<TableLink onClick={()=>props.update({page:props.listState.page+1})} active={showNext()} >Next &gt;</TableLink>
 		</div>
 	)
 }
