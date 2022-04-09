@@ -65,7 +65,7 @@ class List extends React.Component {
 	    return  (
 			<div className="list" ref={this.ref} style={{height: height}}> 
 			
-				<ListError  error={this.state.error} complete={()=>{this.setState({error: false})}}  /> 
+				<ListError  error={this.state.error} complete={()=>this.setState({error: false})}  /> 
 				<ListLoader show={this.state.loading} />	
 				<ListSearch value={this.state.search} onChange={this.getOrders}  />
 

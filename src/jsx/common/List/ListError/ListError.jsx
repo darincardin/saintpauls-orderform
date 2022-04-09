@@ -8,7 +8,7 @@ class HTML extends React.Component{
 		super();
 		
 		setTimeout(()=>{
-			this.props.complete()
+			this.props.complete();
 		},4000)
 	}
 	
