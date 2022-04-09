@@ -1,19 +1,16 @@
 import React from 'react';
 
-
 class ListSearch extends React.Component {
 	state = {value:""}
-		//this.props.onChange
+
 	onSearch = $event => {		
-		debugger;
+
 		this.setState({value: $event.currentTarget.value})	
 		
 		if(this.cancel) clearTimeout(this.cancel);
 		
 		this.cancel = setTimeout( ()=>{ 
-			
-			this.props.onChange({search:this.state.value});
-			
+			this.props.onChange({search:this.state.value, page:0});	
 		}, 300);	
 	}			
 		
