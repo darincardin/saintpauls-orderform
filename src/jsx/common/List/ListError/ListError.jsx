@@ -6,14 +6,17 @@ class HTML extends React.Component{
 		
 	constructor(){
 		super();
-		console.log("here")
+		
+		setTimeout(()=>{
+			this.props.complete()
+		},4000)
 	}
 	
     render(){ 
 		return (
 			<div className={'error-msg show'} >
 				<div className="alert alert-danger">
-						<strong>Error:</strong> List could not be loaded
+					<strong>Error:</strong> List could not be loaded
 				</div>
 			</div>
 		)
@@ -25,30 +28,11 @@ class HTML extends React.Component{
 
 class ListError extends React.Component {
 		
-	constructor(props){
-		super()
-		
-		setTimeout(()=>{
-
-			this.props.complete()
-		},4000)
-	}
-
-
 	render() {
-	
-
-	
 		return (
-		
-	
-			<div className={'error-msg show'} >
-				<div className="alert alert-danger">
-						<strong>Error:</strong> List could not be loaded
-				</div>
-			</div>
-			
-		
+			<>
+				{ this.props.error && <HTML complete={this.props.complete} /> }
+			</>
 		)	
 	}
 }		

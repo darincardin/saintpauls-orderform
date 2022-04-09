@@ -55,16 +55,7 @@ class List extends React.Component {
 	}
 	
 	handleError = () =>{	
-		
-			//this.setState( {error:true});
 		this.setState( {error:true, loading:false, page:0} )
-		//setTimeout( ()=>{ this.setState({error:false}) }, 4000);			
-	}
-	
-	
-	complete = ()=>{
-		debugger;
-		this.setState({error: false});
 	}
 	
 	render = () => {
@@ -74,8 +65,7 @@ class List extends React.Component {
 	    return  (
 			<div className="list" ref={this.ref} style={{height: height}}> 
 			
-			
-				{ this.state.error && <ListError  complete={this.complete}  /> }
+				<ListError  error={this.state.error} complete={()=>{this.setState({error: false})}}  /> 
 				<ListLoader show={this.state.loading} />	
 				<ListSearch value={this.state.search} onChange={this.getOrders}  />
 
