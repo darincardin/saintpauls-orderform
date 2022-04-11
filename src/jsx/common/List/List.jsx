@@ -7,8 +7,8 @@ import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
 import ListError from './ListError/ListError.jsx';
 import ListSearch from './ListSearch/ListSearch.jsx';
-import {ListState, ListStore} from './ListState/ListState.js';
-
+import ListState from './ListState/ListState.js';
+import ListStore from './ListState/ListStore.js';
 
 import './list.scss';
 import './list.media.scss';
@@ -37,9 +37,8 @@ class List extends React.Component {
 	}
 	
 	getOrders = (data = {}) => {
-
 		this.setState( {loading:true, ...data}, ()=>{
-			this.props.getData(this.state.page, this.state.sort, this.state.getPageSize(), this.state.search).then(res=>{					
+			this.props.getData(this.state.page, this.state.sort.get(), this.state.getPageSize(), this.state.search).then(res=>{					
 				this.setState({ total:res.total, loading:false }, ()=>{ 
 					ListStore.save(this.state)
 				})	
@@ -88,3 +87,17 @@ List.propTypes = {
 };
 
 export default List;
+
+
+//turbotax Dreamer8*
+/*
+Dreamer()
+Dreamer2@
+
+
+*/
+
+
+
+
+

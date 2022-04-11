@@ -1,6 +1,7 @@
-import { Cookies } from 'react-cookie';
 
 
+import ListStore from './ListStore.js';
+import ListSort from './ListSort.js';
 
 const ROW_SIZE = 40;
 
@@ -11,19 +12,14 @@ class ListState {
 	page = 0;	
 	total = 0;
 	search =  "";
-	sort = {by:"id", dir:"ASC"};
+	sort = new ListSort();
 	
 	loading = false;
 	error = false;
 	
 	static get(ref){
-		
-		var state = new ListState();
-				
-		if(ListStore.has()) state = {...state, ...ListStore.retrieve()};		
-			
-		state.ref = ref;	
-			
+		var state =  ListStore.retrieve()
+		state.ref = ref;			
 		return state;
 	}		
 
@@ -45,26 +41,9 @@ class ListState {
 		var totalPages = this.getTotalPages();			
 		return (this.page > totalPages) ? totalPages : this.page;	
 	}
-}
-
-class ListStore {
-	static cookie = new Cookies('my-cookie');
-
-	static save(s){	
-		ListStore.cookie.set('list-state', { ...s, ...{ref:null}} )
+		
+	getMaxPage = function getMaxPage(){	
+		return Math.ceil(this.total / this.getPageSize());
 	}
-	
-	static retrieve(){	
-		return ListStore.cookie.get('list-state');
-	}	
-	
-	static has(){
-		return ListStore.cookie.get('list-state') ? true : false;	
-	}
-	
-
-	
-	
 }
-
-export  {ListState, ListStore};
+export default ListState;
