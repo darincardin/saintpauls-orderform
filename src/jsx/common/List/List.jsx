@@ -66,6 +66,7 @@ class List extends React.Component {
 			
 				<ListError  error={this.state.error} complete={()=>this.setState({error: false})}  /> 
 				<ListLoader show={this.state.loading} />	
+
 				<ListSearch value={this.state.search} onChange={this.getOrders}  />
 
 				<table>
@@ -87,17 +88,3 @@ List.propTypes = {
 };
 
 export default List;
-
-
-//turbotax Dreamer8*
-/*
-Dreamer()
-Dreamer2@
-
-
-*/
-
-
-
-
-

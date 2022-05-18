@@ -1,8 +1,8 @@
 import Order from './Order.js';
 
 
-var url = 'http://localhost:8888';
-
+//var url = 'http://localhost:8888';
+var url = 'http://demo.darincardin.infinityfreeapp.com';
 
 
 class OrderAPI {
@@ -29,7 +29,7 @@ class OrderAPI {
 	}
 	
 	static login(data){
-		return OrderAPI.post(`${url}/php/login.php`, data ) 
+		return OrderAPI.post(`${url}/php/login.php`, data ) ;
 	}	
 	
 	static logout(){
@@ -52,6 +52,7 @@ class OrderAPI {
 		
 		if(data) opts.body = JSON.stringify(data)
 		
+
 		return fetch(url, opts).then(res => res.json()).then(res=>{
 			
 			if(res instanceof Array) res.data = Order.toArray(res.data)
@@ -63,6 +64,7 @@ class OrderAPI {
 			console.log('An error occurred. Please try again later.')	
 			throw err;
 		})	
+		
 	}
 }
 

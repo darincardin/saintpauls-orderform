@@ -1,6 +1,6 @@
 
 	header{
-		background: url('/bg.jpg');
+		background: #273a4e;
 		height: 80px;
 		z-index:2;
 		position: relative;
@@ -9,6 +9,11 @@
 		color:white;
 		h1 {text-align: center;}
 		
+		
+		.glyphicon-lock {
+			top: 0px; 
+    		display: inline;
+		}
 		
 		.controls {
 			position: absolute;

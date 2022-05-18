@@ -10,7 +10,7 @@ class Footer extends React.Component{
 			<center className="hidden-xs">
 				Placeholder
 			</center> 
-			<center className="copyright">COPYRIGHT &copy; 2019 <span></span></center>
+			<center className="copyright">COPYRIGHT &copy; 2021 <span></span></center>
 		</footer>   
 	  );
 	}

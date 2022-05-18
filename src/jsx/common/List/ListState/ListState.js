@@ -46,4 +46,7 @@ class ListState {
 		return Math.ceil(this.total / this.getPageSize());
 	}
 }
+
+
+
 export default ListState;

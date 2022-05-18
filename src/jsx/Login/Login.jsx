@@ -5,7 +5,7 @@ import {Header, Footer, ProgressBar, Background} from '/jsx/common';
 
 import {OrderAPI, Order} from  '/js/order';
 
-
+import './style.scss';
 
 class Login extends React.Component{
 	
@@ -36,15 +36,15 @@ class Login extends React.Component{
 				<Header title="Login"/>
 				<Background />
 				<main >
-				<div className="login">
-					
-				
+				<div className="login">			
 					<div className="panel panel-default">
 						<div className="panel-body">
 						
 							<h2>Login Demo</h2>
 							
+		
 								<br />
+								<div className="sub-text">* Use any username/password to log in</div>
 								<div className="input-group">
 									<span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
 									<input  type="text" className="form-control" name="username" placeholder="User" onKeyUp={this.change} />

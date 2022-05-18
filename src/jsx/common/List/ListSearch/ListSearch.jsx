@@ -1,7 +1,9 @@
 import React from 'react';
 
 class ListSearch extends React.Component {
-	state = {value:""}
+	
+	state = {value:this.props.value}
+	
 
 	onSearch = $event => {		
 

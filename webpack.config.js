@@ -1,17 +1,17 @@
 const path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+//const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+//var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = (env) => {
 
 	var plugins = [ 
 
-		
+		new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 3 }),	
 		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'lodash' }) ,
 	    new CopyPlugin({
 	      patterns: [
@@ -55,59 +55,22 @@ module.exports = (env) => {
 	  },
 	  devServer: require('./devServer/index.js')(env),
 	  
-	  
-	  
-	  
 	  module: {
 
 		rules: [
 			{ test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
             { test:/\.(s*)css$/, use:['style-loader','css-loader', 'sass-loader']  },			
 			{
-			    test: /\.(png|jpe?g|gif|ico)$/i, 
-				exclude: /node_modules/, 
+			    test: /\.(png|jpe?g|gif|ico)$/i, exclude: /node_modules/, 
 				use: [{  loader: 'file-loader',  options: {  name: '[name].[ext]'}} ]
 			},
 			{
 				test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
 				loader: 'url-loader'
-			},
-			
-				/*
-            {
-                test: require.resolve('jquery'),
-                use: [{
-                        loader: 'expose-loader',
-                        options: 'jQuery'
-                    },
-                    {
-                        loader: 'expose-loader',
-                        options: '$'
-                    }
-                ]
-            },			
-            {
-                test: require.resolve('bootstrap'),
-                use: [
-					{
-                        loader: 'expose-loader',
-                        options: 'bootstrap'
-                    }
-                ]
-            }					
-			
-			*/
-			
+			}
 		]
 	  }
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+
 	}
 
 }
