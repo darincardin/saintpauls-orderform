@@ -7,17 +7,23 @@
 		right: 0;
 		z-index: 0;
 			
+			
+		.login-bg{  min-width: 0px;  }	
+			
+		.fadeIn{ opacity:1; }	
+			
 		img {
+			
+			
+			
 			min-width: 600px;
 			width: 100%;
 			opacity: 0;
 			height: inherit;
 			transition: opacity 1s;
-		}
+			
 
-		img.fadeIn{
-			opacity:1;
-		}				
+		}		
 	}
 
 

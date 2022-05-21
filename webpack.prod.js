@@ -31,9 +31,9 @@ module.exports = env => {
 		extensions: ['*','.js','.jsx']
 	  },  
 	  plugins: [
-		new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 3 }),	
+		//new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 3 }),	
 		new CleanWebpackPlugin(),
-		new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 3 }),	
+	//	new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 3 }),	
 		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'lodash' }) ,
 	    new CopyPlugin({
 	      patterns: [

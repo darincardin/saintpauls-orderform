@@ -34,7 +34,7 @@ class Login extends React.Component{
 		return (
 			<div> 
 				<Header title="Login"/>
-				<Background />
+				<Background className="login-bg"/>
 				<main >
 				<div className="login">			
 					<div className="panel panel-default">
