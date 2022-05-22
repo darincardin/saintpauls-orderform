@@ -1,15 +1,25 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-
 import {Header, Footer, ProgressBar, Background} from '/jsx/common';
-
 import {OrderAPI, Order} from  '/js/order';
+
+import utils from '/js/utils.js'
 
 import './style.scss';
 
 class Login extends React.Component{
 	
-	state = {username:"", password:""}
+	ref = null;
+	state = {username:"", password:""}	
+	
+	constructor(props){
+		super(props)
+		this.ref = React.createRef();	
+		
+		utils.thirdParty.then( () => {
+			utils.ref = this.ref;
+			this.setState( {loaded: true} );
+		});		
+	}		
 	
 	submit = () =>{
 
@@ -32,7 +42,7 @@ class Login extends React.Component{
 	
     render() {
 		return (
-			<div> 
+			<div ref={this.ref}> 
 				<Header title="Login"/>
 				<Background className="login-bg"/>
 				<main >

@@ -1,8 +1,8 @@
 import Order from './Order.js';
 
 
-//var url = 'http://localhost:8888';
-var url = 'http://demo.darincardin.infinityfreeapp.com';
+var url = 'http://localhost:8888';
+//var url = 'http://demo.darincardin.infinityfreeapp.com';
 
 
 class OrderAPI {

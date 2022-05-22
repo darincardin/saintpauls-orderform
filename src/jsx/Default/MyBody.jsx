@@ -1,62 +1,38 @@
 import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
 import ErrorBoundary from 'react-error-boundary';
 import {BrowserRouter as Router, Switch, Redirect,Route, Link, withRouter} from "react-router-dom";
 import {Header, Footer, ProgressBar, Error,  Background} from '/jsx/common';
-
 import StepBar from 'stepbar';
-
-import {Order} from 'order';
-
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-
 import {Page1, Page2, Page3} from './Pages/';
 
+import utils from '/js/utils.js'
 
-
-var thirdParty = Promise.all([
-	import ('jquery'),
-	import ('bootstrap/dist/js/bootstrap.js'),
-	
-	
-	
-	
-])
-
-
-var getPromise = () =>{
-	
-	
-}
 
 
 var Main = withRouter( class Main extends React.Component { 
+	
+	ref = null;
 	
 	state = { loaded:false, step:0, className: '' }
 		
 	constructor(props){
 		super(props)
+		this.ref = React.createRef()	
 		
-		thirdParty.then( () => {
-			window.$ = $;
+		utils.thirdParty.then( () => {
+			utils.ref = this.ref;
 			this.setState( {loaded: true} );
 		});		
-		
-		
+				
 		this.props.history.listen( loc => {	
-		
 			var step = this.map[loc.pathname];
 			var className = step > this.state.step ? '':'reverse';
 			this.setState({className, step})
 		});	
 	}	
 	
-	map = {
-		undefined:0,
-		'/page1':0,
-		'/page2':1,
-		'/page3':2
-	}
+	map = {	undefined:0, '/page1':0, '/page2':1, '/page3':2 }
 
 	loading = 	(<div>
 					<br/><br/><br/>
@@ -71,20 +47,14 @@ var Main = withRouter( class Main extends React.Component {
 		{label:"Done"}
 	]
 	
-	renderxx() {
-
-		return <div></div>
-	}
-	
 	render() {
 
 		return (
-			<main>		
+			<main  ref={this.ref} >		
 				<Background />			
 				<ErrorBoundary FallbackComponent={<Error />} >
-					<br />
-				
-					
+						<br />
+
 						<div className="panel panel-default">
 							<div className="panel-body">
 								{this.state.loaded && 

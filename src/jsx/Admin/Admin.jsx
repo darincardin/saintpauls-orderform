@@ -8,10 +8,25 @@ import {OrderAPI, Order} from  '/js/order';
 
 import { connect, actions } from 'reducer'
 
+import utils from '/js/utils.js'
+
 
 class Admin extends React.Component {
 
 	state = { data:[] }
+	ref = null;
+	
+	constructor(props){
+		super(props)
+
+		utils.thirdParty.then( () => {
+	
+			utils.ref = this.ref;
+
+			this.setState( {loaded: true} );
+		});			
+	}		
+	
 	
 	getData = (page, sort, amount, search)=>{
 		return OrderAPI.list(page, sort, amount, search).then(res=>{
@@ -46,7 +61,7 @@ class Admin extends React.Component {
 		
 	render = () => {
 		return (	
-			<div>
+			<div ref={this.ref} >
 				<Router>
 				<Header title="Admin" logout={true}/>	
 				<main>	
