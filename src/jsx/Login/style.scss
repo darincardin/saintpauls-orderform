@@ -1,7 +1,16 @@
 
 
-.sub-text{
-	
+.sub-text{	
 	color: #737373; 
 	font-style: italic;
 }
+
+
+
+
+@media screen and  (max-width : 525px) {	
+	input::placeholder {
+	    color: transparent!important;
+	}
+}	
+

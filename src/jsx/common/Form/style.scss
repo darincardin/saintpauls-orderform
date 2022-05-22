@@ -58,6 +58,7 @@ form {
 				color: red;
 				position: absolute;
 				margin-left: 5px;
+				  
 			}		
 		}
 			
@@ -108,6 +109,13 @@ form {
 			width: 20px;
 			xxopacity:0;
 		}
+
+
+		@media screen and  (min-width: 767px) {	
+			input::placeholder, textarea::placeholder {
+			    color: transparent!important;
+			}
+		}	
 
 		
 		textarea{

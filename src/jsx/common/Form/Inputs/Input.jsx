@@ -1,8 +1,5 @@
 import React from 'react';
 import tooltip from '../Tools/Tooltip.jsx';
-import Validation  from '../Tools/Validation.js';
-
-import utils from '/js/utils.js'
 
 const messages = {required:"Required", phone:"Format is xxx-xxx-xxxx", containsChars:"Cannot contain characters"};
 
@@ -68,12 +65,13 @@ class Input extends React.Component {
 			onChange: this.onChange,
 			onBlur: this.onBlur,
 			value: this.state.value,
-			placeholder:  utils.isXS() ? this.props.label : ""
+			placeholder:  this.props.label
 		}	
 	
 		return (
 			<>
 				<td className="hidden-xs"><label className={'control-label ' + (this.props.required ? 'required':'')}>{this.props.label}</label></td>
+				<td className="hidden-sm hidden-md hidden-lg hidden-xl"><label className={'control-label ' + (this.props.required ? 'required':'')}>&nbsp;</label></td>
 				<td>
 					<div ref={this.elem} className={className.join(" ")} name={`my-${this.props.name}`}  >							
 						{ this.props.strategy.html(attribs, this.tooltipParams, this.props.options) }

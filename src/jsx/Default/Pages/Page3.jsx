@@ -29,12 +29,12 @@ class Page3 extends React.Component {
 		render() { 
 			return (
 				<div className="page page3" >
-					<h3 style={{'font-weight':'600'}}>Order Successful!</h3>
+					<h3 style={{'fontWeight':'600'}}>Order Successful!</h3>
 	
 							<table >  
 								<tbody>
 								{this.data.map(i=>(
-									<tr> 
+									<tr  key={i.label}> 
 										<td><label className='control-label'>{i.label}</label></td>
 										<td>{i.value}</td>
 									</tr>

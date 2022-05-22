@@ -32,7 +32,7 @@ var Main = withRouter( class Main extends React.Component {
 		});	
 	}	
 	
-	map = {	undefined:0, '/page1':0, '/page2':1, '/page3':2 }
+	map = {	undefined:0, '/':0, '/page1':0, '/page2':1, '/page3':2 }
 
 	loading = 	(<div>
 					<br/><br/><br/>
