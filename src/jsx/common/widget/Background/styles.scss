@@ -22,8 +22,20 @@
 			height: inherit;
 			transition: opacity 1s;
 			
+			
 
-		}		
+		}
+		
+			@media screen and  (max-width: 766px) {	
+				
+				img {
+					position: absolute;
+    				left: -25%;
+    				width: 125%;
+				}
+			}		
+		
+			
 	}
 
 

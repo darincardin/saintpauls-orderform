@@ -7,11 +7,15 @@ import './styles.scss';
 class Background extends React.Component{
 	
 	componentDidMount() {	
+		
+		
 		setTimeout( ()=>{				
-			var img = utils.isXS() ? "background-sm.jpg" : "background.jpg";
 			
-			$('.bg img').attr("src", img).addClass('fadeIn');
+			
+			$('.bg img').attr("src", "background.jpg").addClass('fadeIn');
 		}, 500);
+		
+		
 	}
 	
     render() {
