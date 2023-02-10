@@ -53,7 +53,7 @@ class Order {
 			orderInfo: [ 
 				{label:"Order Info", name:"order-info", 	tag:"header" },
 				{label:"Quantity",   name:"quantity",   	tag:"number", showIf:{target: "deliveryMethod", test:v=>v>5 }, required:true},
-				{label:"Deliver",    name:"deliveryMethod", tag:"radio",  showIf:{target:['address', 'time'], test:true },  options: [
+				{label:"",    name:"deliveryMethod", tag:"radio",  showIf:{target:['address', 'time'], test:true },  options: [
 					{label:"Pickup",  value:false },
 					{label:"Deliver", value:true }
 				]},

@@ -1,7 +1,35 @@
 
-.list {	 
 
-	.error-msg{
+	.my-error{
+		
+	    position: fixed;
+	    top: 30px;
+	    left: 0;
+	    right: 0;		
+		text-align: center;
+			
+			
+		.alert-danger {
+			
+		    position: relative;
+		    max-width: 500px;
+		    width: 100%;
+		   
+		    display: inline-block;			
+					
+		}
+			
+	}
+
+
+
+
+
+
+
+
+
+	.xxxerror-msg{
 	    position: absolute;
 	    z-index: 1000;
 	    width: 100%;
@@ -15,12 +43,12 @@
 		    
 	    .alert{
 		    margin: 10px 20%;
-		
+		  
 		    color: #a94442;
 		    background-color: #f2dede;
 		    border-color: #ebccd1;
 				
 		} 
 	}
-}
+
  

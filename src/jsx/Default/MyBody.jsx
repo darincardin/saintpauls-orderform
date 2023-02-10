@@ -76,8 +76,7 @@ var Main = withRouter( class Main extends React.Component {
 								</div>
 								}	
 							</div>
-						</div>	
-					}				
+						</div>			
 				</ErrorBoundary >
 			</main>		
 		)

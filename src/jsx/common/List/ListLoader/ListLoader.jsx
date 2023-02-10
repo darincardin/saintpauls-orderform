@@ -10,7 +10,7 @@ class ListLoader extends React.Component {
 		<>
 			{this.props.show && 
 				<div className="table-loader">
-					<div> <i className="glyphicon glyphicon-cog spin" ></i></div>
+					<div> <i className="glyphicon glyphicon-refresh spin" ></i></div>
 				</div>
 			}
 		</>		

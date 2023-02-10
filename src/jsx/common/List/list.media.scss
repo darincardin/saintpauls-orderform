@@ -9,7 +9,7 @@
 	}	
 	
 	
-	@media screen and  (max-width : 991px) {				
+	@media screen and  (max-width : 991px) {	/*Phone*/			
 		td:nth-child(5){
 			display:none;
 		}	 
@@ -29,6 +29,42 @@
 		td:nth-child(2), td:nth-child(6) {
 			display:none;
 		}		
+	}	
+	
+	
+	
+	
+
+		
+	@media only screen and (max-width: 550px) {
+			& {
+				margin: 10px 2px;
+				max-width: calc(100% - 4px) !important;
+			}
+
+			td:nth-child(1),
+			td:nth-child(4),
+			td:nth-child(6){	
+				display:none;
+			}
+			
+			.edit,
+			.delete {
+				overflow: hidden;
+				display: inline-block;
+				width: 15px;			
+				vertical-align: middle;
+				font-family: "Glyphicons Halflings";
+			}
+			
+			.edit:before   { content: "\e065"; }
+			.delete:before { content: "\e020"; }	
 	}		
+	
+	
+	
+	
+	
+		
 }
  

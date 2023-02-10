@@ -5,10 +5,11 @@ import ListHeader from './ListHeader/ListHeader.jsx';
 import ListBody from './ListBody/ListBody.jsx';
 import ListFooter from './ListFooter/ListFooter.jsx';
 import ListLoader from './ListLoader/ListLoader.jsx';
-import ListError from './ListError/ListError.jsx';
 import ListSearch from './ListSearch/ListSearch.jsx';
 import ListState from './ListState/ListState.js';
 import ListStore from './ListState/ListStore.js';
+
+import MyError from '../widget/MyError/MyError.jsx';
 
 import './list.scss';
 import './list.media.scss';
@@ -64,7 +65,7 @@ class List extends React.Component {
 	    return  (
 			<div className="list" ref={this.ref} style={{height: height}}> 
 			
-				<ListError  error={this.state.error} complete={()=>this.setState({error: false})}  /> 
+				<MyError  error={this.state.error} complete={()=>this.setState({error: false})}  /> 
 				<ListLoader show={this.state.loading} />	
 
 				<ListSearch value={this.state.search} onChange={this.getOrders}  />

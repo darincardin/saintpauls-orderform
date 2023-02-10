@@ -6,6 +6,7 @@ import {ProgressBar} from '/jsx/common';
 import {connect, actions} from 'reducer'
 import {OrderAPI, Order} from  'order';
 
+import MyError from '../../common/widget/MyError/MyError.jsx';
 
 class Page2 extends React.Component {
 
@@ -14,7 +15,7 @@ class Page2 extends React.Component {
 		if(!props.order.fName) props.history.push('/')
 	}
 	
-	state = { order: this.props.order }
+	state = { order: this.props.order, error:false }
 
 	onSuccessBackup = order =>{
 		this.props.actions.setOrder(order);
@@ -29,13 +30,18 @@ class Page2 extends React.Component {
 			this.props.actions.setOrder(res);
 			this.props.history.push('/page3')
 		})
+		.catch(()=>{ this.setState({error:true}) })
 		.finally( this.props.progress.hide )	
 	}
 
 	render = ()=> {
 		return (
 			<div className="page page2" >
+			    <MyError  error={this.state.error} complete={()=>this.setState({error: true})}  /> 
+			
 				<div>
+					Orders of six or more will be delivered for free.
+				
 					<Form  onSuccess={this.onSuccess} object={this.state.order} fields={Order.display.inputs.orderInfo} >
 						<Link to='/page1'><button className="btn btn-default">Back</button></Link>
 						&nbsp;

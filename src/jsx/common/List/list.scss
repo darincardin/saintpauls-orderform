@@ -5,6 +5,8 @@ html, body, #app {
 }
 
 .list {	 
+	margin: 10px;
+	max-width: calc(100% - 20px) !important;
 	padding-bottom: 41px;
 	white-space: nowrap;
 	table-layout:fixed;
@@ -61,11 +63,11 @@ html, body, #app {
 
 	td:nth-child(2), 
 	td:nth-child(3){
-		width: 120px;
+		width: 130px;
 	}
 
 	td:nth-child(4){
-		width: 65px;
+		width: 70px;
 	}
 	
 	td:nth-child(5) {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './list.error.scss';
+import './style.scss';
 
 class HTML extends React.Component{
 		
@@ -14,9 +14,9 @@ class HTML extends React.Component{
 	
     render(){ 
 		return (
-			<div className={'error-msg show'} >
+			<div className="my-error " >
 				<div className="alert alert-danger">
-					<strong>Error:</strong> List could not be loaded
+					<strong>Error:</strong> Server not responding. Try again later.
 				</div>
 			</div>
 		)
@@ -26,7 +26,7 @@ class HTML extends React.Component{
 
 
 
-class ListError extends React.Component {
+class MyError extends React.Component {
 		
 	render() {
 		return (
@@ -37,4 +37,4 @@ class ListError extends React.Component {
 	}
 }		
 
-export default ListError;
+export default MyError;

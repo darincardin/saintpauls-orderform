@@ -7,32 +7,5 @@ main {
 		& { height: calc(100% - 110px);	}
 	}	
 
-	.list {
-		margin: 10px;
-		max-width: calc(100% - 20px) !important;
-		
-		@media only screen and (max-width: 550px) {
-			& {
-				margin: 10px 2px;
-				max-width: calc(100% - 4px) !important;
-			}
 
-			td:nth-child(1),
-			td:nth-child(4){	
-				display:none;
-			}
-			
-			.edit,
-			.delete {
-				overflow: hidden;
-				display: inline-block;
-				width: 15px;			
-				vertical-align: middle;
-				font-family: "Glyphicons Halflings";
-			}
-			
-			.edit:before   { content: "\e065"; }
-			.delete:before { content: "\e020"; }	
-		}		
-	}
 }
