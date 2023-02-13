@@ -16,20 +16,26 @@ module.exports = function(env) {
 		publicPath: '/',
 		historyApiFallback: true,   
 		inline: true,
-		   disableHostCheck: true,   // That solved it
-		port: 80   ,
+		disableHostCheck: true,  
+		port: 8080   ,
 		before: function(app, server, compiler) {
-			app.post('/php/orders/create.php',  (req, res)=>res.json(reader(res, 'create.json'))); 
-			app.post('/php/orders/update.php',  (req, res)=>{
+			app.post('/php/orders/controllers/create.php',  (req, res)=>res.json(reader(res, 'create.json'))); 
+			app.post('/php/orders/controllers/update.php',  (req, res)=>{
 				return res.json(reader(res, 'success.json')); 
 			})
-			app.get('/php/orders/list.php*',    (req, res)=>{	
+			app.get('/php/orders/controllers/list.php*',    (req, res)=>{	
 				var {page, amount} = req.query;
-				var list = 	[...data];
-				res.json({total: Math.ceil(list.length/amount), data: list.splice(amount*page, amount)});
+			
+				var list = [
+				  	{"id":"15", "fName": "Rice", "lName":"Allen",  "quantity":"2", "phone":"211-234-3332", "address":"Union Street"},
+  					{"id":"16", "fName": "Smith", "lName":"John",  "quantity":"5", "phone":"222-222-2222", "address":"Rockdale Street"}  	
+				]
+				
+				
+				res.json({total:list.length, data: list});
 			})
 
-			app.get('/php/orders/delete.php*', (req, res)=>{
+			app.get('/php/orders/controllers/delete.php*', (req, res)=>{
 				_.remove(data, {id: req.query.id})
 				res.json(reader(res, 'success.json'));
 			}); 

@@ -2,10 +2,10 @@ const path = require('path');
 var webpack = require('webpack');
 
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+//const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+//const TerserPlugin = require('terser-webpack-plugin');
 
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -58,7 +58,7 @@ module.exports = env => {
 		publicPath: '/',
 		historyApiFallback: {rewrites: [{ from: /^.*$/, to: '/index.html' }]},
 		inline: true,
-		port: 8888
+		port: 8080
 	  },
 	  module: {
 		rules: [
