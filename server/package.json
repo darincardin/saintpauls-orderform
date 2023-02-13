@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "node start.js"
+  },	
+  "type": "module",
+  "dependencies": {
+    	"php-server": "^1.0.0"
+  }
+}

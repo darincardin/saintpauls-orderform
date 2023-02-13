@@ -1,0 +1,26 @@
+<?php
+ $conn = mysql_connect("localhost", "root", "root") or die(mysql_error());
+mysql_select_db ('lobster',  $conn );
+
+
+mysql_query("CREATE TABLE test( firstName VARCHAR(50),  lastName VARCHAR(50), quantity INT )", $conn);
+ 
+
+
+
+
+$sql = "SHOW TABLES FROM lobster";
+$result = mysql_query($sql);
+
+if (!$result) {
+    echo "DB Error, could not list tables\n";
+    echo 'MySQL Error: ' . mysql_error();
+    exit;
+}
+
+while ($row = mysql_fetch_row($result)) {
+    echo "Table: {$row[0]}\n";
+}
+
+
+?>
