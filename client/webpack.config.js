@@ -36,9 +36,6 @@ module.exports = (env) => {
 		   "/assets": path.resolve(__dirname, 'src/assets/'),
 		   "reducer": path.resolve(__dirname, 'src/js/reducer'),
 		   "order": path.resolve(__dirname, 'src/js/order'),
-		   "list": path.resolve(__dirname, 'src/jsx/common/list/List.jsx'),
-		   "form": path.resolve(__dirname, 'src/jsx/common/form/Form.jsx'),
-		   "stepbar": path.resolve(__dirname, 'src/jsx/common/stepbar/StepBar.jsx'),
 		   '$': "jquery"
 		},
 		extensions: ['*','.js','.jsx']
@@ -53,7 +50,23 @@ module.exports = (env) => {
 	  output: {
 		path: path.resolve(__dirname, 'dist'), filename: '[name].js'
 	  },
-	  devServer: require('./devServer/index.js')(env),
+	  devServer: {
+	        setup(app) {
+		
+		        app.post('/php/login.php', (req, res) => {		
+	                res.json({"success":true});
+	            });	
+	
+			    app.get('/php/logout.php', (req, res) => {		
+	                res.json({"success":true});
+	            });	
+		
+				app.get('/php/orders/controllers/list.php', (req, res) => {
+	                res.json({"total":0, "data":[]});
+	            });	
+		
+	        },
+	    },
 	  
 	  module: {
 

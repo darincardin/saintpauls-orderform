@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, withRouter} from "react-router-dom";
-import Form from 'form';
+import Form from 'form/dist/index.js';
 
 import {connect, actions} from 'reducer'
 import {Order} from '/js/order';

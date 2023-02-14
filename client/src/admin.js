@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Provider, store} from 'reducer'
 
+ window.jQuery = window.$ = require('jquery');	
 
 import Admin from './jsx/Admin/Admin.jsx';
 

@@ -2,7 +2,10 @@ import React, { Suspense } from 'react';
 import ErrorBoundary from 'react-error-boundary';
 import {BrowserRouter as Router, Switch, Redirect,Route, Link, withRouter} from "react-router-dom";
 import {Header, Footer, ProgressBar, Error,  Background} from '/jsx/common';
-import StepBar from 'stepbar';
+
+import StepBar from 'stepbar/dist/react';
+
+
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import {Page1, Page2, Page3} from './Pages/';
 
@@ -14,7 +17,7 @@ var Main = withRouter( class Main extends React.Component {
 	
 	ref = null;
 	
-	state = { loaded:false, step:0, className: '' }
+	state = { loaded:false, step:1, className: '' }
 		
 	constructor(props){
 		super(props)
@@ -32,7 +35,7 @@ var Main = withRouter( class Main extends React.Component {
 		});	
 	}	
 	
-	map = {	undefined:0, '/':0, '/page1':0, '/page2':1, '/page3':2 }
+	map = {	undefined:1, '/':1, '/page1':1, '/page2':2, '/page3':3 }
 
 	loading = 	(<div>
 					<br/><br/><br/>

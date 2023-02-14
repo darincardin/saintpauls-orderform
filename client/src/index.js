@@ -12,6 +12,8 @@ import '/assets/css/index.scss';
 import '/assets/css/slide.scss';
 
 
+ window.jQuery = window.$ = require('jquery');	
+
 ReactDOM.render( <Provider store={store}><MyBody></MyBody></Provider>, document.getElementById('app'));
 
 
