@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ]
+  }, 
+  
   "scripts": {
     "start": "webpack-dev-server --open",
     "start_prod": "webpack-dev-server --config webpack.prod.js --open",
@@ -33,18 +40,20 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.9.4",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^3.4.2",
-    "form": "darincardin/form",
+
     "fs": "^0.0.1-security",
-    "list": "darincardin/list",
-    "loadimage": "darincardin/jquery.loadimage",
+
+    "jquery-plugins": "darincardin/jquery-plugins",
     "lodash": "^4.17.21",
     "node-sass": "^4.13.1",
+    
+    
     "react": "^16.13.1",
     "react-cookie": "^4.1.1",
     "react-dom": "^16.13.1",
@@ -54,6 +63,6 @@
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.1",
     "redux": "^3.7.2",
-    "stepbar": "darincardin/stepbar"
+    "react-widgets": "darincardin/react-widgets"
   }
 }

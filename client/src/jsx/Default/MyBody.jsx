@@ -3,7 +3,7 @@ import ErrorBoundary from 'react-error-boundary';
 import {BrowserRouter as Router, Switch, Redirect,Route, Link, withRouter} from "react-router-dom";
 import {Header, Footer, ProgressBar, Error,  Background} from '/jsx/common';
 
-import StepBar from 'stepbar/dist/react';
+import {StepBar} from 'react-widgets';
 
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
@@ -54,32 +54,32 @@ var Main = withRouter( class Main extends React.Component {
 
 		return (
 			<main  ref={this.ref} >		
-				<Background />			
+				
 				<ErrorBoundary FallbackComponent={<Error />} >
-						<br />
 
-						<div className="panel panel-default">
-							<div className="panel-body">
-								{this.state.loaded && 
-								<div>
-									<StepBar index={this.state.step} array={this.array} />
+					<div className="panel panel-default">
+						<div className="panel-body">
+							{this.state.loaded && 
+							<div>
+								<StepBar index={this.state.step} array={this.array} />
 								
-									<TransitionGroup className={'body ' + this.state.className}>
-										<CSSTransition timeout={500} classNames="slide" key={this.props.location.key} >  
-											<Suspense fallback={this.loading}>
-												<Switch location={this.props.location}>
-														<Route path="/page1"  component={Page1} />
-														<Route path="/page2"  component={Page2} />
-														<Route path="/page3"  component={Page3} />
-														<Redirect from="/" to="/page1" />		
-												</Switch>
-											</Suspense>
-										</CSSTransition>
-									</TransitionGroup>		
-								</div>
-								}	
+
+								<TransitionGroup className={'body ' + this.state.className}>
+									<CSSTransition timeout={500} classNames="slide" key={this.props.location.key} >  
+										<Suspense fallback={this.loading}>
+											<Switch location={this.props.location}>
+												<Route path="/page1"  component={Page1} />
+												<Route path="/page2"  component={Page2} />
+												<Route path="/page3"  component={Page3} />
+												<Redirect from="/" to="/page1" />		
+											</Switch>
+										</Suspense>
+									</CSSTransition>
+								</TransitionGroup>		
 							</div>
-						</div>			
+							}	
+						</div>
+					</div>			
 				</ErrorBoundary >
 			</main>		
 		)
@@ -95,7 +95,6 @@ var Main = withRouter( class Main extends React.Component {
 
 
 
-
 */
 
 
@@ -105,6 +104,7 @@ class MyBody extends React.Component {
 		return (
 			<div>
 				<Router>
+					<Background />		
 					<Header title="Order Form" login={true} />
 					<Main/>
 					<Footer />

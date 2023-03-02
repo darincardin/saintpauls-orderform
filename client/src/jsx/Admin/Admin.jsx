@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ErrorBoundary from 'react-error-boundary';
 import {Header, Footer, ProgressBar, Error, Background} from '/jsx/common';
 import {BrowserRouter as Router} from "react-router-dom";
-import List from 'list';
+import List from '/jsx/common/widget/List/List.jsx';
 import Update from '/jsx/Admin/Update/Update.jsx';
 import {OrderAPI, Order} from  '/js/order';
 
@@ -63,9 +63,10 @@ class Admin extends React.Component {
 		return (	
 			<div ref={this.ref} >
 				<Router>
+				<Background />		
 				<Header title="Admin" logout={true}/>	
 				<main>	
-					<Background />	
+				
 					<ErrorBoundary  FallbackComponent={<Error />} >
 						<List labels={Order.display.columns} data={this.state.data} getData={this.getData}  >	
 							<a className="edit" onClick={this.setSelected}>Edit</a>

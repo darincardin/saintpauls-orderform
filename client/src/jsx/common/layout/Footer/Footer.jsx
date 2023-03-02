@@ -7,10 +7,8 @@ class Footer extends React.Component{
 	
     render() {return (
 		<footer className="clearfix">
-			<center className="hidden-xs">
-				Placeholder
-			</center> 
-			<center className="copyright">COPYRIGHT &copy; 2021 <span></span></center>
+
+			<center className="copyright">Copyright &copy; 2021 <span></span></center>
 		</footer>   
 	  );
 	}

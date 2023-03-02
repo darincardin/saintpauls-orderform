@@ -1,0 +1,33 @@
+
+
+.list {	 
+	
+	.foot{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-top: solid #d4d4d4 1px;
+		background: #e6e6e6ed;
+		user-select: none;
+		padding:10px;
+		height: 35px;
+		text-align: center;
+		
+		span a, span b{
+			padding: 4px 4px;
+			margin: 0 1px;
+			xxbackground: red;
+		}
+		
+	}
+	
+					
+	.foot .pagenum{
+		text-align:center;
+		display:inline-block;
+		min-width:25px;
+	}
+
+}
+ 

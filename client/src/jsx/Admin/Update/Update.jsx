@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Form from 'form';
+import {Form} from 'react-widgets';
 
 import {connect, actions} from 'reducer'
 import {ProgressBar, Modal} from '/jsx/common';

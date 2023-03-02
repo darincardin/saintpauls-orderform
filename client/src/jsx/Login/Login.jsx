@@ -43,8 +43,9 @@ class Login extends React.Component{
     render() {
 		return (
 			<div ref={this.ref}> 
+			    <Background />		
 				<Header title="Login"/>
-				<Background className="login-bg"/>
+			
 				<main >
 				<div className="login">			
 					<div className="panel panel-default">

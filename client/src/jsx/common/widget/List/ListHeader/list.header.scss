@@ -1,0 +1,28 @@
+	/********   HEADER ************/
+
+	thead{
+        font-weight: bold;
+		
+		
+		td {
+			padding: 0;
+		}
+		
+		a {
+			color: black;
+			xxpadding: 10px;
+			user-select: none;
+		}
+		
+		
+		a.ASC:after  {
+			content:" ▲";	
+		}
+		
+		a.DESC:after  {
+			content:" ▼";
+		}
+		
+    }
+	
+	

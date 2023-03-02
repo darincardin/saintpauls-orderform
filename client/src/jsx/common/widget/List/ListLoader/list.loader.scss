@@ -1,0 +1,50 @@
+	/*******  LOADER  ************/
+
+	.table-loader {
+		position: absolute;
+		top:41px; left:0;right:0;bottom:0;
+		background: rgba(227, 227, 227, 0.4);
+		z-index: 10;
+
+		>div {
+		
+			position: absolute;
+			bottom: 0;
+			padding: 10px;
+		}	
+				
+		.glyphicon-refresh{
+		    font-size: 26px;
+		    font-weight: bold!important;
+		    top: 5px!important;
+			
+		}		
+		
+	 	.spin {
+		  -webkit-animation: spin 2s infinite linear;
+		  -moz-animation: spin 2s infinite linear;
+		  -o-animation: spin 2s infinite linear;
+		  animation: spin 2s infinite linear;
+		}	
+					
+		@-moz-keyframes spin {
+		  from {-moz-transform: rotate(0deg);  }
+		  to {-moz-transform: rotate(360deg);  }
+		}
+		@-webkit-keyframes spin {
+		  from {-webkit-transform: rotate(0deg);  }
+		  to {	-webkit-transform: rotate(360deg);  }
+		}
+		@keyframes spin {
+		  from {	transform: rotate(0deg);  }
+		  to {	transform: rotate(360deg);  }
+		}		
+		
+		
+	}	
+
+
+
+	
+
+	
